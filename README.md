@@ -1,10 +1,10 @@
 # Projet 7 - Développeur Front-End  
 --------------------------
-##Développez un algorithme de recherche en JavaScript  
+## Développez un algorithme de recherche en JavaScript  
 
 Vous êtes freelance et vous venez d’être missionné par l’entreprise “Les petits plats” en temps que Développeur Front-end pour une mission de 3 mois.  
 
-![Logo du site Les petits plats](https://www.figma.com/file/xqeE1ZKlHUWi2Efo8r73NK/UI-Design-Les-Petits-Plats-FR?node-id=108%3A433)  
+![Cover](https://github.com/JuponEmmanuelle_7_24052022/)  
 
 Après avoir édité des livres de cuisine pendant plusieurs années, l’entreprise a décidé de se lancer dans un nouveau projet : réaliser son propre site de recettes de cuisine à l’instar de Marmiton ou 750g.  
 
