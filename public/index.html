@@ -27,20 +27,65 @@
 <body>
     <header>
         <a href="index.html" class="headerLogo" id="logoHome">
-            <img src="./assets/img/logoSvg.svg" alt="logo du site Les petits plats" class="logo">
+            <img src="./assets/img/logo.svg" alt="logo du site Les petits plats" class="logo">
             <title id="title">Les petits plats</title>
         </a>
     </header>
 
+    <main>
+        <aside class="search">
+            <div class="inputSearch">
+                <input type="text" class="formControl" id="search" placeholder="Rechercher une recette">
+                <label class="formLabel" for="search">
+                    <img src="./assets/img/loupe.svg" alt="loupe de recherche">
+                </label>
+            </div>
+            <div class="searchTags"></div>
+            <div class="searchFilters">
 
+                <div class="filterBtn" data-filter="ingrédients">
+                    <div class="searchControls">
+                        <label for="inputIngredients" class="controlsFilter" data-filter-label>Ingrédients</label>
+                        <input type="text" class="controlsInput" placeholder="chercher un ingrédient" id="ingredients"
+                            data-filter-input>
+                        <button class="controlExpand" data-filter-expand>
+                            <img src="./assets/img/arrow.svg" alt="arrowDown">
+                        </button>
+                    </div>
+                    <ul class="searchResult" data-filter-results></ul>
+                </div>
 
-    <nav>
+                <div class="filterBtn" data-filter="appareils">
+                    <div class="searchControls">
+                        <label for="inputAppareils" class="controlsFilter" data-filter-label>Appareils</label>
+                        <input type="text" class="controlsInput" placeholder="chercher un appareil" id="appareils"
+                            data-filter-input>
+                        <button class="controlExpand" data-filter-expand>
+                            <img src="./assets/img/arrow.svg" alt="arrowDown">
+                        </button>
+                    </div>
+                    <ul class="searchResult" data-filter-results></ul>
+                </div>
 
-    </nav>
+                <div class="filterBtn" data-filter="ustensiles">
+                    <div class="searchControls">
+                        <label for="inputUstensiles" class="controlsFilter" data-filter-label>Ustensiles</label>
+                        <input type="text" class="controlsInput" placeholder="chercher un ustensile" id="ustensiles"
+                            data-filter-input>
+                        <button class="controlExpand" data-filter-expand>
+                            <img src="./assets/img/arrow.svg" alt="arrowDown">
+                        </button>
+                    </div>
+                    <ul class="searchResult" data-filter-results></ul>
+                </div>
+            </div>
+        </aside>
+        <section class="recettes"></section>
+        <section class="noResults">
+            <p> Aucune recette ne correspond à vos critères de recherche.<br>Vous pouvez chercher « tarte aux pommes », « poisson », etc.</p>
+        </section>
+    </main>
 
-    <section class="">
-
-    </section>
 
     <script type="module" src="./assets/scripts/pages/index.js"></script>
 
