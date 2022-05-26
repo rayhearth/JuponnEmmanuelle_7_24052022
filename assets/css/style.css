@@ -1,3 +1,41 @@
+/*****RESET*****/
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
+body {
+  font-family: "DM Sans", "Lato", "Roboto", sans-serif;
+  margin: 0;
+}
+body .overflow {
+  overflow: hidden;
+}
+
+a {
+  text-decoration: none;
+}
+
+img {
+  display: block;
+}
+
+h1 {
+  font-family: "DM Sans";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 36px;
+  line-height: 47px;
+  color: #D04F4F;
+}
+
+h2 {
+  font-family: "Lato";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 22px;
+}
 
 /*# sourceMappingURL=style.css.map */
