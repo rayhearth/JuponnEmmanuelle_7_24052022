@@ -6,25 +6,21 @@
 }
 
 body {
-    font-family: 'DM Sans','Lato','Roboto', sans-serif;
+    font-family: "DM Sans", "Lato", "Roboto", sans-serif;
     margin: 0 auto;
-    max-width: 1240px;
     .overflow {
         overflow: hidden;
     }
 }
 
-a {
-    text-decoration: none;
-}
-
-img {
-    display: block;
+main{
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: 0 2%;
 }
 
 h1 {
-    font-family: 'DM Sans';
-    font-style: normal;
+    font-family: "DM Sans";
     font-weight: 700;
     font-size: 36px;
     line-height: 47px;
@@ -32,9 +28,30 @@ h1 {
 }
 
 h2 {
-    font-family: 'Lato';
-    font-style: normal;
+    font-family: "Lato";
     font-weight: 400;
     font-size: 18px;
     line-height: 22px;
 }
+
+a,
+input,
+button,
+ul {
+    border: none;
+    text-decoration: none;
+    cursor: pointer;
+    list-style-type: none;
+    &:hover,
+    &:focus,
+    &:active {
+        border: none;
+        text-decoration: none;
+        outline: none;
+    }
+}
+
+img {
+    display: block;
+}
+

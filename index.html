@@ -47,7 +47,7 @@
                 <div class="filterBtn" data-filter="ingrédients">
                     <div class="searchControls">
                         <label for="inputIngredients" class="controlsFilter" data-filter-label>Ingrédients</label>
-                        <input type="text" class="controlsInput" placeholder="chercher un ingrédient" id="ingredients"
+                        <input type="text" class="controlsInput inputHidden" placeholder="chercher un ingrédient" id="ingredients"
                             data-filter-input>
                         <button class="controlExpand" data-filter-expand>
                             <img src="./assets/img/arrow.svg" alt="arrowDown">
@@ -59,7 +59,7 @@
                 <div class="filterBtn" data-filter="appareils">
                     <div class="searchControls">
                         <label for="inputAppareils" class="controlsFilter" data-filter-label>Appareils</label>
-                        <input type="text" class="controlsInput" placeholder="chercher un appareil" id="appareils"
+                        <input type="text" class="controlsInput inputHidden" placeholder="chercher un appareil" id="appareils"
                             data-filter-input>
                         <button class="controlExpand" data-filter-expand>
                             <img src="./assets/img/arrow.svg" alt="arrowDown">
@@ -71,7 +71,7 @@
                 <div class="filterBtn" data-filter="ustensiles">
                     <div class="searchControls">
                         <label for="inputUstensiles" class="controlsFilter" data-filter-label>Ustensiles</label>
-                        <input type="text" class="controlsInput" placeholder="chercher un ustensile" id="ustensiles"
+                        <input type="text" class="controlsInput inputHidden" placeholder="chercher un ustensile" id="ustensiles"
                             data-filter-input>
                         <button class="controlExpand" data-filter-expand>
                             <img src="./assets/img/arrow.svg" alt="arrowDown">
@@ -81,10 +81,34 @@
                 </div>
             </div>
         </aside>
-        <section class="recettes"></section>
-        <section class="noResults">
-            <p> Aucune recette ne correspond à vos critères de recherche.<br>Vous pouvez chercher « tarte aux pommes »,
-                « poisson », etc.</p>
+        <section class="recettes">
+            <article class="card">
+                <div class="card-picture">
+                    <img src="" alt="">
+                </div>
+                <div class="card-details">
+                    <div class="card-header">
+                        <h2>Miam</h2>
+                        <div class="clock">
+                            <img src="./assets/img/clock.svg" alt="timing recipes">
+                            <p>10min</p>
+                        </div>
+                    </div>
+                    <div class="card-legend">
+                        <div class="ingredients">
+                            <span class='ing'>riz:</span>
+                            <span class='qte'>100gr</span>
+                        </div>
+                        <div class="instructions">
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni, doloribus! Ab dolor dolores sapiente qui deserunt suscipit perspiciatis numquam consequatur odio perferendis doloribus repellendus, amet, quia, saepe neque praesentium fuga.
+                        </div>
+                    </div>
+                </div>
+            </article>
+            <div class="noResults">
+                <p> Aucune recette ne correspond à vos critères de recherche.<br>Vous pouvez chercher « tarte aux pommes »,
+                    « poisson », etc.</p>
+            </div>
         </section>
     </main>
 

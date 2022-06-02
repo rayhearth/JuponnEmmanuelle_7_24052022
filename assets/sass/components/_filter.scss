@@ -1,0 +1,52 @@
+.searchFilters {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    margin: 2% 0;
+    .filterBtn {
+        min-height: 4.375rem;
+        min-width: 10.625rem;
+        border-radius: 0.313rem;
+        color: white;
+        margin-right: 3%;
+        &:first-child{
+            background-color: $blue;
+        }
+        &:nth-of-type(2){
+            background-color: $green;
+        }
+        &:last-child{background-color: $red;}
+        .searchControls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 4.375rem;
+            padding-left: 5%;
+            position: relative;
+            .controlsInput {
+                width: 6.25rem;
+                color: white;
+            }
+            .inputHidden {
+                position: absolute;
+                width: 1px;
+                height: 1px;
+                overflow: hidden;
+                opacity: 0;
+                z-index: -9999px;
+            }
+            button {
+                width: 3.125rem;
+                height: 3.125rem;
+                background: transparent;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+        }
+        ul{
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+        }
+    }
+}

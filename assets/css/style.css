@@ -8,23 +8,19 @@
 body {
   font-family: "DM Sans", "Lato", "Roboto", sans-serif;
   margin: 0 auto;
-  max-width: 1240px;
 }
 body .overflow {
   overflow: hidden;
 }
 
-a {
-  text-decoration: none;
-}
-
-img {
-  display: block;
+main {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 2%;
 }
 
 h1 {
   font-family: "DM Sans";
-  font-style: normal;
   font-weight: 700;
   font-size: 36px;
   line-height: 47px;
@@ -33,10 +29,92 @@ h1 {
 
 h2 {
   font-family: "Lato";
-  font-style: normal;
   font-weight: 400;
   font-size: 18px;
   line-height: 22px;
+}
+
+a,
+input,
+button,
+ul {
+  border: none;
+  text-decoration: none;
+  cursor: pointer;
+  list-style-type: none;
+}
+a:hover, a:focus, a:active,
+input:hover,
+input:focus,
+input:active,
+button:hover,
+button:focus,
+button:active,
+ul:hover,
+ul:focus,
+ul:active {
+  border: none;
+  text-decoration: none;
+  outline: none;
+}
+
+img {
+  display: block;
+}
+
+.searchFilters {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  margin: 2% 0;
+}
+.searchFilters .filterBtn {
+  min-height: 4.375rem;
+  min-width: 10.625rem;
+  border-radius: 0.313rem;
+  color: white;
+  margin-right: 3%;
+}
+.searchFilters .filterBtn:first-child {
+  background-color: #3282F7;
+}
+.searchFilters .filterBtn:nth-of-type(2) {
+  background-color: #68D9A4;
+}
+.searchFilters .filterBtn:last-child {
+  background-color: #ED6454;
+}
+.searchFilters .filterBtn .searchControls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 4.375rem;
+  padding-left: 5%;
+  position: relative;
+}
+.searchFilters .filterBtn .searchControls .controlsInput {
+  width: 6.25rem;
+  color: white;
+}
+.searchFilters .filterBtn .searchControls .inputHidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  opacity: 0;
+  z-index: -9999px;
+}
+.searchFilters .filterBtn .searchControls button {
+  width: 3.125rem;
+  height: 3.125rem;
+  background: transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.searchFilters .filterBtn ul {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
 }
 
 header {
@@ -71,18 +149,61 @@ aside .inputSearch input {
   width: 90%;
   height: 4.375rem;
 }
-aside .searchFilters {
+
+.recettes {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  padding: 2% 0;
+}
+.recettes article {
+  display: flex;
+  flex-direction: column;
+}
+.recettes article .card-picture {
+  min-height: 11.125rem;
+  border-radius: 0.313rem 0.313rem 0 0;
+  background-color: #C7BEBE;
+}
+.recettes article .card-details {
+  background-color: #E7E7E7;
+  padding: 2%;
+  border-radius: 0 0 0.313rem 0.313rem;
+}
+.recettes article .card-details .card-header {
   display: flex;
   align-items: center;
-  width: 100%;
-  margin: 2% 0;
+  justify-content: space-between;
+  padding: 2%;
 }
-aside .searchFilters .filterBtn {
-  min-height: 4.375rem;
-}
-aside .searchFilters .filterBtn .searchControls {
+.recettes article .card-details .card-header .clock {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 700;
+  gap: 5%;
+}
+.recettes article .card-details .card-legend {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 2%;
+}
+.recettes article .card-details .card-legend .ingredients {
+  display: flex;
+  width: 50%;
+  gap: 2%;
+  font-size: 0.75rem;
+}
+.recettes article .card-details .card-legend .ingredients .ing {
+  font-weight: 700;
+}
+.recettes article .card-details .card-legend .ingredients .qte {
+  font-weight: 400;
+}
+.recettes article .card-details .card-legend .instructions {
+  font-family: "Roboto";
+  font-size: 0.75rem;
+  width: 50%;
 }
 
 /*# sourceMappingURL=style.css.map */

@@ -19,17 +19,59 @@ aside {
             height: 4.375rem;
         }
     }
+}
 
-    .searchFilters{
+.recettes{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    padding: 2% 0;
+    article{
         display: flex;
-        align-items: center;
-        width: 100%;
-        margin: 2% 0;
-        .filterBtn{
-            min-height: 4.375rem;
-            .searchControls{
+        flex-direction: column;
+        .card-picture{
+            min-height: 11.125rem;
+            border-radius: 0.313rem 0.313rem 0 0;
+            background-color: $grey;
+        }
+        .card-details{
+            background-color: $lightGrey;
+            padding: 2%;
+            border-radius: 0 0 0.313rem 0.313rem;
+            .card-header{
                 display: flex;
-                justify-content: center;
+                align-items: center;
+                justify-content: space-between;
+                padding: 2%;
+                .clock{
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    font-weight: 700;
+                    gap: 5%;
+                }
+            }
+            .card-legend{
+                display: flex;
+                justify-content: space-between;
+                align-items: flex-start;
+                padding: 2%;
+                .ingredients{
+                    display: flex;
+                    width: 50%;
+                    gap: 2%;
+                    font-size: 0.75rem;
+                    .ing{
+                        font-weight: 700;
+                    }
+                    .qte{
+                        font-weight: 400;
+                    }
+                }
+                .instructions{
+                    font-family: 'Roboto';
+                    font-size: 0.75rem;
+                    width: 50%;
+                }
             }
         }
     }
