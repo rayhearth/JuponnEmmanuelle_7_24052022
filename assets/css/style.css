@@ -9,14 +9,19 @@ body {
   font-family: "DM Sans", "Lato", "Roboto", sans-serif;
   margin: 0 auto;
 }
-body .overflow {
-  overflow: hidden;
-}
 
 main {
   max-width: 1240px;
   margin: 0 auto;
   padding: 0 2%;
+}
+main .hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  opacity: 0;
+  z-index: -9999px;
 }
 
 h1 {
@@ -32,6 +37,12 @@ h2 {
   font-weight: 400;
   font-size: 18px;
   line-height: 22px;
+}
+
+h3 {
+  font-size: 14px;
+  font-weight: 700;
+  color: white;
 }
 
 a,
@@ -96,14 +107,6 @@ img {
   width: 6.25rem;
   color: white;
 }
-.searchFilters .filterBtn .searchControls .inputHidden {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  overflow: hidden;
-  opacity: 0;
-  z-index: -9999px;
-}
 .searchFilters .filterBtn .searchControls button {
   width: 3.125rem;
   height: 3.125rem;
@@ -115,6 +118,24 @@ img {
 .searchFilters .filterBtn ul {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
+}
+
+.searchTags {
+  display: flex;
+  align-items: center;
+  max-width: 6.688rem;
+  max-height: 2.313rem;
+  border-radius: 5px;
+  background-color: black;
+  margin-top: 2%;
+  padding: 1%;
+  gap: 1rem;
+}
+.searchTags .tagBtn {
+  min-height: 1.25rem;
+  min-width: 1.25rem;
+  color: white;
+  background-color: transparent;
 }
 
 header {

@@ -8,15 +8,20 @@
 body {
     font-family: "DM Sans", "Lato", "Roboto", sans-serif;
     margin: 0 auto;
-    .overflow {
-        overflow: hidden;
-    }
 }
 
-main{
+main {
     max-width: 1240px;
     margin: 0 auto;
     padding: 0 2%;
+    .hidden {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+        opacity: 0;
+        z-index: -9999px;
+    }
 }
 
 h1 {
@@ -32,6 +37,12 @@ h2 {
     font-weight: 400;
     font-size: 18px;
     line-height: 22px;
+}
+
+h3{
+    font-size: 14px;
+    font-weight: 700;
+    color: white;
 }
 
 a,
@@ -54,4 +65,3 @@ ul {
 img {
     display: block;
 }
-

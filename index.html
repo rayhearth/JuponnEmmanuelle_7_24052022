@@ -41,13 +41,18 @@
                     <img src="./assets/img/loupe.svg" alt="loupe de recherche">
                 </label>
             </div>
-            <div class="searchTags"></div>
+            <div class="searchTags hidden" id="tagsSelect">
+                <h3>carottes</h3>
+                <button class="tagBtn">
+                    <img src="./assets/img/clTag.svg" alt="">
+                </button>
+            </div>
             <div class="searchFilters">
 
                 <div class="filterBtn" data-filter="ingrédients">
                     <div class="searchControls">
                         <label for="inputIngredients" class="controlsFilter" data-filter-label>Ingrédients</label>
-                        <input type="text" class="controlsInput inputHidden" placeholder="chercher un ingrédient" id="ingredients"
+                        <input type="text" class="controlsInput hidden" placeholder="chercher un ingrédient" id="ingredients"
                             data-filter-input>
                         <button class="controlExpand" data-filter-expand>
                             <img src="./assets/img/arrow.svg" alt="arrowDown">
@@ -59,7 +64,7 @@
                 <div class="filterBtn" data-filter="appareils">
                     <div class="searchControls">
                         <label for="inputAppareils" class="controlsFilter" data-filter-label>Appareils</label>
-                        <input type="text" class="controlsInput inputHidden" placeholder="chercher un appareil" id="appareils"
+                        <input type="text" class="controlsInput hidden" placeholder="chercher un appareil" id="appareils"
                             data-filter-input>
                         <button class="controlExpand" data-filter-expand>
                             <img src="./assets/img/arrow.svg" alt="arrowDown">
@@ -71,7 +76,7 @@
                 <div class="filterBtn" data-filter="ustensiles">
                     <div class="searchControls">
                         <label for="inputUstensiles" class="controlsFilter" data-filter-label>Ustensiles</label>
-                        <input type="text" class="controlsInput inputHidden" placeholder="chercher un ustensile" id="ustensiles"
+                        <input type="text" class="controlsInput hidden" placeholder="chercher un ustensile" id="ustensiles"
                             data-filter-input>
                         <button class="controlExpand" data-filter-expand>
                             <img src="./assets/img/arrow.svg" alt="arrowDown">
@@ -105,7 +110,7 @@
                     </div>
                 </div>
             </article>
-            <div class="noResults">
+            <div class="noResults hidden">
                 <p> Aucune recette ne correspond à vos critères de recherche.<br>Vous pouvez chercher « tarte aux pommes »,
                     « poisson », etc.</p>
             </div>
