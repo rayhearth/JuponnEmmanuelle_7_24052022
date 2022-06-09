@@ -1,6 +1,7 @@
 import recipes from './recipes.js'
 import { RecipeCard } from './models/recipeCard.js'
 import { IngredientList, ApplianceList, UstensilsList } from './models/createLists.js'
+import { Tags } from './models/tags.js'
 
 //DOM
 const recipesContainer = document.querySelector('#recettes')
@@ -17,10 +18,6 @@ const listOfIngredients = document.querySelector('#ingredientsList')
 const listOfUstensils = document.querySelector('#ustensilsList')
 const listOfAppliances = document.querySelector('#applianceList')
 
-// insertion effective des tags dans les modules, selon leur type
-let ingredient = 'ingredient'
-let appareil = 'appareil'
-let ustensile = 'ustensil'
 
 
 //Création des Array
@@ -42,18 +39,26 @@ let selectedUstensils = []
 let selectedRecipes = []
 
 
+// const displayTags = () => {
+
+//     const tagsContainer = recipes.map(t=> new Tags(t))
+//     console.log(tagsContainer)
+//     tags.innerHTML = renderTags(tagsContainer)
+// }
+// window.addEventListener('load',displayTags)
 
 
+//on injecte le html du render recipe ds notre section recette
 const displayRecipes = () =>{
     
     const container = recipes.map(r => new RecipeCard(r))
     // console.log(container)
     const renderAllRecipes = (recipes) => {
         let all = ''
-        console.log(all)
+        // console.log(all)
         for (let recipe of recipes){
             all += recipe.renderRecipe()
-            console.log(all)
+            // console.log(all)
         }
         return all
     }
