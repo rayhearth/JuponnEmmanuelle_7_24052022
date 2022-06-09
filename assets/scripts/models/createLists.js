@@ -1,4 +1,4 @@
-class IngredientList {
+export class IngredientList {
 
     constructor(ingredient) {
         this.ingredient = ingredient
@@ -16,7 +16,7 @@ class IngredientList {
     }
 }
 
-class ApplianceList{
+export class ApplianceList{
 
     constructor(appliance) {
         this.appliance = appliance
@@ -33,7 +33,7 @@ class ApplianceList{
     }
 }
 
-class UstensilsList{
+export class UstensilsList{
 
     constructor(ustensil) {
         this.ustensil = ustensil

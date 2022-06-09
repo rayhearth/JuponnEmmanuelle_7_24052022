@@ -25,6 +25,7 @@ aside {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     padding: 2% 0;
+    grid-gap: 3.125rem;
     article{
         display: flex;
         flex-direction: column;
@@ -47,30 +48,30 @@ aside {
                     justify-content: space-between;
                     align-items: center;
                     font-weight: 700;
-                    gap: 5%;
+                    width: 25%;
                 }
             }
             .card-legend{
                 display: flex;
                 justify-content: space-between;
                 align-items: flex-start;
-                padding: 2%;
                 .ingredients{
-                    display: flex;
                     width: 50%;
                     gap: 2%;
+                    padding: 2%;
                     font-size: 0.75rem;
-                    .ing{
-                        font-weight: 700;
-                    }
-                    .qte{
-                        font-weight: 400;
-                    }
+                    // .ing{
+                    //     font-weight: 700;
+                    // }
+                    // .qte{
+                    //     font-weight: 400;
+                    // }
                 }
                 .instructions{
                     font-family: 'Roboto';
                     font-size: 0.75rem;
                     width: 50%;
+                    padding: 2%;
                 }
             }
         }
