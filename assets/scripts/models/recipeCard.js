@@ -6,7 +6,6 @@ export class RecipeCard {
         this.ingredients = data.ingredients
         this.time = data.time
         this.description = data.description
-        this.desc= ellipsis(this.description)
         this.appliance = data.appliance.toLowerCase()
         // console.log(this.appliance)
         this.ustensils = data.ustensils

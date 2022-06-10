@@ -72,6 +72,10 @@ aside {
                     font-size: 0.75rem;
                     width: 50%;
                     padding: 2%;
+                    line-height: 1.5;
+                    text-overflow: ellipsis;
+                    overflow: hidden;
+                    height: 150px;
                 }
             }
         }
