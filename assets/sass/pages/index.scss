@@ -29,6 +29,8 @@ aside {
     article{
         display: flex;
         flex-direction: column;
+        min-width: 21.875rem;
+        min-height: 22.5rem;
         .card-picture{
             min-height: 11.125rem;
             border-radius: 0.313rem 0.313rem 0 0;
@@ -36,46 +38,50 @@ aside {
         }
         .card-details{
             background-color: $lightGrey;
-            padding: 2%;
             border-radius: 0 0 0.313rem 0.313rem;
+            min-width: 18.875rem;
+            min-height: 11.625rem;
             .card-header{
                 display: flex;
+                flex-direction: row;
                 align-items: center;
                 justify-content: space-between;
-                padding: 2%;
+                width: 100%;
+                line-height: 1.5rem;
+                height: fit-content;
+                padding: 3% 3% 0 3%;
+                h2{
+                    text-overflow: ellipsis;
+                    overflow: hidden;
+                    white-space: nowrap;
+                    max-width: calc(100% - 6.375rem);
+                }
                 .clock{
                     display: flex;
                     justify-content: space-between;
                     align-items: center;
                     font-weight: 700;
-                    width: 25%;
+                    img{
+                        padding-right: 7px
+                    }
                 }
             }
             .card-legend{
                 display: flex;
                 justify-content: space-between;
                 align-items: flex-start;
+                padding: 3%;
                 .ingredients{
                     width: 50%;
-                    gap: 2%;
-                    padding: 2%;
-                    font-size: 0.75rem;
-                    // .ing{
-                    //     font-weight: 700;
-                    // }
-                    // .qte{
-                    //     font-weight: 400;
-                    // }
+                    padding-right: 3%;
+                    font-size: 0.70rem;
                 }
                 .instructions{
                     font-family: 'Roboto';
                     font-size: 0.75rem;
                     width: 50%;
                     padding: 2%;
-                    line-height: 1.5;
-                    text-overflow: ellipsis;
-                    overflow: hidden;
-                    height: 150px;
+                    @include line-clamp(8, 0.9375rem);
                 }
             }
         }
