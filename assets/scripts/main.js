@@ -1,6 +1,6 @@
 import recipes from './recipes.js'
 import { RecipeCard } from './models/recipeCard.js'
-import { IngredientList, ApplianceList, UstensilsList } from './models/createLists.js'
+import { List } from './models/createLists.js'
 import { Tags } from './models/tags.js'
 
 //DOM
@@ -47,6 +47,11 @@ let selectedRecipes = []
 // }
 // window.addEventListener('load',displayTags)
 
+const displayLists = () =>{
+    const el = recipes.map(l => new List(l))
+    console.log(el)
+}
+window.addEventListener('load',displayLists)
 
 //on injecte le html du render recipe ds notre section recette
 const displayRecipes = () =>{

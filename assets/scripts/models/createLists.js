@@ -1,8 +1,10 @@
-export class IngredientList {
+export class List {
 
-    constructor(ingredient) {
-        this.ingredient = ingredient
-        console.log(this.ingredient)
+    constructor(data) {
+        this.ingredient = data.ingredient
+        this.appliance = data.appliance
+        this.ustensil = data.ustensil
+        console.log(this.ustensil)
     }
 
     buildIngredientsList() {
@@ -14,13 +16,7 @@ export class IngredientList {
 
         return listOfIngredients
     }
-}
 
-export class ApplianceList{
-
-    constructor(appliance) {
-        this.appliance = appliance
-    }
     
     buildApplianceList() {
         const listOfAppliances = document.createElement('li')
@@ -31,20 +27,14 @@ export class ApplianceList{
     
         return listOfAppliances
     }
-}
 
-export class UstensilsList{
 
-    constructor(ustensil) {
-        this.ustensil = ustensil
-    }
-
-    buildIngredientsList() {
+    buildUstensilList() {
         const listOfUstensils = document.createElement('li')
-        listOfIngredients.classList.add('list-items')
-        listOfIngredients.setAttribute('data-item', this.ustensil)
-        listOfIngredients.setAttribute('data-type', 'ustensil')
-        listOfIngredients.innerHTML = this.ingredient
+        listOfUstensils.classList.add('list-items')
+        listOfUstensils.setAttribute('data-item', this.ustensil)
+        listOfUstensils.setAttribute('data-type', 'ustensil')
+        listOfUstensils.innerHTML = this.ustensil
 
         return listOfUstensils
     }
