@@ -7,8 +7,8 @@ export class RecipeCard {
         this.time = data.time
         this.description = data.description
         this.appliance = data.appliance.toLowerCase()
-        // console.log(this.appliance)
         this.ustensils = data.ustensils
+
     }
 
 
@@ -43,6 +43,15 @@ export class RecipeCard {
                 </div>
             </article>
         `
+    }
+
+    renderNoResult(){
+        const noResult = document.querySelector('#noResult')
+        if(!match) {
+            noResult.classList.remove('hidden')
+        } else{
+            noResult.classList.add('hidden')
+        }
     }
 
     // limite de texte pour la description

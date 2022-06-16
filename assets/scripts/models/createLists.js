@@ -1,41 +1,46 @@
-export class List {
+export class IngredientsList {
 
-    constructor(data) {
-        this.ingredient = data.ingredient
-        this.appliance = data.appliance
-        this.ustensil = data.ustensil
-        console.log(this.ustensil)
+    constructor(ingredient) {
+        this.ingredient = ingredient.map((el) => el.ingredient)
+        // console.log(this.ingredient)
     }
 
     buildIngredientsList() {
-        const listOfIngredients = document.createElement('li')
-        listOfIngredients.classList.add('list-items')
-        listOfIngredients.setAttribute('data-item', this.ingredient)
-        listOfIngredients.setAttribute('data-type', 'ingredient')
-        listOfIngredients.innerHTML = this.ingredient
 
-        return listOfIngredients
+        return `<li class="list-items" data-item="${this.ingredient}" data-type="ingredient">
+        ${this.ingredient}
+        </li>
+        `
+
+    }
+}
+
+export class AppliancesList {
+    constructor(appliance) {
+        this.appliance = appliance
+        // console.log(this.appliance)
     }
 
-    
     buildApplianceList() {
-        const listOfAppliances = document.createElement('li')
-        listOfIngredients.classList.add('list-items')
-        listOfIngredients.setAttribute('data-item', this.appliance)
-        listOfIngredients.setAttribute('data-type', 'appliance')
-        listOfIngredients.innerHTML = this.appliance
-    
-        return listOfAppliances
+        return `<li class="list-items" data-item="${this.appliance}" data-type="appliance">
+        ${this.appliance}
+        </li>
+        `
     }
 
+}
+
+export class UstensilsList {
+    constructor(ustensil) {
+        this.ustensil = ustensil
+        // console.log(this.ustensil)
+    }
 
     buildUstensilList() {
-        const listOfUstensils = document.createElement('li')
-        listOfUstensils.classList.add('list-items')
-        listOfUstensils.setAttribute('data-item', this.ustensil)
-        listOfUstensils.setAttribute('data-type', 'ustensil')
-        listOfUstensils.innerHTML = this.ustensil
 
-        return listOfUstensils
+        return `<li class="list-items" data-item="${this.ustensil}" data-type="ustensil">
+        ${this.ustensil}
+        </li>
+        `
     }
 }
