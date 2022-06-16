@@ -21,6 +21,8 @@ const listOfIngredients = document.querySelector('#ingredientsList')
 const listOfUstensils = document.querySelector('#ustensilsList')
 const listOfAppliances = document.querySelector('#applianceList')
 
+const btnTags = document.querySelectorAll('.list-items')
+
 
 
 //Création des Array
@@ -40,10 +42,10 @@ let selectedApplainces = []
 let selectedUstensils = []
 let selectedRecipes = []
 
-// listeners
+
+// listeners Filters
 ingredientFilter.addEventListener('click', (e) => {
     displayIngList()
-
 })
 
 applianceFilter.addEventListener('click', (e) => {
@@ -54,20 +56,6 @@ ustensilFilter.addEventListener('click', (e) => {
     displayUstList()
 })
 
-// btnfilter.addEventListener('click',(e)=>{
-//     hideList(listOfIngredients,ingredientFilter)
-//     hideList(listOfAppliances,AppliancesList)
-//     hideList(listOfUstensils,ustensilFilter)
-// })
-
-
-// const displayTags = () => {
-
-//     const tagsContainer = recipes.map(t=> new Tags(t))
-//     console.log(tagsContainer)
-//     tags.innerHTML = renderTags(tagsContainer)
-// }
-// window.addEventListener('load',displayTags)
 
 const displayIngList = (e) => {
     const ingList = ingredientsArray.map(i => new IngredientsList(i))
@@ -131,11 +119,26 @@ const displayUstList = (e) => {
 window.addEventListener('load', displayUstList)
 
 
+const displayTags = (e) => {
+    //cible endroit où tags select seront insérés
+    tags.classList.add('.tagselected')
+    tags.style.display=''
+    
+    let currentTag = e.target.document.querySelectorAll('.list-items')
+    console.log(currentTag)
 
+    tagContainer = new Tags(tag,ingredient)
 
-const removeList = () => {
-
+    tags.innerHTML = renderTags(tagContainer)
 }
+
+const startTagsListener = () =>{
+    selectedTags.document.querySelectorAll('.list-items li')//on recupere tous nos li
+    for (let t of selectedTags){
+        t.addEventListener('click', displayTags)
+    }
+}
+window.addEventListener('load',displayTags)
 
 //on injecte le html du render recipe ds notre section recette
 const displayRecipes = () => {
