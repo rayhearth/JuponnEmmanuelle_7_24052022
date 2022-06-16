@@ -2,6 +2,7 @@ import recipes from './recipes.js'
 import { RecipeCard } from './models/recipeCard.js'
 import { IngredientsList, AppliancesList, UstensilsList } from './models/createLists.js'
 import { Tags } from './models/tags.js'
+import { Search } from './models/Search.js'
 
 //DOM
 const recipesContainer = document.querySelector('#recettes')
@@ -23,7 +24,10 @@ const listOfAppliances = document.querySelector('#applianceList')
 
 const btnTags = document.querySelectorAll('.list-items')
 
-
+// const research = () =>{
+//     let inputValue = ''
+//     principalSearch.addEventListener('change', ()=>)
+// }
 
 //Création des Array
 recipes: [] //array de toutes les recettes
@@ -124,12 +128,12 @@ const displayTags = (e) => {
     tags.classList.add('.tagselected')
     tags.style.display=''
     
-    let currentTag = e.target.document.querySelectorAll('.list-items')
-    console.log(currentTag)
+    // let currentTag = e.target.document.querySelectorAll('.list-items')
+    // console.log(currentTag)
 
-    tagContainer = new Tags(tag,ingredient)
+    // tagContainer = new Tags(tag,ingredient)
 
-    tags.innerHTML = renderTags(tagContainer)
+    // tags.innerHTML = renderTags(tagContainer)
 }
 
 const startTagsListener = () =>{
