@@ -13,7 +13,7 @@ const ingredientFilter = document.querySelector('#ingredients-filter')
 const applianceFilter = document.querySelector('#appliance-filter')
 const ustensilFilter = document.querySelector('#ustensils-filter')
 const btnfilter = document.querySelectorAll('.controlExpand')
-// console.log(btnfilter)
+
 const principalSearch = document.querySelector('#search')
 
 //ul
@@ -31,22 +31,35 @@ const btnTags = document.querySelectorAll('.list-items')
 
 //Création des Array
 recipes: [] //array de toutes les recettes
-let ing = recipes.map(i => i.ingredients.map(n=>n.ingredient))
-// ing.flat(Infinity)
-ing= ing +''
-let resultSplit = ing.split(',')
-console.log(resultSplit)
-setTimeout(function(){
-    console.log(ing)
+console.log(recipes)
+//traitement ing
+let ing = recipes.map(i => i.ingredients.map(n => n.ingredient))
+ing = ing +''
+//transforme string en array  
+let ingData = ing.split(',')
+//uniformise caract
+const lowIngData = ingData.map(el=> {
+    return el.toLowerCase()
+})
+let ingredientsArray = [...new Set(lowIngData)] // array de tous les ingredients filtrés
 
-},1000)
-let ingredientsArray = [...ing] // array de tous les ingredients
-console.log(ingredientsArray)
-let ust = recipes.map(u => u.ustensils)
-let ustensilsArray = [...ust] // array de tous les ustenciles
+
+//traitement app
 let app = recipes.map(a => a.appliance)
-let appliancesArray = [...app] //array de tous les appareils
+let appliancesArray = [...new Set(app)] //array de tous les appareils
 // console.log(appliancesArray)
+
+// traitement des ustensils
+let ust = recipes.map(u => u.ustensils)
+ust = ust +','
+let ustData = ust.split(',')
+const lowUstData = ustData.map(el=>{
+    return el.toLowerCase()
+})
+let ustensilsArray = [...new Set (lowUstData)] // array de tous les ustenciles
+console.log(ustensilsArray)
+
+
 
 let selectedTags = []
 let selectedIngredients = []
@@ -59,11 +72,9 @@ let selectedRecipes = []
 ingredientFilter.addEventListener('click', (e) => {
     displayIngList()
 })
-
 applianceFilter.addEventListener('click', (e) => {
     displayAppList()
 })
-
 ustensilFilter.addEventListener('click', (e) => {
     displayUstList()
 })
@@ -138,7 +149,7 @@ const displayTags = (e) => {
     tags.style.display=''
     
     let currentTag = e.target
-    console.log(currentTag)
+    // console.log(currentTag)
 
     // tagContainer = new Tags(tag,ingredient)
 
