@@ -2,7 +2,7 @@ import recipes from './recipes.js'
 import { RecipeCard } from './models/recipeCard.js'
 import { IngredientsList, AppliancesList, UstensilsList } from './models/createLists.js'
 import { Tags } from './models/tags.js'
-import { Search } from './models/Search.js'
+
 
 //DOM
 const recipesContainer = document.querySelector('#recettes')
@@ -31,13 +31,21 @@ const btnTags = document.querySelectorAll('.list-items')
 
 //Création des Array
 recipes: [] //array de toutes les recettes
-let ing = recipes.map(i => i.ingredients)
+let ing = recipes.map(i => i.ingredients.map(n=>n.ingredient))
+// ing.flat(Infinity)
+ing= ing +''
+let resultSplit = ing.split(',')
+console.log(resultSplit)
+setTimeout(function(){
+    console.log(ing)
+
+},1000)
 let ingredientsArray = [...ing] // array de tous les ingredients
+console.log(ingredientsArray)
 let ust = recipes.map(u => u.ustensils)
 let ustensilsArray = [...ust] // array de tous les ustenciles
 let app = recipes.map(a => a.appliance)
 let appliancesArray = [...app] //array de tous les appareils
-console.log(appliancesArray)
 // console.log(appliancesArray)
 
 let selectedTags = []
@@ -119,6 +127,7 @@ const displayUstList = (e) => {
     listOfUstensils.setAttribute('aria-hidden', 'false')
     listOfIngredients.style.display = 'none'
     listOfAppliances.style.display = 'none'
+    startTagsListener()
 }
 window.addEventListener('load', displayUstList)
 
@@ -128,8 +137,8 @@ const displayTags = (e) => {
     tags.classList.add('.tagselected')
     tags.style.display=''
     
-    // let currentTag = e.target.document.querySelectorAll('.list-items')
-    // console.log(currentTag)
+    let currentTag = e.target
+    console.log(currentTag)
 
     // tagContainer = new Tags(tag,ingredient)
 
@@ -137,7 +146,8 @@ const displayTags = (e) => {
 }
 
 const startTagsListener = () =>{
-    selectedTags.document.querySelectorAll('.list-items li')//on recupere tous nos li
+    selectedTags = document.querySelectorAll('.list-items')//on recupere tous nos li
+    console.log(selectedTags)
     for (let t of selectedTags){
         t.addEventListener('click', displayTags)
     }
