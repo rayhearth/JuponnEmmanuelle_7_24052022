@@ -43,17 +43,6 @@ const lowIngData = ingData.map(el=> {
 let ingredientsArray = [...new Set(lowIngData)] // array de tous les ingredients filtrés
 // console.log(ingredientsArray)
 
-let addItem = (ingredientsArray, parentElm) => {
-    console.log('ygfyf')
-	ingredientsArray.forEach(item => {
-		let option = create("li", {class: "list-item"});
-		option.textContent = item.charAt(0).toUpperCase() + item.slice(1);
-		parentElm.appendChild(option);
-	})
-}
-
-
-
 //traitement app
 let app = recipes.map(a => a.appliance)
 let appliancesArray = [...new Set(app)] //array de tous les appareils
@@ -101,7 +90,7 @@ const buildIngredientsList = (ingredient) => {
 
 const displayIngList = (e) => {
     const ingList = ingredientsArray.map(i => buildIngredientsList(i))
-    console.log(ingList)
+    // console.log(ingList)
 
     const renderAllIngredient = (ingredientsArray) => {
         let all = ''
