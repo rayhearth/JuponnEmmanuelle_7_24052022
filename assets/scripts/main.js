@@ -31,7 +31,7 @@ const btnTags = document.querySelectorAll('.list-items')
 
 //Création des Array
 recipes: [] //array de toutes les recettes
-console.log(recipes)
+// console.log(recipes)
 //traitement ing
 let ing = recipes.map(i => i.ingredients.map(n => n.ingredient))
 ing = ing +''
@@ -39,9 +39,19 @@ ing = ing +''
 let ingData = ing.split(',')
 //uniformise caract
 const lowIngData = ingData.map(el=> {
-    return el.toLowerCase()
-})
+    return el.toLowerCase()})
 let ingredientsArray = [...new Set(lowIngData)] // array de tous les ingredients filtrés
+// console.log(ingredientsArray)
+
+let addItem = (ingredientsArray, parentElm) => {
+    console.log('ygfyf')
+	ingredientsArray.forEach(item => {
+		let option = create("li", {class: "list-item"});
+		option.textContent = item.charAt(0).toUpperCase() + item.slice(1);
+		parentElm.appendChild(option);
+	})
+}
+
 
 
 //traitement app
@@ -57,7 +67,7 @@ const lowUstData = ustData.map(el=>{
     return el.toLowerCase()
 })
 let ustensilsArray = [...new Set (lowUstData)] // array de tous les ustenciles
-console.log(ustensilsArray)
+// console.log(ustensilsArray)
 
 
 
@@ -72,6 +82,7 @@ let selectedRecipes = []
 ingredientFilter.addEventListener('click', (e) => {
     displayIngList()
 })
+
 applianceFilter.addEventListener('click', (e) => {
     displayAppList()
 })
@@ -79,15 +90,23 @@ ustensilFilter.addEventListener('click', (e) => {
     displayUstList()
 })
 
+const buildIngredientsList = (ingredient) => {
+
+    return `<li class="list-items" data-item="${ingredient}" data-type="ingredient">
+    ${ingredient}
+    </li>
+    `
+
+}
 
 const displayIngList = (e) => {
-    const ingList = ingredientsArray.map(i => new IngredientsList(i))
-    // console.log(ingList)
+    const ingList = ingredientsArray.map(i => buildIngredientsList(i))
+    console.log(ingList)
 
     const renderAllIngredient = (ingredientsArray) => {
         let all = ''
         for (let ingredient of ingredientsArray) {
-            all += ingredient.buildIngredientsList()
+            all += buildIngredientsList(ingredient)
             // console.log(all)
         }
         return all
@@ -122,13 +141,11 @@ window.addEventListener('load', displayAppList)
 
 const displayUstList = (e) => {
     const ustList = ustensilsArray.map(u => new UstensilsList(u))
-    // console.log(ustList)
 
     const renderAllUstensils = (ustensilsArray) => {
         let all = ''
         for (let ustensil of ustensilsArray) {
             all += ustensil.buildUstensilList()
-            // console.log(all)
         }
         return all
     }
@@ -158,7 +175,7 @@ const displayTags = (e) => {
 
 const startTagsListener = () =>{
     selectedTags = document.querySelectorAll('.list-items')//on recupere tous nos li
-    console.log(selectedTags)
+    // console.log(selectedTags)
     for (let t of selectedTags){
         t.addEventListener('click', displayTags)
     }

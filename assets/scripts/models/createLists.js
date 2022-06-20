@@ -1,7 +1,7 @@
 export class IngredientsList {
 
     constructor(ingredient) {
-        this.ingredient = ingredient.map((el) => el.ingredient)
+        this.ingredient = ingredient
         // console.log(this.ingredient)
     }
 
