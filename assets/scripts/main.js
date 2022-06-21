@@ -175,7 +175,7 @@ window.addEventListener('load', displayUstList)
 
 
 let selectedTags = []
-console.log(selectedTags)
+
 let selectedIngredients = []
 let selectedApplainces = []
 let selectedUstensils = []
@@ -190,6 +190,7 @@ const displayTags = (e) => {
     
     let currentTag = e.target
     console.log(currentTag)
+    
     
     tags.innerHTML = renderTags(currentTag.innerHTML)
     console.log(tags.innerHTML)
