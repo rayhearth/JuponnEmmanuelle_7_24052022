@@ -100,7 +100,7 @@ img {
   justify-content: space-between;
   align-items: center;
   height: 4.375rem;
-  padding-left: 5%;
+  padding-left: 3%;
   position: relative;
 }
 .searchFilters .filterBtn .searchControls .controlsInput {
@@ -118,6 +118,15 @@ img {
 .searchFilters .filterBtn ul {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
+  row-gap: 2%;
+  min-width: 11.625rem;
+  max-height: 20.5rem;
+  padding: 0 3%;
+  overflow-y: scroll;
+  line-height: 1.125rem;
+}
+.searchFilters .filterBtn ul li {
+  text-transform: capitalize;
 }
 
 .searchTags {

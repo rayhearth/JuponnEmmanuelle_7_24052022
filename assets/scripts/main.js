@@ -1,6 +1,6 @@
 import recipes from './recipes.js'
 import { RecipeCard } from './models/recipeCard.js'
-import { IngredientsList, AppliancesList, UstensilsList } from './models/createLists.js'
+import { AppliancesList, UstensilsList } from './models/createLists.js'
 import { Tags } from './models/tags.js'
 
 
@@ -34,12 +34,13 @@ recipes: [] //array de toutes les recettes
 // console.log(recipes)
 //traitement ing
 let ing = recipes.map(i => i.ingredients.map(n => n.ingredient))
-ing = ing +''
+ing = ing + ''
 //transforme string en array  
 let ingData = ing.split(',')
 //uniformise caract
-const lowIngData = ingData.map(el=> {
-    return el.toLowerCase()})
+const lowIngData = ingData.map(el => {
+    return el.toLowerCase()
+})
 let ingredientsArray = [...new Set(lowIngData)] // array de tous les ingredients filtrés
 // console.log(ingredientsArray)
 
@@ -50,12 +51,12 @@ let appliancesArray = [...new Set(app)] //array de tous les appareils
 
 // traitement des ustensils
 let ust = recipes.map(u => u.ustensils)
-ust = ust +','
+ust = ust + ','
 let ustData = ust.split(',')
-const lowUstData = ustData.map(el=>{
+const lowUstData = ustData.map(el => {
     return el.toLowerCase()
 })
-let ustensilsArray = [...new Set (lowUstData)] // array de tous les ustenciles
+let ustensilsArray = [...new Set(lowUstData)] // array de tous les ustenciles
 // console.log(ustensilsArray)
 
 
@@ -80,17 +81,13 @@ ustensilFilter.addEventListener('click', (e) => {
 })
 
 const buildIngredientsList = (ingredient) => {
-
-    return `<li class="list-items" data-item="${ingredient}" data-type="ingredient">
-    ${ingredient}
-    </li>
-    `
-
+    return `<li class="list-items" data-type="ingredient">
+    ${ingredient}</li>`
 }
 
 const displayIngList = (e) => {
-    const ingList = ingredientsArray.map(i => buildIngredientsList(i))
-    // console.log(ingList)
+    const ingList = ingredientsArray
+    console.log(ingList)
 
     const renderAllIngredient = (ingredientsArray) => {
         let all = ''
@@ -152,8 +149,8 @@ window.addEventListener('load', displayUstList)
 const displayTags = (e) => {
     //cible endroit où tags select seront insérés
     tags.classList.add('.tagselected')
-    tags.style.display=''
-    
+    tags.style.display = ''
+
     let currentTag = e.target
     // console.log(currentTag)
 
@@ -162,14 +159,14 @@ const displayTags = (e) => {
     // tags.innerHTML = renderTags(tagContainer)
 }
 
-const startTagsListener = () =>{
+const startTagsListener = () => {
     selectedTags = document.querySelectorAll('.list-items')//on recupere tous nos li
     // console.log(selectedTags)
-    for (let t of selectedTags){
+    for (let t of selectedTags) {
         t.addEventListener('click', displayTags)
     }
 }
-window.addEventListener('load',displayTags)
+window.addEventListener('load', displayTags)
 
 //on injecte le html du render recipe ds notre section recette
 const displayRecipes = () => {
