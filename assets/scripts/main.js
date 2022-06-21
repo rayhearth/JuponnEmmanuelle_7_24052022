@@ -11,7 +11,7 @@ const ingredientFilter = document.querySelector('#ingredients-filter')
 const applianceFilter = document.querySelector('#appliance-filter')
 const ustensilFilter = document.querySelector('#ustensils-filter')
 
-//app search listes
+//search listes
 const ingLabel = document.querySelector('#ingL')
 const ingSearch = document.querySelector('#ingredients')
 const appLabel = document.querySelector('#appL')
@@ -175,11 +175,26 @@ window.addEventListener('load', displayUstList)
 
 
 let selectedTags = []
+console.log(selectedTags)
 let selectedIngredients = []
 let selectedApplainces = []
 let selectedUstensils = []
 let selectedRecipes = []
 
+
+const displayTags = (e) => {
+    //cible endroit où tags select seront insérés
+    tags.classList.add('tagselected')
+    tags.classList.remove('hidden')
+    tags.style.display = ''
+    
+    let currentTag = e.target
+    console.log(currentTag)
+    
+    tags.innerHTML = renderTags(currentTag.innerHTML)
+    console.log(tags.innerHTML)
+    // tags.innerHTML = renderTags(tagContainer)
+}
 const renderTags = (currentTag) =>{
     return `
         <h3>${currentTag}</h3>
@@ -188,21 +203,9 @@ const renderTags = (currentTag) =>{
         </button>`
 }
 
-const displayTags = (e) => {
-    //cible endroit où tags select seront insérés
-    tags.classList.add('.tagselected')
-    tags.style.display = ''
-
-    let currentTag = e.target
-    console.log(currentTag)
-
-    tags.innerHTML = renderTags(currentTag)
-    // tags.innerHTML = renderTags(tagContainer)
-}
-
 const startTagsListener = () => {
     selectedTags = document.querySelectorAll('.list-items')//on recupere tous nos li
-    // console.log(selectedTags)
+    console.log(selectedTags)
     for (let t of selectedTags) {
         t.addEventListener('click', displayTags)
     }
