@@ -8,17 +8,30 @@
 body {
   font-family: "DM Sans", "Lato", "Roboto", sans-serif;
   margin: 0 auto;
+  scrollbar-width: thin;
+  /* "auto" or "thin" */
+  scrollbar-color: transparent;
+  /* scroll thumb and track */
+}
+body ::-webkit-scrollbar {
+  width: 0.625rem;
+}
+body ::-webkit-scrollbar-track {
+  background: transparent;
+}
+body ::-webkit-scrollbar-thumb {
+  background-color: transparent;
 }
 
 main {
-  max-width: 1240px;
+  max-width: 77.5rem;
   margin: 0 auto;
   padding: 0 2%;
 }
 main .hidden {
   position: absolute;
-  width: 1px;
-  height: 1px;
+  width: 0.063rem;
+  height: 0.063rem;
   overflow: hidden;
   opacity: 0;
   z-index: -9999px;
@@ -75,7 +88,7 @@ img {
 
 .searchFilters {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   width: 100%;
   margin: 2% 0;
 }
@@ -85,6 +98,16 @@ img {
   border-radius: 0.313rem;
   color: white;
   margin-right: 3%;
+}
+.searchFilters .filterBtn ::placeholder {
+  color: #E7E7E7;
+  opacity: 0.7;
+}
+.searchFilters .filterBtn input {
+  background-color: transparent;
+  font-size: 1.125rem;
+  font-family: "Lato";
+  font-weight: bold;
 }
 .searchFilters .filterBtn:first-child {
   background-color: #3282F7;
@@ -106,6 +129,7 @@ img {
 .searchFilters .filterBtn .searchControls .controlsInput {
   width: 6.25rem;
   color: white;
+  width: fit-content;
 }
 .searchFilters .filterBtn .searchControls button {
   width: 3.125rem;
@@ -119,14 +143,19 @@ img {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   row-gap: 2%;
-  min-width: 11.625rem;
-  max-height: 20.5rem;
-  padding: 0 3%;
+  min-height: 8rem;
+  max-height: 19.45rem;
   overflow-y: scroll;
   line-height: 1.125rem;
 }
 .searchFilters .filterBtn ul li {
   text-transform: capitalize;
+  padding: 0 9%;
+  width: 13.916rem;
+  height: 1.375rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .searchTags {
