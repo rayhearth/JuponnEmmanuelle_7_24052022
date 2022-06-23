@@ -5,6 +5,7 @@ import { RecipeCard } from './models/recipeCard.js'
 //DOM
 const recipesContainer = document.querySelector('#recettes')
 const tags = document.querySelector('#tagsSelect')
+const tagsList = document.querySelector('#tagsList')
 
 //inputs
 const ingredientFilter = document.querySelector('#ingredients-filter')
@@ -22,12 +23,9 @@ const ustSearch = document.querySelector('#ustensiles')
 const principalSearch = document.querySelector('#search')
 
 //ul
-const resultIng = document.querySelector('.searchResult')
 const listOfIngredients = document.querySelector('#ingredientsList')
 const listOfUstensils = document.querySelector('#ustensilsList')
 const listOfAppliances = document.querySelector('#applianceList')
-
-const btnTags = document.querySelectorAll('.list-items')
 
 
 //Création des Array
@@ -71,7 +69,7 @@ ustensilFilter.addEventListener('click', (e) => {
 
 /*Affichage Liste Ing*/
 const buildIngredientsList = (ingredient) => {
-    return `<li class="list-items" data-type="ingredient">
+    return `<li class="list-items ingredient" data-type="ingredient">
     ${ingredient}</li>`
 }
 
@@ -105,7 +103,7 @@ window.addEventListener('load', displayIngList)
 
 /* Affichage Liste App*/
 const buildApplianceList = (appliance) => {
-    return `<li class="list-items" data-type="appliance">
+    return `<li class="list-items appliance" data-type="appliance">
         ${appliance}</li>`
 }
 
@@ -141,7 +139,7 @@ window.addEventListener('load', displayAppList)
 
 /*Affichage Liste Ust*/
 const buildUstensilList = (ustensil) => {
-    return `<li class="list-items" data-type="ustensil">
+    return `<li class="list-items ustensil" data-type="ustensil">
     ${ustensil}</li>`
 }
 
@@ -177,6 +175,7 @@ window.addEventListener('load', displayUstList)
 let selectedTags = []
 
 let selectedIngredients = []
+console.log(selectedIngredients)
 let selectedApplainces = []
 let selectedUstensils = []
 let selectedRecipes = []
@@ -184,29 +183,36 @@ let selectedRecipes = []
 
 const displayTags = (e) => {
     //cible endroit où tags select seront insérés
-    tags.classList.add('tagselected')
+    // tags.classList.add('tagselected')
     tags.classList.remove('hidden')
-    tags.style.display = ''
-    
+    tagsList.style.display = ''
+
     let currentTag = e.target
     console.log(currentTag)
-    
-    
-    tags.innerHTML = renderTags(currentTag.innerHTML)
-    console.log(tags.innerHTML)
-    // tags.innerHTML = renderTags(tagContainer)
+
+    if (currentTag.classList.contains('ingredient')){
+        selectedIngredients.push(currentTag.innerHTML)
+        selectedTags.delete(currentTag.innerHTML)
+    }
+    // switch (currentTag.classList.contains('ingredient')){
+    //     case 'ingredient':
+    //         selectedIngredients.push(currentTag.innerHTML)
+    // }
+
+    tagsList.innerHTML = renderTags(currentTag.innerHTML)
 }
-const renderTags = (currentTag) =>{
+const renderTags = (currentTag) => {
     return `
+    <li class="tagSelect">
         <h3>${currentTag}</h3>
         <button class="tagBtn">
             <img src="./assets/img/clTag.svg" alt="">
-        </button>`
+        </button>
+    </li>`
 }
 
 const startTagsListener = () => {
     selectedTags = document.querySelectorAll('.list-items')//on recupere tous nos li
-    console.log(selectedTags)
     for (let t of selectedTags) {
         t.addEventListener('click', displayTags)
     }

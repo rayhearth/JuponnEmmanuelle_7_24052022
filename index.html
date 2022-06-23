@@ -12,8 +12,9 @@
     <!-- FONTS ------------------------------------------------>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&family=Lato:wght@400;700&family=Roboto&display=swap"
-    rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&family=Lato:wght@400;700&family=Roboto&display=swap"
+        rel="stylesheet">
 
     <!--    RESPONSIVE EDGE------------------------------------>
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -43,18 +44,22 @@
             </div>
 
             <div class="searchTags hidden" id="tagsSelect">
-                <h3>carottes</h3>
-                <button class="tagBtn">
-                    <img src="./assets/img/clTag.svg" alt="">
-                </button>
+                <ul class="tagsList" id="tagsList">
+                    <li>
+                        <h3></h3>
+                        <button class="tagBtn">
+                            <img src="./assets/img/clTag.svg" alt="">
+                        </button>
+                    </li>
+                </ul>
             </div>
-
             <div class="searchFilters">
                 <div class="filterBtn" id='ingredients-filter' data-filter="ingrédients">
                     <div class="searchControls">
-                        <label for="inputIngredients" class="controlsFilter" id="ingL" data-filter-label>Ingrédients</label>
-                        <input type="text" class="controlsInput hidden" placeholder="Rechercher un ingrédient" id="ingredients"
-                            data-filter-input>
+                        <label for="inputIngredients" class="controlsFilter" id="ingL"
+                            data-filter-label>Ingrédients</label>
+                        <input type="text" class="controlsInput hidden" placeholder="Rechercher un ingrédient"
+                            id="ingredients" data-filter-input>
                         <button class="controlExpand" data-filter-expand>
                             <img src="./assets/img/arrow.svg" alt="arrowDown">
                         </button>
@@ -65,8 +70,8 @@
                 <div class="filterBtn" id='appliance-filter' data-filter="appareils">
                     <div class="searchControls">
                         <label for="inputAppareils" class="controlsFilter" id="appL" data-filter-label>Appareils</label>
-                        <input type="text" class="controlsInput hidden" placeholder="Rechercher un appareil" id="appareils"
-                            data-filter-input>
+                        <input type="text" class="controlsInput hidden" placeholder="Rechercher un appareil"
+                            id="appareils" data-filter-input>
                         <button class="controlExpand" data-filter-expand>
                             <img src="./assets/img/arrow.svg" alt="arrowDown">
                         </button>
@@ -76,9 +81,10 @@
 
                 <div class="filterBtn" id='ustensils-filter' data-filter="ustensiles">
                     <div class="searchControls">
-                        <label for="inputUstensiles" class="controlsFilter" id="ustL" data-filter-label>Ustensiles</label>
-                        <input type="text" class="controlsInput hidden" placeholder="Rechercher un ustensile" id="ustensiles"
-                            data-filter-input>
+                        <label for="inputUstensiles" class="controlsFilter" id="ustL"
+                            data-filter-label>Ustensiles</label>
+                        <input type="text" class="controlsInput hidden" placeholder="Rechercher un ustensile"
+                            id="ustensiles" data-filter-input>
                         <button class="controlExpand" data-filter-expand>
                             <img src="./assets/img/arrow.svg" alt="arrowDown">
                         </button>
@@ -89,7 +95,8 @@
         </aside>
         <section class="recettes" id="recettes">
             <div class="noResults hidden">
-                <p> Aucune recette ne correspond à vos critères de recherche.<br>Vous pouvez chercher « tarte aux pommes »,
+                <p> Aucune recette ne correspond à vos critères de recherche.<br>Vous pouvez chercher « tarte aux pommes
+                    »,
                     « poisson », etc.</p>
             </div>
         </section>
