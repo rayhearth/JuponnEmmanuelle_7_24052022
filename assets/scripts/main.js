@@ -40,11 +40,11 @@ let ingData = ing.split(',')
 const lowIngData = ingData.map(el => {
     return el.toLowerCase()
 })
-let ingredientsArray = [...new Set(lowIngData)] // array de tous les ingredients filtrés
+let ingredientsArray = [...new Set(lowIngData)].sort() // array de tous les ingredients filtrés
 
 /*traitement app*/
 let app = recipes.map(a => a.appliance)
-let appliancesArray = [...new Set(app)] //array de tous les appareils
+let appliancesArray = [...new Set(app)].sort() //array de tous les appareils
 
 /*traitement des ustensils*/
 let ust = recipes.map(u => u.ustensils)
@@ -53,7 +53,7 @@ let ustData = ust.split(',')
 const lowUstData = ustData.map(el => {
     return el.toLowerCase()
 })
-let ustensilsArray = [...new Set(lowUstData)] // array de tous les ustenciles
+let ustensilsArray = [...new Set(lowUstData)].sort() // array de tous les ustenciles
 
 // listeners Filters
 ingredientFilter.addEventListener('click', (e) => {
@@ -174,10 +174,12 @@ window.addEventListener('load', displayUstList)
 
 let selectedTags = []
 
-let selectedIngredients = []
-console.log(selectedIngredients)
-let selectedApplainces = []
+let selectIngredients = []
+// console.log(selectIngredients)
+let selectedAppliances = []
+// console.log(selectedAppliances)
 let selectedUstensils = []
+// console.log(selectedUstensils)
 let selectedRecipes = []
 
 
@@ -186,13 +188,23 @@ const displayTags = (e) => {
     // tags.classList.add('tagselected')
     tags.classList.remove('hidden')
     tagsList.style.display = ''
-
+    
     let currentTag = e.target
-    console.log(currentTag)
+    console.log((currentTag))
+
 
     if (currentTag.classList.contains('ingredient')){
-        selectedIngredients.push(currentTag.innerHTML)
-        selectedTags.delete(currentTag.innerHTML)
+        selectIngredients.push(currentTag.innerHTML)
+        // listOfIngredients.delete(currentTag.innerHTML)
+    } else if (currentTag.classList.contains('appliance')){
+        selectedAppliances.push(currentTag.innerHTML)
+
+    } else if (currentTag.classList.contains('ustensil')) {
+        selectedUstensils.push(currentTag.innerHTML)
+    } else{
+        const tagsArray = selectIngredients.concat(selectedAppliances).concat(selectedUstensils)
+        console.log(tagsArray)
+
     }
     // switch (currentTag.classList.contains('ingredient')){
     //     case 'ingredient':
