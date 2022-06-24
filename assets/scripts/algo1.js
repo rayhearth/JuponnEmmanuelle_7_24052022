@@ -18,6 +18,7 @@ export default {
                 }))
                 searchArray.push(recipe)
             }
+            let array
         }
 
     }
