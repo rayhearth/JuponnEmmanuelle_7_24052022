@@ -1,5 +1,6 @@
 import recipes from './recipes.js'
 import { RecipeCard } from './models/recipeCard.js'
+import algo1 from './algo1.js'
 
 
 //DOM
@@ -21,6 +22,17 @@ const ustLabel = document.querySelector('#ustL')
 const ustSearch = document.querySelector('#ustensiles')
 
 const principalSearch = document.querySelector('#search')
+let searchValue = ''
+
+const research = (e) =>{
+
+    let searchValue = ''
+    
+    principalSearch.addEventListener('change', (e)=>{
+        searchValue = principalSearch.value.trim().toLowerCase()
+        return searchValue
+    })
+}
 
 //ul
 const listOfIngredients = document.querySelector('#ingredientsList')
@@ -65,6 +77,8 @@ applianceFilter.addEventListener('click', (e) => {
 ustensilFilter.addEventListener('click', (e) => {
     displayUstList()
 })
+
+
 
 
 /*Affichage Liste Ing*/
