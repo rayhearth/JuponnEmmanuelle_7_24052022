@@ -2,21 +2,22 @@ import recipes from './recipes.js'
 
 recipes: []
 const principalSearch = document.querySelector('#search')
+let searchValue=''
 
 const Search = () => {
 
-    searchValue = principalSearch.value.trim()
+    searchValue = principalSearch.value.trim().toLowerCase()
     let searchArray = []
 
 
 
     if (searchValue.length >= 3) {
         for (let recipe of recipes) {
-            if (recipe.name.toLocaleLowerCase().includes(searchValue) ||
+            if (recipe.name.toLowerCase().includes(searchValue) ||
                 recipe.description.includes(searchValue) ||
-                recipe.ingredients.forEach((ingredient) => {
-                    ingredient.toLocaleLowerCase().includes(searchValue)
-                }) || recipe.appiance.includes(searchValue) ||
+                // recipe.ingredients.forEach((ingredients) => {
+                // ingredients.ingredient.toLowerCase().includes(searchValue)
+                // }) || recipe.appliance.includes(searchValue) ||
                 recipe.ustensils.includes(searchValue)
             )
             searchArray.push(recipe)
