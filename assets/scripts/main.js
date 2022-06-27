@@ -1,6 +1,6 @@
 import recipes from './recipes.js'
 import { RecipeCard } from './models/recipeCard.js'
-import algo1 from './algo1.js'
+// import { Search }  from './algo1.js'
 
 
 //DOM
@@ -22,17 +22,25 @@ const ustLabel = document.querySelector('#ustL')
 const ustSearch = document.querySelector('#ustensiles')
 
 const principalSearch = document.querySelector('#search')
-let searchValue = ''
 
-const research = (e) =>{
+//listener de la principal search
+// const research = () =>{
 
-    let searchValue = ''
-    
-    principalSearch.addEventListener('change', (e)=>{
-        searchValue = principalSearch.value.trim().toLowerCase()
-        return searchValue
-    })
-}
+//     principalSearch.addEventListener('click', c =>{
+//         c.target.value=''
+//         entries = c.target.value
+        
+        
+//     } )
+
+//     principalSearch.addEventListener('keyup', k =>{
+//         entries = k.target.value
+
+        
+//     })
+
+// }
+// window.addEventListener('load', research)
 
 //ul
 const listOfIngredients = document.querySelector('#ingredientsList')
@@ -77,7 +85,6 @@ applianceFilter.addEventListener('click', (e) => {
 ustensilFilter.addEventListener('click', (e) => {
     displayUstList()
 })
-
 
 
 
@@ -204,22 +211,22 @@ const displayTags = (e) => {
     tagsList.style.display = ''
     
     let currentTag = e.target
-    console.log((currentTag))
+    // console.log((currentTag))
 
 
-    if (currentTag.classList.contains('ingredient')){
-        selectIngredients.push(currentTag.innerHTML)
-        // listOfIngredients.delete(currentTag.innerHTML)
-    } else if (currentTag.classList.contains('appliance')){
-        selectedAppliances.push(currentTag.innerHTML)
+    // if (currentTag.classList.contains('ingredient')){
+    //     selectIngredients.push(currentTag.innerHTML)
+    //     // listOfIngredients.delete(currentTag.innerHTML)
+    // } else if (currentTag.classList.contains('appliance')){
+    //     selectedAppliances.push(currentTag.innerHTML)
 
-    } else if (currentTag.classList.contains('ustensil')) {
-        selectedUstensils.push(currentTag.innerHTML)
-    } else{
-        const tagsArray = selectIngredients.concat(selectedAppliances).concat(selectedUstensils)
-        console.log(tagsArray)
+    // } else if (currentTag.classList.contains('ustensil')) {
+    //     selectedUstensils.push(currentTag.innerHTML)
+    // } else{
+    //     const tagsArray = selectIngredients.concat(selectedAppliances).concat(selectedUstensils)
+    //     console.log(tagsArray)
 
-    }
+    // }
     // switch (currentTag.classList.contains('ingredient')){
     //     case 'ingredient':
     //         selectedIngredients.push(currentTag.innerHTML)
