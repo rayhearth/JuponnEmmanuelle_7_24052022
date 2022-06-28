@@ -4,32 +4,35 @@ recipes: []
 const principalSearch = document.querySelector('#search')
 let searchValue=''
 
-const Search = () => {
-
+let Search = () => {
+    
     searchValue = principalSearch.value.trim().toLowerCase()
     let searchArray = []
 
 
 
     if (searchValue.length >= 3) {
-        for (let recipe of recipes) {
-            if (recipe.name.toLowerCase().includes(searchValue) ||
-                recipe.description.includes(searchValue) ||
-                // recipe.ingredients.forEach((ingredients) => {
-                // ingredients.ingredient.toLowerCase().includes(searchValue)
-                // }) || recipe.appliance.includes(searchValue) ||
-                recipe.ustensils.includes(searchValue)
-            )
-            searchArray.push(recipe)
-            searchArray = recipes
+        for (let i=0; i< recipes.length; i++) {
+            if(recipes[i].name.toLowerCase().includes(searchValue)||recipes[i].description.includes(searchValue)){
+                searchArray.push(recipes[i])
+            } else {
+                for (let r=0; r<recipes[i].ingredients.length; r++ ){
+                    if(recipes[i].ingredients[r].ingredient.toLowerCase().includes(searchValue)){
+                        searchArray.push(recipes[i])
+                        break
+                    }
+                }
+            } 
+            
+            // searchArray = recipes
         }
-        if (searchArray.length == 0) {
-            return `<div class="noResults hidden">
-                <p> Aucune recette ne correspond à vos critères de recherche.<br>Vous pouvez chercher « tarte aux pommes
-                »,« poisson », etc.</p>
-                </div>`
+        // if (searchArray.length == 0) {
+        //     return `<div class="noResults hidden">
+        //         <p> Aucune recette ne correspond à vos critères de recherche.<br>Vous pouvez chercher « tarte aux pommes
+        //         »,« poisson », etc.</p>
+        //         </div>`
 
-        }
+        // }
     }
 
 }
