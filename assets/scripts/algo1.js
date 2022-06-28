@@ -24,16 +24,25 @@ let Search = () => {
                         searchArray.push(recipes[i])
                         break
                     }
-                    // throw new Error('Aucune recette ne correspond à vos critères de recherche. Vous pouvez chercher « tarte aux pommes»,« poisson », etc')
                 }
-                document.querySelector('#recettes').innerHTML = searchArray.map(s => s.outerHTML).join('')
-                console.log(searchArray)
-            } if(searchArray.length == 0) {
-                    ghost.classList.remove('hidden')
+            } 
+            const replace = searchArray.map(s => new RecipeCard(s))
+            const visualAll = (searchArray) => {
+                let all=''
+                for (let searching of searchArray){
+                    all += searching.renderRecipe()
                 }
+                return all
+            }
+            document.querySelector('#recettes').innerHTML = visualAll(replace)
+            console.log(searchArray)
+            
+            if (searchArray.length == 0) {
+                ghost.classList.remove('hidden')
+            }
 
         }
-        
+
     }
 
 }
