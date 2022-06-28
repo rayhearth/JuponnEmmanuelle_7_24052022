@@ -256,7 +256,7 @@ window.addEventListener('load', displayTags)
 const displayRecipes = () => {
 
     const container = recipes.map(r => new RecipeCard(r))
-    // console.log(container)
+    console.log(container)
     const renderAllRecipes = (recipes) => {
         let all = ''
         // console.log(all)
