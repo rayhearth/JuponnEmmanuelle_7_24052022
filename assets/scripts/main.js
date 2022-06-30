@@ -28,17 +28,12 @@ const principalSearch = document.querySelector('#search')
 
 //     principalSearch.addEventListener('click', c =>{
 //         c.target.value=''
-//         entries = c.target.value
-        
-        
+//         entries = c.target.value       
 //     } )
 
 //     principalSearch.addEventListener('keyup', k =>{
-//         entries = k.target.value
-
-        
+//         entries = k.target.value       
 //     })
-
 // }
 // window.addEventListener('load', research)
 
@@ -50,30 +45,23 @@ const listOfAppliances = document.querySelector('#applianceList')
 
 //Création des Array
 recipes: [] //array de toutes les recettes
-
+// console.log(recipes)
 /*traitement ing*/
-let ing = recipes.map(i => i.ingredients.map(n => n.ingredient))
+let ing = recipes.map(i => i.ingredients.map(n => n.ingredient.toLowerCase()))
 ing = ing + ''
 //transforme string en array  
 let ingData = ing.split(',')
-//uniformise caract
-const lowIngData = ingData.map(el => {
-    return el.toLowerCase()
-})
-let ingredientsArray = [...new Set(lowIngData)].sort() // array de tous les ingredients filtrés
+let ingredientsArray = [...new Set(ingData)].sort() // array de tous les ingredients filtrés
 
 /*traitement app*/
-let app = recipes.map(a => a.appliance)
+let app = recipes.map(a => a.appliance.toLowerCase())
 let appliancesArray = [...new Set(app)].sort() //array de tous les appareils
 
 /*traitement des ustensils*/
-let ust = recipes.map(u => u.ustensils)
-ust = ust + ','
+let ust = recipes.map(u => u.ustensils.toString().toLowerCase())
+ust = ust + ''
 let ustData = ust.split(',')
-const lowUstData = ustData.map(el => {
-    return el.toLowerCase()
-})
-let ustensilsArray = [...new Set(lowUstData)].sort() // array de tous les ustenciles
+let ustensilsArray = [...new Set(ustData)].sort() // array de tous les ustenciles
 
 // listeners Filters
 ingredientFilter.addEventListener('click', (e) => {
@@ -209,7 +197,7 @@ const displayTags = (e) => {
     // tags.classList.add('tagselected')
     tags.classList.remove('hidden')
     tagsList.style.display = ''
-    
+
     let currentTag = e.target
     // console.log((currentTag))
 

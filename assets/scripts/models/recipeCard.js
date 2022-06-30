@@ -6,7 +6,7 @@ export class RecipeCard {
         this.ingredients = data.ingredients
         this.time = data.time
         this.description = data.description
-        this.appliance = data.appliance.toLowerCase()
+        this.appliance = data.appliance
         this.ustensils = data.ustensils
 
     }
