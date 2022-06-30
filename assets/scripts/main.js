@@ -45,7 +45,6 @@ const listOfAppliances = document.querySelector('#applianceList')
 
 //Création des Array
 recipes: [] //array de toutes les recettes
-// console.log(recipes)
 /*traitement ing*/
 let ing = recipes.map(i => i.ingredients.map(n => n.ingredient.toLowerCase()))
 ing = ing + ''
@@ -62,6 +61,7 @@ let ust = recipes.map(u => u.ustensils.toString().toLowerCase())
 ust = ust + ''
 let ustData = ust.split(',')
 let ustensilsArray = [...new Set(ustData)].sort() // array de tous les ustenciles
+
 
 // listeners Filters
 ingredientFilter.addEventListener('click', (e) => {

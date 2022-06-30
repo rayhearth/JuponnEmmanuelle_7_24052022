@@ -18,7 +18,7 @@ const principalSearch = document.querySelector('#search')
 const ingSearch = document.querySelector('#ingredients')
 const ghost = document.querySelector('#noResults')
 let searchValue = ''
-let ingValue =''
+let ingValue = ''
 
 let Search = () => {
 
@@ -37,8 +37,25 @@ let Search = () => {
                     }
                 }
             }
-            //on parcour l'array obtenu et on instancie notre clss recipeCard
-            const replace = searchArray.map(s => new RecipeCard(s))
+
+            /*MAJ des liste en fonction du résultat de la recherche principale*/
+            let ingFiltered = searchArray.map(i => i.ingredients.map(n => n.ingredient.toLowerCase()))
+            ingFiltered = ingFiltered + ''
+            let iFiltredData = ingFiltered.split(',')
+            let newIngredientArray = [...new Set(iFiltredData)].sort()
+
+            let appFiltered = searchArray.map(a => a.appliance.toLowerCase())
+            let newApplianceArray = [...new Set(appFiltered)].sort()
+
+            let ustFistered = searchArray.map(u => u.ustensils.toString().toLowerCase())
+            ustFistered = ustFistered + ''
+            let uFilteredData = ustFistered.split(',')
+            let newUstensilsArray = [...new Set(uFilteredData)].sort()
+
+            /* Création des recipes cards en fonction du resultat de la recherche*/
+
+            //on parcour l'array obtenu et on instancie notre class recipeCard
+            const results = searchArray.map(s => new RecipeCard(s))
             //on cree une méthode qui va gérer le html de toutes les ecttes trouvées
             const visualAll = (searchArray) => {
                 let all = ''
@@ -47,7 +64,7 @@ let Search = () => {
                 }
                 return all
             }
-            document.querySelector('#recettes').innerHTML = visualAll(replace)
+            document.querySelector('#recettes').innerHTML = visualAll(results)
             //s'il n'y a pas de recette on fait app le mess no result sinon il estt caché
             if (searchArray.length == 0) {
                 ghost.classList.remove('hidden')
@@ -86,4 +103,4 @@ let searchFilter = () => {
     }
 }
 
-ingSearch.addEventListener('input',searchFilter)
+ingSearch.addEventListener('input', searchFilter)
