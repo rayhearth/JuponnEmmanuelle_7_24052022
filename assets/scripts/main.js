@@ -23,20 +23,6 @@ const ustSearch = document.querySelector('#ustensiles')
 
 const principalSearch = document.querySelector('#search')
 
-//listener de la principal search
-// const research = () =>{
-
-//     principalSearch.addEventListener('click', c =>{
-//         c.target.value=''
-//         entries = c.target.value       
-//     } )
-
-//     principalSearch.addEventListener('keyup', k =>{
-//         entries = k.target.value       
-//     })
-// }
-// window.addEventListener('load', research)
-
 //ul
 const listOfIngredients = document.querySelector('#ingredientsList')
 const listOfUstensils = document.querySelector('#ustensilsList')
@@ -194,15 +180,15 @@ let selectedRecipes = []
 
 const displayTags = (e) => {
     //cible endroit où tags select seront insérés
-    // tags.classList.add('tagselected')
+    tags.classList.add('tagselected')
     tags.classList.remove('hidden')
     tagsList.style.display = ''
 
     let currentTag = e.target
-    // console.log((currentTag))
+    console.log((currentTag))
 
 
-    // if (currentTag.classList.contains('ingredient')){
+    // if (currentTag.classList.contains('.ingredient')){
     //     selectIngredients.push(currentTag.innerHTML)
     //     // listOfIngredients.delete(currentTag.innerHTML)
     // } else if (currentTag.classList.contains('appliance')){
@@ -213,7 +199,6 @@ const displayTags = (e) => {
     // } else{
     //     const tagsArray = selectIngredients.concat(selectedAppliances).concat(selectedUstensils)
     //     console.log(tagsArray)
-
     // }
     // switch (currentTag.classList.contains('ingredient')){
     //     case 'ingredient':
@@ -246,10 +231,8 @@ const displayRecipes = () => {
     const container = recipes.map(r => new RecipeCard(r))
     const renderAllRecipes = (recipes) => {
         let all = ''
-        // console.log(all)
         for (let recipe of recipes) {
             all += recipe.renderRecipe()
-            // console.log(all)
         }
         return all
 

@@ -2,23 +2,17 @@ import { RecipeCard } from './models/recipeCard.js'
 import recipes from './recipes.js'
 
 recipes: []
-let ing = recipes.map(i => i.ingredients.map(n => n.ingredient))
-ing = ing + ''
-//transforme string en array  
-let ingData = ing.split(',')
-//uniformise caract
-const lowIngData = ingData.map(el => {
-    return el.toLowerCase()
-})
-let ingredientsArray = [...new Set(lowIngData)].sort() // array de tous les ingredients filtrés
-// console.log(ingredientsArray)
+
 /*traitement app*/
 
 const principalSearch = document.querySelector('#search')
-const ingSearch = document.querySelector('#ingredients')
-const ghost = document.querySelector('#noResults')
 let searchValue = ''
+
+const ingSearch = document.querySelector('#ingredients')
 let ingValue = ''
+
+//const ou est stocke la div no result
+const ghost = document.querySelector('#noResults')
 
 let Search = () => {
 
@@ -37,6 +31,8 @@ let Search = () => {
                     }
                 }
             }
+            // recipes.splice(0,recipes.length,...searchArray)
+            // console.log(recipes)
 
             /*MAJ des liste en fonction du résultat de la recherche principale*/
             let ingFiltered = searchArray.map(i => i.ingredients.map(n => n.ingredient.toLowerCase()))
@@ -53,9 +49,9 @@ let Search = () => {
             let newUstensilsArray = [...new Set(uFilteredData)].sort()
 
             /* Création des recipes cards en fonction du resultat de la recherche*/
-
             //on parcour l'array obtenu et on instancie notre class recipeCard
             const results = searchArray.map(s => new RecipeCard(s))
+            // console.log(searchArray)
             //on cree une méthode qui va gérer le html de toutes les ecttes trouvées
             const visualAll = (searchArray) => {
                 let all = ''
@@ -65,7 +61,7 @@ let Search = () => {
                 return all
             }
             document.querySelector('#recettes').innerHTML = visualAll(results)
-            //s'il n'y a pas de recette on fait app le mess no result sinon il estt caché
+            //s'il n'y a pas de recette on fait app le mess no result sinon il est caché
             if (searchArray.length == 0) {
                 ghost.classList.remove('hidden')
             } else {
