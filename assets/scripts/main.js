@@ -193,19 +193,19 @@ const displayTags = (e) => {
     console.log((currentTag))
 
 
-    if (currentTag.classList.contains('ingredient')){
-        selectIngredients.push(currentTag.innerHTML)
-        // listOfIngredients.delete(currentTag.innerHTML)
-    } else if (currentTag.classList.contains('appliance')){
-        selectedAppliances.push(currentTag.innerHTML)
+    // if (currentTag.classList.contains('ingredient')){
+    //     selectIngredients.push(currentTag.innerHTML)
+    //     // listOfIngredients.delete(currentTag.innerHTML)
+    // } else if (currentTag.classList.contains('appliance')){
+    //     selectedAppliances.push(currentTag.innerHTML)
 
-    } else if (currentTag.classList.contains('ustensil')) {
-        selectedUstensils.push(currentTag.innerHTML)
-    } else{
-        const tagsArray = selectIngredients.concat(selectedAppliances).concat(selectedUstensils)
-        console.log(tagsArray)
+    // } else if (currentTag.classList.contains('ustensil')) {
+    //     selectedUstensils.push(currentTag.innerHTML)
+    // } else{
+    //     const tagsArray = selectIngredients.concat(selectedAppliances).concat(selectedUstensils)
+    //     console.log(tagsArray)
 
-    }
+    // }
     // switch (currentTag.classList.contains('ingredient')){
     //     case 'ingredient':
     //         selectedIngredients.push(currentTag.innerHTML)
