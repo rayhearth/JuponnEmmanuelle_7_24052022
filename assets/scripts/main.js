@@ -32,15 +32,11 @@ const listOfAppliances = document.querySelector('#applianceList')
 recipes: [] //array de toutes les recettes
 
 /*traitement ing*/
-let ing = recipes.map(i => i.ingredients.map(n => n.ingredient))
+let ing = recipes.map(i => i.ingredients.map(n => n.ingredient.toLowerCase()))
 ing = ing + ''
 //transforme string en array  
 let ingData = ing.split(',')
-//uniformise caract
-const lowIngData = ingData.map(el => {
-    return el.toLowerCase()
-})
-let ingredientsArray = [...new Set(lowIngData)].sort() // array de tous les ingredients filtrés
+let ingredientsArray = [...new Set(ingData)].sort()  // array de tous les ingredients filtrés
 
 /*traitement app*/
 let app = recipes.map(a => a.appliance)
