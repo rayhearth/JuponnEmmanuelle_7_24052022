@@ -1,5 +1,6 @@
 import recipes from './recipes.js'
 import { RecipeCard } from './models/recipeCard.js'
+// import { Search }  from './algo1.js'
 
 
 //DOM
@@ -30,13 +31,12 @@ const listOfAppliances = document.querySelector('#applianceList')
 
 //Création des Array
 recipes: [] //array de toutes les recettes
-
 /*traitement ing*/
 let ing = recipes.map(i => i.ingredients.map(n => n.ingredient.toLowerCase()))
 ing = ing + ''
 //transforme string en array  
 let ingData = ing.split(',')
-let ingredientsArray = [...new Set(ingData)].sort()  // array de tous les ingredients filtrés
+let ingredientsArray = [...new Set(ingData)].sort() // array de tous les ingredients filtrés
 
 /*traitement app*/
 let app = recipes.map(a => a.appliance.toLowerCase())
@@ -48,6 +48,7 @@ ust = ust + ''
 let ustData = ust.split(',')
 let ustensilsArray = [...new Set(ustData)].sort() // array de tous les ustenciles
 
+
 // listeners Filters
 ingredientFilter.addEventListener('click', (e) => {
     displayIngList()
@@ -58,6 +59,7 @@ applianceFilter.addEventListener('click', (e) => {
 ustensilFilter.addEventListener('click', (e) => {
     displayUstList()
 })
+
 
 
 /*Affichage Liste Ing*/
@@ -178,15 +180,15 @@ let selectedRecipes = []
 
 const displayTags = (e) => {
     //cible endroit où tags select seront insérés
-    // tags.classList.add('tagselected')
+    tags.classList.add('tagselected')
     tags.classList.remove('hidden')
     tagsList.style.display = ''
-    
+
     let currentTag = e.target
     console.log((currentTag))
 
-
-    // if (currentTag.classList.contains('ingredient')){
+    
+    // if (currentTag.classList.contains('.ingredient')){
     //     selectIngredients.push(currentTag.innerHTML)
     //     // listOfIngredients.delete(currentTag.innerHTML)
     // } else if (currentTag.classList.contains('appliance')){
@@ -197,7 +199,6 @@ const displayTags = (e) => {
     // } else{
     //     const tagsArray = selectIngredients.concat(selectedAppliances).concat(selectedUstensils)
     //     console.log(tagsArray)
-
     // }
     // switch (currentTag.classList.contains('ingredient')){
     //     case 'ingredient':
@@ -228,13 +229,10 @@ window.addEventListener('load', displayTags)
 const displayRecipes = () => {
 
     const container = recipes.map(r => new RecipeCard(r))
-    // console.log(container)
     const renderAllRecipes = (recipes) => {
         let all = ''
-        // console.log(all)
         for (let recipe of recipes) {
             all += recipe.renderRecipe()
-            // console.log(all)
         }
         return all
 
