@@ -3,6 +3,12 @@ import recipes from './recipes.js'
 
 recipes: []
 
+let ing = recipes.map(i => i.ingredients.map(n => n.ingredient.toLowerCase()))
+ing = ing + ''
+//transforme string en array  
+let ingData = ing.split(',')
+let ingredientsArray = [...new Set(ingData)].sort() 
+
 /*traitement app*/
 
 const principalSearch = document.querySelector('#search')
@@ -82,7 +88,7 @@ let searchFilter = () => {
         for (let i = 0; i < ingredientsArray.length; i++) {
             if (ingredientsArray[i].toLowerCase().includes(ingValue)) {
                 ingfiltered.push(ingredientsArray[i])
-                console.log(ingfiltered)
+                // console.log(ingfiltered)
             }
 
             const recipesIng = ingfiltered.map(i => new RecipeCard(i))
