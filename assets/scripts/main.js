@@ -39,17 +39,14 @@ let ingData = ing.split(',')
 let ingredientsArray = [...new Set(ingData)].sort()  // array de tous les ingredients filtrés
 
 /*traitement app*/
-let app = recipes.map(a => a.appliance)
+let app = recipes.map(a => a.appliance.toLowerCase())
 let appliancesArray = [...new Set(app)].sort() //array de tous les appareils
 
 /*traitement des ustensils*/
-let ust = recipes.map(u => u.ustensils)
-ust = ust + ','
+let ust = recipes.map(u => u.ustensils.toString().toLowerCase())
+ust = ust + ''
 let ustData = ust.split(',')
-const lowUstData = ustData.map(el => {
-    return el.toLowerCase()
-})
-let ustensilsArray = [...new Set(lowUstData)].sort() // array de tous les ustenciles
+let ustensilsArray = [...new Set(ustData)].sort() // array de tous les ustenciles
 
 // listeners Filters
 ingredientFilter.addEventListener('click', (e) => {
