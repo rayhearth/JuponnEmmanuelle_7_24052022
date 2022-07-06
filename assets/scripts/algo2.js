@@ -2,7 +2,7 @@ import { RecipeCard } from './models/recipeCard.js'
 import recipes from './recipes.js'
 
 recipes: []
-console.log(recipes)
+// console.log(recipes)
 
 /*traitement app*/
 
@@ -18,7 +18,7 @@ const ghost = document.querySelector('#noResults')
 let Search = () => {
 
   searchValue = principalSearch.value.trim().toLowerCase()
-  console.table(recipes)
+  // console.table(recipes)
   const SearchArray = ['name', 'description']
 
   // const keywords = Object.keys(recipes)
@@ -41,22 +41,32 @@ let Search = () => {
   /***********************
    TEST
    ****************/
-const indexIngArray = (recipes, ingtofind)=>{
-index = [].concat.apply([], ([].concat.apply([], recipes))).indexOf(ingtofind)
+// const indexIngArray = (recipes, ingredients)=>{
+// let index = [].concat.apply([], ([].concat.apply([], recipes))).indexOf(ingredients)
+// // console.log(index)
+// if(index === -1){
+//   return false
+// }
+// let numColumns = recipes[0].length
 
-if(index === -1){
-  return false
+// let row=parseInt(index/numColumns)
+
+// let col = index % numColumns
+
+// return [row,col]
+//   }
+// const researchIng = recipes.reduce((acc, curr)=>{
+//   return indexIngArray()
+// })
+
+const iList = recipes.map((recipe) => recipe.ingredients.indexOf(ingredients))
+console.log(iList)
+
+const searchindex = (ingredients) =>{
+  return ingredients.ingredient == searchValue
 }
-numColumns = recipes[0].length
 
-row=parseInt(index/numColumns)
-
-col = index % numColumns
-
-return [row,col]
-  }
-
-indexIngArray.reduce(recipes , searchValue)
+console.log(recipes.map((recipe) =>recipe.ingredients.indexOf(searchindex)))
 
 
 
@@ -78,7 +88,7 @@ indexIngArray.reduce(recipes , searchValue)
 
   }
   // recipes.name.toLowerCase().find(results === searchValue) || recipes.descrption.find(results === searchValue)
-console.log(recipes)
+
 }
 // return recipe
 
