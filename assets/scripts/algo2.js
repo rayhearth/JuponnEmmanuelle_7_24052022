@@ -18,6 +18,7 @@ const ghost = document.querySelector('#noResults')
 let Search = () => {
 
   searchValue = principalSearch.value.trim().toLowerCase()
+  console.table(recipes)
   const SearchArray = ['name', 'description']
 
   // const keywords = Object.keys(recipes)
@@ -36,8 +37,31 @@ let Search = () => {
   //     acc.push(curr)
   //   }
   // })
+  
+  /***********************
+   TEST
+   ****************/
+const indexIngArray = (recipes, ingtofind)=>{
+index = [].concat.apply([], ([].concat.apply([], recipes))).indexOf(ingtofind)
 
-  recipes.findIndex(x=>x.ingredients)
+if(index === -1){
+  return false
+}
+numColumns = recipes[0].length
+
+row=parseInt(index/numColumns)
+
+col = index % numColumns
+
+return [row,col]
+  }
+
+indexIngArray.reduce(recipes , searchValue)
+
+
+
+  // let index = recipes.findIndex(recipe => recipe.ingredients == searchValue)
+  // console.log(index)
 
   const research = () => {
     if (searchValue >= 3) {
