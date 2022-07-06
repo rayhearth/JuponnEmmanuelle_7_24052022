@@ -2,7 +2,7 @@ import { RecipeCard } from './models/recipeCard.js'
 import recipes from './recipes.js'
 
 recipes: []
-// console.log(recipes)
+console.log(recipes)
 
 /*traitement app*/
 
@@ -36,6 +36,8 @@ let Search = () => {
   //     acc.push(curr)
   //   }
   // })
+
+  recipes.findIndex(x=>x.ingredients)
 
   const research = () => {
     if (searchValue >= 3) {
