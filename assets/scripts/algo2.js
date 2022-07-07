@@ -18,60 +18,41 @@ const ghost = document.querySelector('#noResults')
 let Search = () => {
 
   searchValue = principalSearch.value.trim().toLowerCase()
-  // console.table(recipes)
+
   const SearchArray = ['name', 'description']
 
-  // const keywords = Object.keys(recipes)
-  // console.log(keywords)
-  // const result = keywords.reduce((next,key)=>{
-  //   if(SearchArray.includes(key)){
-  //     return {...next, [key]:recipes[key]}
-  //   } else {
-  //     return next
-  //   }
-  // },{})
 
-
-  // const research = recipes.reduce((acc, curr) =>{
-  //   if(curr.name.toLowerCase().includes(searchValue)||curr.description.includes(searchValue)){
-  //     acc.push(curr)
-  //   }
-  // })
-  
   /***********************
-   TEST
+  TEST
    ****************/
-// const indexIngArray = (recipes, ingredients)=>{
-// let index = [].concat.apply([], ([].concat.apply([], recipes))).indexOf(ingredients)
-// // console.log(index)
-// if(index === -1){
-//   return false
-// }
-// let numColumns = recipes[0].length
+  //flag peut être =-1 ou undefined--va permettre d'itérer sur un un array pour le spread l42
+  let flag = -1
+  //array vide d'ingredients
+  let ing = []
+  
+  recipes.forEach((element, index) => {
+    //si flag diff de index
+    if (flag != index) {
+      //alors on stocke index de l'ing ds un array
+      ing[index] = []
+      
+      flag = index
+    }
+    //on stocke ds ing[index]: un array avec l'index des ing et notre array pour chaque recipe 
+    ing[index] = [...ing[index], ...element.ingredients.map(i => i.ingredient)]
+  })
+  console.log(ing)
 
-// let row=parseInt(index/numColumns)
-
-// let col = index % numColumns
-
-// return [row,col]
-//   }
-// const researchIng = recipes.reduce((acc, curr)=>{
-//   return indexIngArray()
-// })
-
-const iList = recipes.map((recipe) => recipe.ingredients.indexOf(ingredients))
-console.log(iList)
-
-const searchindex = (ingredients) =>{
-  return ingredients.ingredient == searchValue
-}
-
-console.log(recipes.map((recipe) =>recipe.ingredients.indexOf(searchindex)))
-
-
-
-  // let index = recipes.findIndex(recipe => recipe.ingredients == searchValue)
-  // console.log(index)
+  let app=[]
+  recipes.forEach((element, index) =>{
+    if (flag != index) {
+      //alors on stocke index de l'ing ds un array
+      app[index] = []
+      
+      flag = index
+    }
+    app[index] = [...app[index], ...element.map(a=> a.appliance)]
+  })
 
   const research = () => {
     if (searchValue >= 3) {
@@ -87,24 +68,9 @@ console.log(recipes.map((recipe) =>recipe.ingredients.indexOf(searchindex)))
     }
 
   }
-  // recipes.name.toLowerCase().find(results === searchValue) || recipes.descrption.find(results === searchValue)
+
 
 }
-// return recipe
 
-  // recipes.reduce(research, {})
-
-  // const research = (searchValue , recipe) =>{
-  //   if (recipes.name.toLowerCase().includes(searchValue) || recipes.description.includes(searchValue)){
-  //     return recipe
-  //   }else{
-  //     if (recipes.ingredients.ingredient.toLowerCase().includes(searchValue)){
-  //       return recipe
-  //     }
-  //   }
-  // }
-
-  // recipes.reduce(research,{})
-// }
 
 principalSearch.addEventListener('input', Search)
