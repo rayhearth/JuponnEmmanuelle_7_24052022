@@ -29,30 +29,26 @@ let Search = () => {
   let flag = -1
   //array vide d'ingredients
   let ing = []
+  let app=[]
+  let ust = []
   
   recipes.forEach((element, index) => {
     //si flag diff de index
     if (flag != index) {
       //alors on stocke index de l'ing ds un array
       ing[index] = []
-      
+      app[index] = []
+      ust [index] = []
       flag = index
     }
     //on stocke ds ing[index]: un array avec l'index des ing et notre array pour chaque recipe 
     ing[index] = [...ing[index], ...element.ingredients.map(i => i.ingredient)]
+    app[index] = [...app[index], element.appliance]
+    ust[index] = [...ust[index], element.ustensils.map(u=>u.ustensils)]
   })
-  console.log(ing)
-
-  let app=[]
-  recipes.forEach((element, index) =>{
-    if (flag != index) {
-      //alors on stocke index de l'ing ds un array
-      app[index] = []
-      
-      flag = index
-    }
-    app[index] = [...app[index], ...element.map(a=> a.appliance)]
-  })
+  // console.log(ing)
+  console.log(app)
+  console.log(ust)
 
   const research = () => {
     if (searchValue >= 3) {
