@@ -41,13 +41,13 @@ let Search = () => {
       ust [index] = []
       flag = index
     }
-    //on stocke ds ing[index]: un array avec l'index des ing et notre array pour chaque recipe 
+    //pour chaque item on obtient un array avec l'index de la recipe et les items de cette recipe
     ing[index] = [...ing[index], ...element.ingredients.map(i => i.ingredient)]
     app[index] = [...app[index], element.appliance]
-    ust[index] = [...ust[index], element.ustensils.map(u=>u.ustensils)]
+    ust[index] = [...ust[index], element.ustensils.toString()]
   })
   // console.log(ing)
-  console.log(app)
+  // console.log(app)
   console.log(ust)
 
   const research = () => {
