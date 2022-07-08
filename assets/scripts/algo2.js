@@ -19,7 +19,7 @@ let Search = () => {
 
   searchValue = principalSearch.value.trim().toLowerCase()
 
-  const SearchArray = ['name', 'description']
+  const SearchArray = []
 
   //flag peut être =-1 ou undefined--va permettre d'itérer sur un un array pour le spread l42
   let flag = -1
@@ -42,12 +42,11 @@ let Search = () => {
     app[index] = [...app[index], element.appliance]
     ust[index] = [...ust[index], element.ustensils.toString()]
 
-    let ingArray = ing[index]
-    let appArray = app[index]
-    let ustArray = ust[index]
-
-    let itemArray = [...new Set(ingArray.concat(appArray).concat(ustArray))]
-    // console.log(itemArray)
+    //on concat les trois tableaux et on enleve les doublons
+    let itemArray = [...new Set(ing[index].concat(app[index]).concat(ust[index]).concat(element.name).concat(element.description))]
+    console.log(itemArray)
+    let result = itemArray.findIndex
+  
   })
 
 
@@ -56,7 +55,7 @@ let Search = () => {
       let searchArray = recipes.reduce(function (accumulator, searchValue) {
         if (accumulator.find(searchValue)) {
           accumulator.push(searchArray)
-          console.log(searchArray)
+          // console.log(searchArray)
         }
         return accumulator
       }, [])
