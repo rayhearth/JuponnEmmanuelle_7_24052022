@@ -64,12 +64,12 @@ let Search = () => {
 
   const research = () => {
     if (searchValue >= 3) {
-      let searchArray = recipes.reduce(function (accumulator, searchValue) {
-        if (accumulator.find(searchValue)) {
-          accumulator.push(searchArray)
-          // console.log(searchArray)
+      let searchArray = recipes.reduce(function (acc, curr) {
+        if (curr.includes(searchValue)) {
+          acc.push(searchArray)
+          console.log(searchArray)
         }
-        return accumulator
+        return acc
       }, [])
 
 
