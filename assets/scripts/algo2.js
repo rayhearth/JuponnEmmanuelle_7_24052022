@@ -45,7 +45,19 @@ let Search = () => {
     //on concat les trois tableaux et on enleve les doublons
     let itemArray = [...new Set(ing[index].concat(app[index]).concat(ust[index]).concat(element.name).concat(element.description))]
     console.log(itemArray)
-    let result = itemArray.findIndex
+
+    
+    
+    // let result = itemArray.reduce((searchArray,curr) => {
+    //   if(!searchValue.includes(curr)){
+    //     searchArray.push(curr)
+    //     console.log(searchArray)
+    //   } 
+    //   return searchArray
+    // },[])
+    
+
+    
   
   })
 
