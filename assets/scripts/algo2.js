@@ -21,6 +21,23 @@ let Search = () => {
 
   const searchArray = []
 
+
+
+  recipes.forEach(function(item, index, array) {
+    console.log(index, item)
+  })
+
+
+  recipes.forEach(function(item, index, array) {
+    item.forEach(function(itm, idx, arr) {
+      console.log(index, idx, itm)
+    })
+  })
+
+
+
+
+
   recipes.forEach(element => {
     //si flag diff de index
   
@@ -29,8 +46,24 @@ let Search = () => {
   
       if (element.name.toLowerCase().includes(searchValue) || element.description.includes(searchValue) || element.ingredients.concat(ingredients).includes(searchValue)) {
         searchArray.push(element)
-        console.log(searchArray)
       }
+
+      //0 ["apple", "orange", "mango"]
+      //1 ["rose", "lotus", "lily"]
+      //2 ["cabbage", "carrot", "beans"]
+      
+      myArray.forEach(function(item, index, array) {
+        item.forEach(function(itm, idx, arr) {
+          console.log(index, idx, itm);
+        });
+      });
+
+
+
+
+
+
+
   
        /* Création des recipes cards en fonction du resultat de la recherche*/
             //on parcour l'array obtenu et on instancie notre class recipeCard
