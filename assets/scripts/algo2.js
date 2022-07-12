@@ -21,43 +21,13 @@ let Search = () => {
 
   const searchArray = []
 
-
-  
-
-  //flag peut être =-1 ou undefined--va permettre d'itérer sur un un array pour le spread l42
-  let flag = -1
-  //array vide d'ingredients
-  let ing = []
-  let app = []
-  let ust = []
-
-  recipes.forEach((element, index) => {
-    //si flag diff de index
-    if (flag != index) {
-      //alors on stocke index de l'ing ds un array
-      ing[index] = []
-      app[index] = []
-      ust[index] = []
-      flag = index
+recipes.filter((recipe) =>{
+  if(recipe.name.includes(searchValue) || recipe.description.includes(searchValue) || recipe.ingredients.find((elt)=>
+    elt.ingredient.includes(searchValue))){
+      searchArray.push(recipe)
+      console.log(searchArray)
     }
-    //pour chaque item on obtient un array avec l'index de la recipe et les items de cette recipe
-    ing[index] = [...ing[index], ...element.ingredients.map(i => i.ingredient)]
-    app[index] = [...app[index], element.appliance]
-    ust[index] = [...ust[index], element.ustensils.toString()]
-
-    //on concat les trois tableaux et on enleve les doublons
-    let itemArray = [...new Set(ing[index].concat(app[index]).concat(ust[index]).concat(element.name).concat(element.description))]
-
-    if (searchValue.length >= 3) {
-      itemArray.filter((item) => {
-        if (item.includes(searchValue)) {
-          searchArray.push(item)
-          console.log(searchArray)
-        }
-      })
-    }
-
-  })
+})
 
 }
 
