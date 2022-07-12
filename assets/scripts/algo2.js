@@ -22,65 +22,7 @@ let Search = () => {
   const searchArray = []
 
 
-
-  // recipes.forEach(function (item, index, array) {
-  //   console.log(index, item)
-  // })
-
-
-  // recipes.forEach(function (item, index, array) {
-  //   item.forEach(function (itm, idx, arr) {
-  //     console.log(index, idx, itm)
-  //   })
-  // })
-
-
-
-
-
-  recipes.forEach(element => {
-    //si flag diff de index
-
-    if (searchValue.length >= 3) {
-      // let result = element.toString().includes(searchValue)
-
-      if (element.name.toLowerCase().includes(searchValue) || element.description.includes(searchValue) || element.ingredients.concat(ingredients).includes(searchValue)) {
-        searchArray.push(element)
-      }
-
-      // recipes.forEach(function (item, index, array) {
-      //   item.forEach(function (itm, idx, arr) {
-      //     console.log(index, idx, itm);
-      //   });
-      // });
-
-
-
-
-
-
-
-
-      /* Création des recipes cards en fonction du resultat de la recherche*/
-      //on parcour l'array obtenu et on instancie notre class recipeCard
-      const results = searchArray.map(s => new RecipeCard(s))
-      // console.log(searchArray)
-      //on cree une méthode qui va gérer le html de toutes les ecttes trouvées
-      const visualAll = (searchArray) => {
-        let all = ''
-        for (let searching of searchArray) {
-          all += searching.renderRecipe()
-        }
-        return all
-      }
-      document.querySelector('#recettes').innerHTML = visualAll(results)
-      // itemArray.reduce(function(SearchArray,curr,result){
-      //   if (curr === searchValue)
-      //   SearchArray.push(result)
-      // })
-      // console.log(SearchArray)
-    }
-  })
+  
 
   //flag peut être =-1 ou undefined--va permettre d'itérer sur un un array pour le spread l42
   let flag = -1
@@ -107,9 +49,9 @@ let Search = () => {
     let itemArray = [...new Set(ing[index].concat(app[index]).concat(ust[index]).concat(element.name).concat(element.description))]
 
     if (searchValue.length >= 3) {
-      itemArray.filter((item, index) => {
+      itemArray.filter((item) => {
         if (item.includes(searchValue)) {
-          searchArray.push(item, index)
+          searchArray.push(item)
           console.log(searchArray)
         }
       })
