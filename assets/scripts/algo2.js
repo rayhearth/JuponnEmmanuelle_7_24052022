@@ -26,22 +26,17 @@ let Search = () => {
     if (recipe.name.trim().toLowerCase().includes(searchValue) || recipe.description.trim().toLowerCase().includes(searchValue) || recipe.ingredients.find((el) =>
       el.ingredient.trim().toLowerCase().includes(searchValue))) {
       searchArray.push(recipe)
-    } 
+    }
   })
 
 
-  // if (searchArray.length == 0) {
-  //   ghost.classList.remove('hidden')
-  // } else {
-  //   ghost.classList.add('hidden')
-  // }
 
   if (searchValue.length >= 3) {
 
     /* Création des recipes cards en fonction du resultat de la recherche*/
     //on parcour l'array obtenu et on instancie la class recipeCard
     const results = searchArray.map(s => new RecipeCard(s))
-    
+
     //on cree une méthode qui va gérer le html de toutes les ecttes trouvées
     const visualAll = (searchArray) => {
       let all = ''
@@ -52,6 +47,11 @@ let Search = () => {
     }
     document.querySelector('#recettes').innerHTML = visualAll(results)
 
+    if (searchArray.length == 0) {
+      ghost.classList.remove('hidden')
+    } else {
+      ghost.classList.add('hidden')
+    }
   }
 
 
