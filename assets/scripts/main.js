@@ -28,6 +28,9 @@ const listOfIngredients = document.querySelector('#ingredientsList')
 const listOfUstensils = document.querySelector('#ustensilsList')
 const listOfAppliances = document.querySelector('#applianceList')
 
+let ingFiltO = false
+let appFilO = false
+let ustFilO = false
 
 //Création des Array
 recipes: [] //array de toutes les recettes
@@ -51,13 +54,25 @@ let ustensilsArray = [...new Set(ustData)].sort() // array de tous les ustencile
 
 // listeners Filters
 ingredientFilter.addEventListener('click', (e) => {
-    displayIngList()
+    ingFiltO = !ingFiltO
+    if (ingFiltO) {
+        displayIngList()
+    } else{
+        ingSearch.classList.add('hidden')
+    }
 })
 applianceFilter.addEventListener('click', (e) => {
-    displayAppList()
+    appFilO = !appFilO
+    if (appFilO) {
+        displayAppList()
+    }
 })
 ustensilFilter.addEventListener('click', (e) => {
-    displayUstList()
+    ustFilO = !ustFilO
+    if (ustFilO) {
+        displayUstList()
+
+    }
 })
 
 
@@ -187,7 +202,7 @@ const displayTags = (e) => {
     let currentTag = e.target
     console.log((currentTag))
 
-    
+
     // if (currentTag.classList.contains('.ingredient')){
     //     selectIngredients.push(currentTag.innerHTML)
     //     // listOfIngredients.delete(currentTag.innerHTML)

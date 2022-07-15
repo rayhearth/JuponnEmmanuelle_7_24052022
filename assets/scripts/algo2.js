@@ -2,7 +2,6 @@ import { RecipeCard } from './models/recipeCard.js'
 import recipes from './recipes.js'
 
 recipes: []
-// console.log(recipes)
 
 /*traitement app*/
 
@@ -18,7 +17,6 @@ const ghost = document.querySelector('#noResults')
 let Search = () => {
 
   searchValue = principalSearch.value.trim().toLowerCase()
-
   const searchArray = []
 
 
@@ -28,7 +26,6 @@ let Search = () => {
       searchArray.push(recipe)
     }
   })
-
 
 
   if (searchValue.length >= 3) {
