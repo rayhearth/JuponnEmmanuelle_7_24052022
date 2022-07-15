@@ -33,7 +33,7 @@ let Search = () => {
                 for (let r = 0; r < recipes[i].ingredients.length; r++) {
                     if (recipes[i].ingredients[r].ingredient.toLowerCase().includes(searchValue)) {
                         searchArray.push(recipes[i])
-                        break
+                        break;
                     }
                 }
             }
