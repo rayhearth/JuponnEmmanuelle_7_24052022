@@ -15,7 +15,7 @@ const tagsList = document.querySelector('#tagsList')
 //inputs
 const principalSearch = document.querySelector('#search')
 
-const filterExp = document.querySelectorAll('.controlExpand')
+const filterBtn = document.querySelectorAll('.controlExpand')
 
 const ingredientFilter = document.querySelector('#ingredients-filter')
 const applianceFilter = document.querySelector('#appliance-filter')
@@ -39,29 +39,43 @@ const ustLabel = document.querySelector('#ustL')
 
 
 //CREATION DES ARRAY
+
 recipes: [] // toutes les recettes
-/*traitement ing*/
-let ing = recipes.map(i => i.ingredients.map(n => n.ingredient.toLowerCase()))
-ing = ing + ''
-//transforme string en array  
-let ingData = ing.split(',')
-let ingredientsArray = [...new Set(ingData)].sort() // array de tous les ingredients filtrés
+let ingredientsArray = []
+let appliancesArray = []
+let ustensilsArray = []
 
-/*traitement app*/
-let app = recipes.map(a => a.appliance.toLowerCase())
-let appliancesArray = [...new Set(app)].sort() //array de tous les appareils
 
-/*traitement des ustensils*/
-let ust = recipes.map(u => u.ustensils.toString().toLowerCase())
-ust = ust + ''
-let ustData = ust.split(',')
-let ustensilsArray = [...new Set(ustData)].sort() // array de tous les ustenciles
 
 let searchValue = ''//requête de principe principal search
-let searchArray = []// array recipes founnd prinipal search
+let searchArray = []// array recipes found prinipal search
+
+
+
+const allList = () =>{
+    recipes.forEach(recipe =>{
+        recipe.ingredients.map(el=> {
+            ingredientsArray.push(el.ingredient)
+        })
+        appliancesArray.push(recipe.appliance)
+        recipe.ustensils.map(el =>{
+            ustensilsArray.push(el)
+        })
+    })
+
+    ingredientsArray = [...new Set(ingredientsArray)].sort()
+    appliancesArray = [...new Set(appliancesArray)].sort()
+    ustensilsArray = [... new Set(ustensilsArray)].sort()
+
+}
+window.addEventListener('load', allList)
+
+
 
 
 // listeners Filters
+
+
 ingredientFilter.addEventListener('click', (e) => {
     displayIngList()
 })
@@ -133,16 +147,15 @@ principalSearch.addEventListener('input', Search)
 
 
 
-
-
 /*Affichage Liste Ing*/
 const buildIngredientsList = (ingredient) => {
-    return `<li class="list-items ingredient" data-type="ingredient">
+    return `<li class="list-items ingredient" data-type="ingredient" data-item=${ingredient}>
     ${ingredient}</li>`
 }
 
 const displayIngList = (e) => {
     const ingList = ingredientsArray
+    
 
     const renderAllIngredient = (ingredientsArray) => {
         let all = ''
@@ -151,6 +164,7 @@ const displayIngList = (e) => {
         }
         return all
     }
+
     ingLabel.classList.add('hidden')
     ingSearch.classList.remove('hidden')
     listOfIngredients.innerHTML = renderAllIngredient(ingList)
@@ -168,6 +182,8 @@ const displayIngList = (e) => {
     startTagsListener()
 }
 window.addEventListener('load', displayIngList)
+
+
 
 /* Affichage Liste App*/
 const buildApplianceList = (appliance) => {
@@ -273,6 +289,7 @@ const renderTags = (currentTag) => {
 
 const startTagsListener = () => {
     selectedTags = document.querySelectorAll('.list-items')//on recupere tous nos li
+    
     for (let t of selectedTags) {
         t.addEventListener('click', displayTags)
     }
@@ -296,7 +313,7 @@ const displayRecipes = () => {
 
 window.addEventListener('load', displayRecipes)
 
-const init = () =>{
+const init = () => {
     displayRecipes()
     Search()
 
