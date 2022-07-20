@@ -36,7 +36,7 @@ let ingredientsArray = []
 let appliancesArray= []
 let ustensilsArray = []
 
-let searchArray = []
+
 let searchValue = ''
 
 const allList = () =>{
@@ -54,6 +54,8 @@ const allList = () =>{
     appliancesArray =[...new Set(appliancesArray)].sort()
     ustensilsArray =[...new Set(ustensilsArray)].sort()
 }
+
+window.addEventListener('load',allList)
 
 // /*traitement ing*/
 // let ing = recipes.map(i => i.ingredients.map(n => n.ingredient))
