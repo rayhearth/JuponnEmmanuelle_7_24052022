@@ -23,7 +23,6 @@ const ustLabel = document.querySelector('#ustL')
 const ustSearch = document.querySelector('#ustensiles')
 
 const principalSearch = document.querySelector('#search')
-let searchValue = ''
 
 //ul
 const listOfIngredients = document.querySelector('#ingredientsList')
@@ -33,30 +32,52 @@ const listOfAppliances = document.querySelector('#applianceList')
 
 //Création des Array
 recipes: [] //array de toutes les recettes
+let ingredientsArray = []
+let appliancesArray= []
+let ustensilsArray = []
 
-/*traitement ing*/
-let ing = recipes.map(i => i.ingredients.map(n => n.ingredient))
-ing = ing + ''
-//transforme string en array  
-let ingData = ing.split(',')
-//uniformise caract
-const lowIngData = ingData.map(el => {
-    return el.toLowerCase()
-})
-let ingredientsArray = [...new Set(lowIngData)].sort() // array de tous les ingredients filtrés
+let searchArray = []
+let searchValue = ''
 
-/*traitement app*/
-let app = recipes.map(a => a.appliance)
-let appliancesArray = [...new Set(app)].sort() //array de tous les appareils
+const allList = () =>{
+    recipes.forEach(recipe=>{
+        recipe.ingredients.map(el=>{
+            ingredientsArray.push(el.ingredient)
+        })
+        appliancesArray.push(recipe.appliance)
+        recipe.ustensils.map(el=>{
+            ustensilsArray.push(el)
+        })
+    })
 
-/*traitement des ustensils*/
-let ust = recipes.map(u => u.ustensils)
-ust = ust + ','
-let ustData = ust.split(',')
-const lowUstData = ustData.map(el => {
-    return el.toLowerCase()
-})
-let ustensilsArray = [...new Set(lowUstData)].sort() // array de tous les ustenciles
+    ingredientsArray =[...new Set(ingredientsArray)].sort()
+    appliancesArray =[...new Set(appliancesArray)].sort()
+    ustensilsArray =[...new Set(ustensilsArray)].sort()
+}
+
+// /*traitement ing*/
+// let ing = recipes.map(i => i.ingredients.map(n => n.ingredient))
+// ing = ing + ''
+// //transforme string en array  
+// let ingData = ing.split(',')
+// //uniformise caract
+// const lowIngData = ingData.map(el => {
+//     return el.toLowerCase()
+// })
+// let ingredientsArray = [...new Set(lowIngData)].sort() // array de tous les ingredients filtrés
+
+// /*traitement app*/
+// let app = recipes.map(a => a.appliance)
+// let appliancesArray = [...new Set(app)].sort() //array de tous les appareils
+
+// /*traitement des ustensils*/
+// let ust = recipes.map(u => u.ustensils)
+// ust = ust + ','
+// let ustData = ust.split(',')
+// const lowUstData = ustData.map(el => {
+//     return el.toLowerCase()
+// })
+// let ustensilsArray = [...new Set(lowUstData)].sort() // array de tous les ustenciles
 
 // listeners Filters
 ingredientFilter.addEventListener('click', (e) => {
