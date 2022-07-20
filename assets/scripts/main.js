@@ -1,27 +1,25 @@
 import recipes from './recipes.js'
 import { RecipeCard } from './models/recipeCard.js'
-// import { Search }  from './algo1.js'
 
 
 //DOM
+
+//recipes cards
 const recipesContainer = document.querySelector('#recettes')
 const tags = document.querySelector('#tagsSelect')
+//const ou est stocke la div no result
+const ghost = document.querySelector('#noResults')
+
 const tagsList = document.querySelector('#tagsList')
 
 //inputs
+const principalSearch = document.querySelector('#search')
+
+const filterExp = document.querySelectorAll('.controlExpand')
+
 const ingredientFilter = document.querySelector('#ingredients-filter')
 const applianceFilter = document.querySelector('#appliance-filter')
 const ustensilFilter = document.querySelector('#ustensils-filter')
-
-//search listes
-const ingLabel = document.querySelector('#ingL')
-const ingSearch = document.querySelector('#ingredients')
-const appLabel = document.querySelector('#appL')
-const appSearch = document.querySelector('#appareils')
-const ustLabel = document.querySelector('#ustL')
-const ustSearch = document.querySelector('#ustensiles')
-
-const principalSearch = document.querySelector('#search')
 
 //ul
 const listOfIngredients = document.querySelector('#ingredientsList')
@@ -29,8 +27,19 @@ const listOfUstensils = document.querySelector('#ustensilsList')
 const listOfAppliances = document.querySelector('#applianceList')
 
 
-//Création des Array
-recipes: [] //array de toutes les recettes
+//search 
+const ingSearch = document.querySelector('#ingredients')
+const appSearch = document.querySelector('#appareils')
+const ustSearch = document.querySelector('#ustensiles')
+
+const ingLabel = document.querySelector('#ingL')
+const appLabel = document.querySelector('#appL')
+const ustLabel = document.querySelector('#ustL')
+
+
+
+//CREATION DES ARRAY
+recipes: [] // toutes les recettes
 /*traitement ing*/
 let ing = recipes.map(i => i.ingredients.map(n => n.ingredient.toLowerCase()))
 ing = ing + ''
@@ -48,6 +57,9 @@ ust = ust + ''
 let ustData = ust.split(',')
 let ustensilsArray = [...new Set(ustData)].sort() // array de tous les ustenciles
 
+let searchValue = ''//requête de principe principal search
+let searchArray = []// array recipes founnd prinipal search
+
 
 // listeners Filters
 ingredientFilter.addEventListener('click', (e) => {
@@ -59,6 +71,67 @@ applianceFilter.addEventListener('click', (e) => {
 ustensilFilter.addEventListener('click', (e) => {
     displayUstList()
 })
+
+
+
+//RECHERCHE PRINCIPALE
+let Search = () => {
+
+    searchValue = principalSearch.value.trim().toLowerCase()
+
+    if (searchValue.length >= 3) {
+        for (let i = 0; i < recipes.length; i++) {
+            if (recipes[i].name.toLowerCase().includes(searchValue) || recipes[i].description.includes(searchValue)) {
+                searchArray.push(recipes[i])
+            } else {
+                for (let r = 0; r < recipes[i].ingredients.length; r++) {
+                    if (recipes[i].ingredients[r].ingredient.toLowerCase().includes(searchValue)) {
+                        searchArray.push(recipes[i])
+                        break;
+                    }
+                }
+            }
+
+            /*MAJ des listes en fonction du résultat de la recherche principale*/
+            let ingFiltered = searchArray.map(i => i.ingredients.map(n => n.ingredient.toLowerCase()))
+            ingFiltered = ingFiltered + ''
+            let iFiltredData = ingFiltered.split(',')
+            let newIngredientArray = [...new Set(iFiltredData)].sort()
+
+            let appFiltered = searchArray.map(a => a.appliance.toLowerCase())
+            let newApplianceArray = [...new Set(appFiltered)].sort()
+
+            let ustFistered = searchArray.map(u => u.ustensils.toString().toLowerCase())
+            ustFistered = ustFistered + ''
+            let uFilteredData = ustFistered.split(',')
+            let newUstensilsArray = [...new Set(uFilteredData)].sort()
+
+            /* Création des recipes cards en fonction du resultat de la recherche*/
+            //on parcour l'array obtenu et on instancie notre class recipeCard
+            const results = searchArray.map(s => new RecipeCard(s))
+            //on cree une méthode qui va gérer le html de toutes les ecttes trouvées
+            const visualAll = (searchArray) => {
+                let all = ''
+                for (let searching of searchArray) {
+                    all += searching.renderRecipe()
+                }
+                return all
+            }
+            document.querySelector('#recettes').innerHTML = visualAll(results)
+            //s'il n'y a pas de recette on fait app le mess no result sinon il est caché
+            if (searchArray.length == 0) {
+                ghost.classList.remove('hidden')
+            } else {
+                ghost.classList.add('hidden')
+            }
+        }
+    }
+}
+
+// Listener principal search
+principalSearch.addEventListener('input', Search)
+
+
 
 
 
@@ -185,25 +258,6 @@ const displayTags = (e) => {
     tagsList.style.display = ''
 
     let currentTag = e.target
-    console.log((currentTag))
-
-
-    // if (currentTag.classList.contains('.ingredient')){
-    //     selectIngredients.push(currentTag.innerHTML)
-    //     // listOfIngredients.delete(currentTag.innerHTML)
-    // } else if (currentTag.classList.contains('appliance')){
-    //     selectedAppliances.push(currentTag.innerHTML)
-
-    // } else if (currentTag.classList.contains('ustensil')) {
-    //     selectedUstensils.push(currentTag.innerHTML)
-    // } else{
-    //     const tagsArray = selectIngredients.concat(selectedAppliances).concat(selectedUstensils)
-    //     console.log(tagsArray)
-    // }
-    // switch (currentTag.classList.contains('ingredient')){
-    //     case 'ingredient':
-    //         selectedIngredients.push(currentTag.innerHTML)
-    // }
 
     tagsList.innerHTML = renderTags(currentTag.innerHTML)
 }
@@ -241,4 +295,12 @@ const displayRecipes = () => {
 }
 
 window.addEventListener('load', displayRecipes)
+
+const init = () =>{
+    displayRecipes()
+    Search()
+
+}
+
+init()
 
