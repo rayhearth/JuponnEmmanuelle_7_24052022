@@ -4,10 +4,14 @@ import { RecipeCard } from './models/recipeCard.js'
 
 //DOM
 const recipesContainer = document.querySelector('#recettes')
+//const ou est stocke la div no result
+const ghost = document.querySelector('#noResults')
 const tags = document.querySelector('#tagsSelect')
 const tagsList = document.querySelector('#tagsList')
 
 //inputs
+const filterBtn = document.querySelectorAll('.filterBtn')
+console.log(filterBtn)
 const ingredientFilter = document.querySelector('#ingredients-filter')
 const applianceFilter = document.querySelector('#appliance-filter')
 const ustensilFilter = document.querySelector('#ustensils-filter')
@@ -30,32 +34,34 @@ const listOfAppliances = document.querySelector('#applianceList')
 
 //Création des Array
 recipes: [] //array de toutes les recettes
+let ingredientsArray = [] //array des ing
+let appliancesArray = []// array app
+let ustensilsArray = []//array ust
 
-/*traitement ing*/
-let ing = recipes.map(i => i.ingredients.map(n => n.ingredient))
-ing = ing + ''
-//transforme string en array  
-let ingData = ing.split(',')
-//uniformise caract
-const lowIngData = ingData.map(el => {
-    return el.toLowerCase()
-})
-let ingredientsArray = [...new Set(lowIngData)].sort() // array de tous les ingredients filtrés
 
-/*traitement app*/
-let app = recipes.map(a => a.appliance)
-let appliancesArray = [...new Set(app)].sort() //array de tous les appareils
+let searchValue = ''
 
-/*traitement des ustensils*/
-let ust = recipes.map(u => u.ustensils)
-ust = ust + ','
-let ustData = ust.split(',')
-const lowUstData = ustData.map(el => {
-    return el.toLowerCase()
-})
-let ustensilsArray = [...new Set(lowUstData)].sort() // array de tous les ustenciles
+const allList = () => {
+    recipes.forEach(recipe => {
+        recipe.ingredients.map(el => {
+            ingredientsArray.push(el.ingredient)
+        })
+        appliancesArray.push(recipe.appliance)
+        recipe.ustensils.map(el => {
+            ustensilsArray.push(el)
+        })
+    })
+
+    ingredientsArray = [...new Set(ingredientsArray)].sort()
+    appliancesArray = [...new Set(appliancesArray)].sort()
+    ustensilsArray = [...new Set(ustensilsArray)].sort()
+}
+
+window.addEventListener('load', allList)
+
 
 // listeners Filters
+filterBtn.addEventListener('click',)
 ingredientFilter.addEventListener('click', (e) => {
     displayIngList()
 })
@@ -67,6 +73,7 @@ ustensilFilter.addEventListener('click', (e) => {
 })
 
 
+
 /*Affichage Liste Ing*/
 const buildIngredientsList = (ingredient) => {
     return `<li class="list-items ingredient" data-type="ingredient">
@@ -76,6 +83,7 @@ const buildIngredientsList = (ingredient) => {
 const displayIngList = (e) => {
     const ingList = ingredientsArray
 
+
     const renderAllIngredient = (ingredientsArray) => {
         let all = ''
         for (let ingredient of ingredientsArray) {
@@ -83,23 +91,34 @@ const displayIngList = (e) => {
         }
         return all
     }
-    ingLabel.classList.add('hidden')
-    ingSearch.classList.remove('hidden')
-    listOfIngredients.innerHTML = renderAllIngredient(ingList)
-    listOfIngredients.style.display = ''
-    listOfIngredients.setAttribute('aria-hidden', 'false')
 
-    listOfAppliances.style.display = 'none'
-    appLabel.classList.remove('hidden')
-    appSearch.classList.add('hidden')
 
-    listOfUstensils.style.display = 'none'
-    ustLabel.classList.remove('hidden')
-    ustSearch.classList.add('hidden')
+    if (!ingLabel.classList.contains('hidden')) {
+        ingLabel.classList.add('hidden')
+        ingSearch.classList.remove('hidden')
+        listOfIngredients.innerHTML = renderAllIngredient(ingList)
+        listOfIngredients.style.display = ''
+        listOfIngredients.setAttribute('aria-hidden', 'false')
+
+        listOfAppliances.style.display = 'none'
+        appLabel.classList.remove('hidden')
+        appSearch.classList.add('hidden')
+
+        listOfUstensils.style.display = 'none'
+        ustLabel.classList.remove('hidden')
+        ustSearch.classList.add('hidden')
+    } else {
+        ingLabel.classList.remove('hidden')
+        ingSearch.classList.add('hidden')
+        listOfIngredients.style.display = 'none'
+        listOfIngredients.setAttribute('aria-hidden', 'true')
+    }
 
     startTagsListener()
+
 }
 window.addEventListener('load', displayIngList)
+
 
 /* Affichage Liste App*/
 const buildApplianceList = (appliance) => {
@@ -117,20 +136,28 @@ const displayAppList = (e) => {
         }
         return all
     }
-    appLabel.classList.add('hidden')
-    appSearch.classList.remove('hidden')
-    listOfAppliances.innerHTML = renderAllAppliance(appList)
-    listOfAppliances.style.display = ''
-    listOfAppliances.setAttribute('aria-hidden', 'false')
 
+    if (!appLabel.classList.contains('hidden')) {
+        appLabel.classList.add('hidden')
+        appSearch.classList.remove('hidden')
+        listOfAppliances.innerHTML = renderAllAppliance(appList)
+        listOfAppliances.style.display = ''
+        listOfAppliances.setAttribute('aria-hidden', 'false')
 
-    listOfIngredients.style.display = 'none'
-    ingLabel.classList.remove('hidden')
-    ingSearch.classList.add('hidden')
+        listOfIngredients.style.display = 'none'
+        ingLabel.classList.remove('hidden')
+        ingSearch.classList.add('hidden')
 
-    listOfUstensils.style.display = 'none'
-    ustLabel.classList.remove('hidden')
-    ustSearch.classList.add('hidden')
+        listOfUstensils.style.display = 'none'
+        ustLabel.classList.remove('hidden')
+        ustSearch.classList.add('hidden')
+
+    } else {
+        appLabel.classList.remove('hidden')
+        appSearch.classList.add('hidden')
+        listOfAppliances.style.display = 'none'
+        listOfAppliances.setAttribute('aria-hidden', 'true')
+    }
 
     startTagsListener()
 }
@@ -153,18 +180,27 @@ const displayUstList = (e) => {
         }
         return all
     }
-    ustLabel.classList.add('hidden')
-    ustSearch.classList.remove('hidden')
-    listOfUstensils.innerHTML = renderAllUstensils(ustList)
-    listOfUstensils.style.display = ''
-    listOfUstensils.setAttribute('aria-hidden', 'false')
-    listOfIngredients.style.display = 'none'
-    ingLabel.classList.remove('hidden')
-    ingSearch.classList.add('hidden')
 
-    listOfAppliances.style.display = 'none'
-    appLabel.classList.remove('hidden')
-    appSearch.classList.add('hidden')
+    if (!ustLabel.classList.contains('hidden')) {
+        ustLabel.classList.add('hidden')
+        ustSearch.classList.remove('hidden')
+        listOfUstensils.innerHTML = renderAllUstensils(ustList)
+        listOfUstensils.style.display = ''
+        listOfUstensils.setAttribute('aria-hidden', 'false')
+
+        listOfIngredients.style.display = 'none'
+        ingLabel.classList.remove('hidden')
+        ingSearch.classList.add('hidden')
+
+        listOfAppliances.style.display = 'none'
+        appLabel.classList.remove('hidden')
+        appSearch.classList.add('hidden')
+    } else {
+        ustLabel.classList.remove('hidden')
+        ustSearch.classList.add('hidden')
+        listOfUstensils.style.display = 'none'
+        listOfUstensils.setAttribute('aria-hidden', 'false')
+    }
 
     startTagsListener()
 }
@@ -180,48 +216,61 @@ let selectedAppliances = []
 // console.log(selectedAppliances)
 let selectedUstensils = []
 // console.log(selectedUstensils)
-let selectedRecipes = []
+
+// const tag = () => {
+//     selectedTags = document.querySelectorAll('.list-items')
+//     selectedTags.forEach(el => {
+//         el.addEventListener('click', e => {
+//             const currentTag = e.target
+//             // console.log(currentTag)
+//             tags.classList.remove('hidden')
+//             tagsList.style.display = ''
+
+//             selectedTags.push(currentTag)
+//             console.log(selectedTags)
+//         })
+//     })
+// }
+
+// window.addEventListener('load', tag)
 
 
 const displayTags = (e) => {
     //cible endroit où tags select seront insérés
-    // tags.classList.add('tagselected')
     tags.classList.remove('hidden')
     tagsList.style.display = ''
-    
+
     let currentTag = e.target
-    console.log((currentTag))
-
-
-    if (currentTag.classList.contains('ingredient')){
-        selectIngredients.push(currentTag.innerHTML)
-        // listOfIngredients.delete(currentTag.innerHTML)
-    } else if (currentTag.classList.contains('appliance')){
-        selectedAppliances.push(currentTag.innerHTML)
-
-    } else if (currentTag.classList.contains('ustensil')) {
-        selectedUstensils.push(currentTag.innerHTML)
-    } else{
-        const tagsArray = selectIngredients.concat(selectedAppliances).concat(selectedUstensils)
-        console.log(tagsArray)
-
+    console.log(currentTag)
+    switch (currentTag.dataset.type) {
+        case 'ingredient':
+            selectIngredients.push(currentTag)
+            break;
+        case 'appliance':
+            selectedAppliances.push(currentTag)
+            break;
+        case 'ustensil':
+            selectedUstensils.push(currentTag)
+            break;
     }
-    // switch (currentTag.classList.contains('ingredient')){
-    //     case 'ingredient':
-    //         selectedIngredients.push(currentTag.innerHTML)
-    // }
 
-    tagsList.innerHTML = renderTags(currentTag.innerHTML)
+    console.log(selectIngredients)
+    console.log(selectedAppliances)
+    console.log(selectedUstensils)
+    const listTags = 
+
+    tagsList.innerHTML = currentTag.innerHTML + `<button class="tagBtn">
+    <img src="./assets/img/clTag.svg" alt=""></button>`
 }
-const renderTags = (currentTag) => {
-    return `
-    <li class="tagSelect">
-        <h3>${currentTag}</h3>
-        <button class="tagBtn">
-            <img src="./assets/img/clTag.svg" alt="">
-        </button>
-    </li>`
-}
+// const renderTags = (currentTag) => {
+//     return `
+//     <li class="tagSelect">
+//         <h3>${currentTag}</h3>
+//         <button class="tagBtn">
+//             <img src="./assets/img/clTag.svg" alt="">
+//         </button>
+//     </li>`
+// }
 
 const startTagsListener = () => {
     selectedTags = document.querySelectorAll('.list-items')//on recupere tous nos li
@@ -230,6 +279,67 @@ const startTagsListener = () => {
     }
 }
 window.addEventListener('load', displayTags)
+
+
+let Search = () => {
+
+    searchValue = principalSearch.value.trim().toLowerCase()
+    let searchArray = []
+
+    if (searchValue.length >= 3) {
+        for (let i = 0; i < recipes.length; i++) {
+            if (recipes[i].name.toLowerCase().includes(searchValue) || recipes[i].description.includes(searchValue)) {
+                searchArray.push(recipes[i])
+            } else {
+                for (let r = 0; r < recipes[i].ingredients.length; r++) {
+                    if (recipes[i].ingredients[r].ingredient.toLowerCase().includes(searchValue)) {
+                        searchArray.push(recipes[i])
+                        break;
+                    }
+                }
+            }
+            // recipes.splice(0,recipes.length,...searchArray)
+            // console.log(recipes)
+
+            /*MAJ des liste en fonction du résultat de la recherche principale*/
+            let ingFiltered = searchArray.map(i => i.ingredients.map(n => n.ingredient.toLowerCase()))
+            ingFiltered = ingFiltered + ''
+            let iFiltredData = ingFiltered.split(',')
+            let newIngredientArray = [...new Set(iFiltredData)].sort()
+
+            let appFiltered = searchArray.map(a => a.appliance.toLowerCase())
+            let newApplianceArray = [...new Set(appFiltered)].sort()
+
+            let ustFistered = searchArray.map(u => u.ustensils.toString().toLowerCase())
+            ustFistered = ustFistered + ''
+            let uFilteredData = ustFistered.split(',')
+            let newUstensilsArray = [...new Set(uFilteredData)].sort()
+
+            /* Création des recipes cards en fonction du resultat de la recherche*/
+            //on parcour l'array obtenu et on instancie notre class recipeCard
+            const results = searchArray.map(s => new RecipeCard(s))
+            // console.log(searchArray)
+            //on cree une méthode qui va gérer le html de toutes les ecttes trouvées
+            const visualAll = (searchArray) => {
+                let all = ''
+                for (let searching of searchArray) {
+                    all += searching.renderRecipe()
+                }
+                return all
+            }
+            document.querySelector('#recettes').innerHTML = visualAll(results)
+            //s'il n'y a pas de recette on fait app le mess no result sinon il est caché
+            if (searchArray.length == 0) {
+                ghost.classList.remove('hidden')
+            } else {
+                ghost.classList.add('hidden')
+            }
+        }
+    }
+}
+
+principalSearch.addEventListener('input', Search)
+
 
 //on injecte le html du render recipe ds notre section recette
 const displayRecipes = () => {

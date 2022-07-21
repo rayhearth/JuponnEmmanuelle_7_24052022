@@ -4,13 +4,13 @@
     max-width: 6.688rem;
     max-height: 2.313rem;
     border-radius: 5px;
-    margin-top: 2%;
+    // margin-top: 2%;
     padding: 1%;
     gap: 1rem;
     ul {
         display: flex;
         align-items: center;
-        justify-content: center;
+        justify-content: space-between;
         width: fit-content;
         li {
             display: flex;

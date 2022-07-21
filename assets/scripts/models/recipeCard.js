@@ -1,20 +1,20 @@
 export class RecipeCard {
-    constructor(data) {
-        this.id = data.id
-        this.name = data.name
-        this.servings = data.servings
-        this.ingredients = data.ingredients
-        this.time = data.time
-        this.description = data.description
-        this.appliance = data.appliance.toLowerCase()
-        this.ustensils = data.ustensils
-
+    constructor({id, name, servings, ingredients, time, description, appliance,ustensils}) {
+        this.id = id
+        this.name = name
+        this.servings = servings
+        this.ingredients = ingredients
+        this.time = time
+        this.description = description
+        this.appliance = appliance
+        this.ustensils = ustensils
+        this.visible = true
     }
 
 
     //création de la carte des recipes
     renderRecipe() {
-        return `<article class="card">
+        return `<article class="card" id='${this.id}'>
                 <div class="card-picture">
                     <img src="" alt="${this.name}"/>
                 </div>
