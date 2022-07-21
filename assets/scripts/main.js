@@ -32,9 +32,9 @@ const listOfAppliances = document.querySelector('#applianceList')
 
 //Création des Array
 recipes: [] //array de toutes les recettes
-let ingredientsArray = []
-let appliancesArray= []
-let ustensilsArray = []
+let ingredientsArray = [] //array des ing
+let appliancesArray= []// array app
+let ustensilsArray = []//array ust
 
 
 let searchValue = ''
