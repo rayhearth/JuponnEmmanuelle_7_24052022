@@ -10,6 +10,8 @@ const tags = document.querySelector('#tagsSelect')
 const tagsList = document.querySelector('#tagsList')
 
 //inputs
+const filterBtn = document.querySelectorAll('.filterBtn')
+console.log(filterBtn)
 const ingredientFilter = document.querySelector('#ingredients-filter')
 const applianceFilter = document.querySelector('#appliance-filter')
 const ustensilFilter = document.querySelector('#ustensils-filter')
@@ -33,55 +35,33 @@ const listOfAppliances = document.querySelector('#applianceList')
 //Création des Array
 recipes: [] //array de toutes les recettes
 let ingredientsArray = [] //array des ing
-let appliancesArray= []// array app
+let appliancesArray = []// array app
 let ustensilsArray = []//array ust
 
 
 let searchValue = ''
 
-const allList = () =>{
-    recipes.forEach(recipe=>{
-        recipe.ingredients.map(el=>{
+const allList = () => {
+    recipes.forEach(recipe => {
+        recipe.ingredients.map(el => {
             ingredientsArray.push(el.ingredient)
         })
         appliancesArray.push(recipe.appliance)
-        recipe.ustensils.map(el=>{
+        recipe.ustensils.map(el => {
             ustensilsArray.push(el)
         })
     })
 
-    ingredientsArray =[...new Set(ingredientsArray)].sort()
-    appliancesArray =[...new Set(appliancesArray)].sort()
-    ustensilsArray =[...new Set(ustensilsArray)].sort()
+    ingredientsArray = [...new Set(ingredientsArray)].sort()
+    appliancesArray = [...new Set(appliancesArray)].sort()
+    ustensilsArray = [...new Set(ustensilsArray)].sort()
 }
 
-window.addEventListener('load',allList)
+window.addEventListener('load', allList)
 
-// /*traitement ing*/
-// let ing = recipes.map(i => i.ingredients.map(n => n.ingredient))
-// ing = ing + ''
-// //transforme string en array  
-// let ingData = ing.split(',')
-// //uniformise caract
-// const lowIngData = ingData.map(el => {
-//     return el.toLowerCase()
-// })
-// let ingredientsArray = [...new Set(lowIngData)].sort() // array de tous les ingredients filtrés
-
-// /*traitement app*/
-// let app = recipes.map(a => a.appliance)
-// let appliancesArray = [...new Set(app)].sort() //array de tous les appareils
-
-// /*traitement des ustensils*/
-// let ust = recipes.map(u => u.ustensils)
-// ust = ust + ','
-// let ustData = ust.split(',')
-// const lowUstData = ustData.map(el => {
-//     return el.toLowerCase()
-// })
-// let ustensilsArray = [...new Set(lowUstData)].sort() // array de tous les ustenciles
 
 // listeners Filters
+filterBtn.addEventListener('click',)
 ingredientFilter.addEventListener('click', (e) => {
     displayIngList()
 })
@@ -103,6 +83,7 @@ const buildIngredientsList = (ingredient) => {
 const displayIngList = (e) => {
     const ingList = ingredientsArray
 
+
     const renderAllIngredient = (ingredientsArray) => {
         let all = ''
         for (let ingredient of ingredientsArray) {
@@ -110,6 +91,7 @@ const displayIngList = (e) => {
         }
         return all
     }
+
 
     if (!ingLabel.classList.contains('hidden')) {
         ingLabel.classList.add('hidden')
@@ -235,48 +217,60 @@ let selectedAppliances = []
 let selectedUstensils = []
 // console.log(selectedUstensils)
 
-const tag = () =>{
-    selectedTags = document.querySelectorAll('.list-items')
-    selectedTags.forEach(el =>{
-        el.addEventListener('click', (e)=>{
-            const currentTag = e.target
-            console.log(currentTag)
-            tags.classList.remove('hidden')
-            tagsList.style.display=''
+// const tag = () => {
+//     selectedTags = document.querySelectorAll('.list-items')
+//     selectedTags.forEach(el => {
+//         el.addEventListener('click', e => {
+//             const currentTag = e.target
+//             // console.log(currentTag)
+//             tags.classList.remove('hidden')
+//             tagsList.style.display = ''
 
-            selectedTags.push({
-                category: currentTag.parentNode.id,
-                value: currentTag.textContent
-            })
-            console.log(selectedTags)
-        })
-    })
-}
+//             selectedTags.push(currentTag)
+//             console.log(selectedTags)
+//         })
+//     })
+// }
 
-window.addEventListener('load', tag)
+// window.addEventListener('load', tag)
 
 
 const displayTags = (e) => {
     //cible endroit où tags select seront insérés
-    // tags.classList.add('tagselected')
     tags.classList.remove('hidden')
     tagsList.style.display = ''
 
     let currentTag = e.target
-    // console.log(currentTag)
+    console.log(currentTag)
+    switch (currentTag.dataset.type) {
+        case 'ingredient':
+            selectIngredients.push(currentTag)
+            break;
+        case 'appliance':
+            selectedAppliances.push(currentTag)
+            break;
+        case 'ustensil':
+            selectedUstensils.push(currentTag)
+            break;
+    }
 
+    console.log(selectIngredients)
+    console.log(selectedAppliances)
+    console.log(selectedUstensils)
+    const listTags = 
 
-    tagsList.innerHTML = renderTags(currentTag.innerHTML)
+    tagsList.innerHTML = currentTag.innerHTML + `<button class="tagBtn">
+    <img src="./assets/img/clTag.svg" alt=""></button>`
 }
-const renderTags = (currentTag) => {
-    return `
-    <li class="tagSelect">
-        <h3>${currentTag}</h3>
-        <button class="tagBtn">
-            <img src="./assets/img/clTag.svg" alt="">
-        </button>
-    </li>`
-}
+// const renderTags = (currentTag) => {
+//     return `
+//     <li class="tagSelect">
+//         <h3>${currentTag}</h3>
+//         <button class="tagBtn">
+//             <img src="./assets/img/clTag.svg" alt="">
+//         </button>
+//     </li>`
+// }
 
 const startTagsListener = () => {
     selectedTags = document.querySelectorAll('.list-items')//on recupere tous nos li

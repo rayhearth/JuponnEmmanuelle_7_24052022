@@ -234,7 +234,7 @@ aside .inputSearch input {
 .recettes {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  padding: 2% 0;
+  padding: 10% 0;
   grid-gap: 3.125rem;
 }
 .recettes article {
