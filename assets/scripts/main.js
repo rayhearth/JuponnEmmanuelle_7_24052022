@@ -1,14 +1,16 @@
 import recipes from './recipes.js'
 import { RecipeCard } from './models/recipeCard.js'
-// import { Search }  from './algo1.js'
 
 
 //DOM
 const recipesContainer = document.querySelector('#recettes')
+//const ou est stocke la div no result
+const ghost = document.querySelector('#noResults')
 const tags = document.querySelector('#tagsSelect')
 const tagsList = document.querySelector('#tagsList')
 
 //inputs
+const filterBtn = document.querySelectorAll('.filterBtn')
 const ingredientFilter = document.querySelector('#ingredients-filter')
 const applianceFilter = document.querySelector('#appliance-filter')
 const ustensilFilter = document.querySelector('#ustensils-filter')
@@ -28,52 +30,44 @@ const listOfIngredients = document.querySelector('#ingredientsList')
 const listOfUstensils = document.querySelector('#ustensilsList')
 const listOfAppliances = document.querySelector('#applianceList')
 
-let ingFiltO = false
-let appFilO = false
-let ustFilO = false
 
 //Création des Array
 recipes: [] //array de toutes les recettes
-/*traitement ing*/
-let ing = recipes.map(i => i.ingredients.map(n => n.ingredient.toLowerCase()))
-ing = ing + ''
-//transforme string en array  
-let ingData = ing.split(',')
-let ingredientsArray = [...new Set(ingData)].sort() // array de tous les ingredients filtrés
+let ingredientsArray = [] //array des ing
+let appliancesArray = []// array app
+let ustensilsArray = []//array ust
 
-/*traitement app*/
-let app = recipes.map(a => a.appliance.toLowerCase())
-let appliancesArray = [...new Set(app)].sort() //array de tous les appareils
 
-/*traitement des ustensils*/
-let ust = recipes.map(u => u.ustensils.toString().toLowerCase())
-ust = ust + ''
-let ustData = ust.split(',')
-let ustensilsArray = [...new Set(ustData)].sort() // array de tous les ustenciles
+let searchValue = ''
+
+const allList = () => {
+    recipes.forEach(recipe => {
+        recipe.ingredients.map(el => {
+            ingredientsArray.push(el.ingredient.toLowerCase())
+        })
+        appliancesArray.push(recipe.appliance.toLowerCase())
+        recipe.ustensils.map(el => {
+            ustensilsArray.push(el.toLowerCase())
+        })
+    })
+
+    ingredientsArray = [...new Set(ingredientsArray)].sort()
+    appliancesArray = [...new Set(appliancesArray)].sort()
+    ustensilsArray = [...new Set(ustensilsArray)].sort()
+}
+
+window.addEventListener('load', allList)
 
 
 // listeners Filters
-ingredientFilter.addEventListener('click', (e) => {
-    ingFiltO = !ingFiltO
-    if (ingFiltO) {
-        displayIngList()
-    } else{
-        ingSearch.classList.add('hidden')
-    }
-})
-applianceFilter.addEventListener('click', (e) => {
-    appFilO = !appFilO
-    if (appFilO) {
-        displayAppList()
-    }
-})
-ustensilFilter.addEventListener('click', (e) => {
-    ustFilO = !ustFilO
-    if (ustFilO) {
-        displayUstList()
 
-    }
+filterBtn.forEach(btn => {
+    btn.addEventListener('click', e => {
+        
+        
+    })
 })
+
 
 
 
@@ -86,6 +80,7 @@ const buildIngredientsList = (ingredient) => {
 const displayIngList = (e) => {
     const ingList = ingredientsArray
 
+
     const renderAllIngredient = (ingredientsArray) => {
         let all = ''
         for (let ingredient of ingredientsArray) {
@@ -93,23 +88,34 @@ const displayIngList = (e) => {
         }
         return all
     }
-    ingLabel.classList.add('hidden')
-    ingSearch.classList.remove('hidden')
-    listOfIngredients.innerHTML = renderAllIngredient(ingList)
-    listOfIngredients.style.display = ''
-    listOfIngredients.setAttribute('aria-hidden', 'false')
 
-    listOfAppliances.style.display = 'none'
-    appLabel.classList.remove('hidden')
-    appSearch.classList.add('hidden')
 
-    listOfUstensils.style.display = 'none'
-    ustLabel.classList.remove('hidden')
-    ustSearch.classList.add('hidden')
+    if (!ingLabel.classList.contains('hidden')) {
+        ingLabel.classList.add('hidden')
+        ingSearch.classList.remove('hidden')
+        listOfIngredients.innerHTML = renderAllIngredient(ingList)
+        listOfIngredients.style.display = ''
+        listOfIngredients.setAttribute('aria-hidden', 'false')
+
+        listOfAppliances.style.display = 'none'
+        appLabel.classList.remove('hidden')
+        appSearch.classList.add('hidden')
+
+        listOfUstensils.style.display = 'none'
+        ustLabel.classList.remove('hidden')
+        ustSearch.classList.add('hidden')
+    } else {
+        ingLabel.classList.remove('hidden')
+        ingSearch.classList.add('hidden')
+        listOfIngredients.style.display = 'none'
+        listOfIngredients.setAttribute('aria-hidden', 'true')
+    }
 
     startTagsListener()
+
 }
 window.addEventListener('load', displayIngList)
+
 
 /* Affichage Liste App*/
 const buildApplianceList = (appliance) => {
@@ -127,20 +133,28 @@ const displayAppList = (e) => {
         }
         return all
     }
-    appLabel.classList.add('hidden')
-    appSearch.classList.remove('hidden')
-    listOfAppliances.innerHTML = renderAllAppliance(appList)
-    listOfAppliances.style.display = ''
-    listOfAppliances.setAttribute('aria-hidden', 'false')
 
+    if (!appLabel.classList.contains('hidden')) {
+        appLabel.classList.add('hidden')
+        appSearch.classList.remove('hidden')
+        listOfAppliances.innerHTML = renderAllAppliance(appList)
+        listOfAppliances.style.display = ''
+        listOfAppliances.setAttribute('aria-hidden', 'false')
 
-    listOfIngredients.style.display = 'none'
-    ingLabel.classList.remove('hidden')
-    ingSearch.classList.add('hidden')
+        listOfIngredients.style.display = 'none'
+        ingLabel.classList.remove('hidden')
+        ingSearch.classList.add('hidden')
 
-    listOfUstensils.style.display = 'none'
-    ustLabel.classList.remove('hidden')
-    ustSearch.classList.add('hidden')
+        listOfUstensils.style.display = 'none'
+        ustLabel.classList.remove('hidden')
+        ustSearch.classList.add('hidden')
+
+    } else {
+        appLabel.classList.remove('hidden')
+        appSearch.classList.add('hidden')
+        listOfAppliances.style.display = 'none'
+        listOfAppliances.setAttribute('aria-hidden', 'true')
+    }
 
     startTagsListener()
 }
@@ -163,18 +177,27 @@ const displayUstList = (e) => {
         }
         return all
     }
-    ustLabel.classList.add('hidden')
-    ustSearch.classList.remove('hidden')
-    listOfUstensils.innerHTML = renderAllUstensils(ustList)
-    listOfUstensils.style.display = ''
-    listOfUstensils.setAttribute('aria-hidden', 'false')
-    listOfIngredients.style.display = 'none'
-    ingLabel.classList.remove('hidden')
-    ingSearch.classList.add('hidden')
 
-    listOfAppliances.style.display = 'none'
-    appLabel.classList.remove('hidden')
-    appSearch.classList.add('hidden')
+    if (!ustLabel.classList.contains('hidden')) {
+        ustLabel.classList.add('hidden')
+        ustSearch.classList.remove('hidden')
+        listOfUstensils.innerHTML = renderAllUstensils(ustList)
+        listOfUstensils.style.display = ''
+        listOfUstensils.setAttribute('aria-hidden', 'false')
+
+        listOfIngredients.style.display = 'none'
+        ingLabel.classList.remove('hidden')
+        ingSearch.classList.add('hidden')
+
+        listOfAppliances.style.display = 'none'
+        appLabel.classList.remove('hidden')
+        appSearch.classList.add('hidden')
+    } else {
+        ustLabel.classList.remove('hidden')
+        ustSearch.classList.add('hidden')
+        listOfUstensils.style.display = 'none'
+        listOfUstensils.setAttribute('aria-hidden', 'false')
+    }
 
     startTagsListener()
 }
@@ -190,47 +213,57 @@ let selectedAppliances = []
 // console.log(selectedAppliances)
 let selectedUstensils = []
 // console.log(selectedUstensils)
-let selectedRecipes = []
+
+// const tag = () => {
+//     selectedTags = document.querySelectorAll('.list-items')
+//     selectedTags.forEach(el => {
+//         el.addEventListener('click', e => {
+//             const currentTag = e.target
+//             // console.log(currentTag)
+//             tags.classList.remove('hidden')
+//             tagsList.style.display = ''
+
+//             selectedTags.push(currentTag)
+//             console.log(selectedTags)
+//         })
+//     })
+// }
+
+// window.addEventListener('load', tag)
 
 
 const displayTags = (e) => {
     //cible endroit où tags select seront insérés
-    tags.classList.add('tagselected')
     tags.classList.remove('hidden')
     tagsList.style.display = ''
 
     let currentTag = e.target
-    console.log((currentTag))
-
-
-    // if (currentTag.classList.contains('.ingredient')){
-    //     selectIngredients.push(currentTag.innerHTML)
-    //     // listOfIngredients.delete(currentTag.innerHTML)
-    // } else if (currentTag.classList.contains('appliance')){
-    //     selectedAppliances.push(currentTag.innerHTML)
-
-    // } else if (currentTag.classList.contains('ustensil')) {
-    //     selectedUstensils.push(currentTag.innerHTML)
-    // } else{
-    //     const tagsArray = selectIngredients.concat(selectedAppliances).concat(selectedUstensils)
-    //     console.log(tagsArray)
-    // }
-    // switch (currentTag.classList.contains('ingredient')){
+    // switch (currentTag.dataset.type) {
     //     case 'ingredient':
-    //         selectedIngredients.push(currentTag.innerHTML)
+    //         selectIngredients.push(currentTag)
+    //         break;
+    //     case 'appliance':
+    //         selectedAppliances.push(currentTag)
+    //         break;
+    //     case 'ustensil':
+    //         selectedUstensils.push(currentTag)
+    //         break;
     // }
 
-    tagsList.innerHTML = renderTags(currentTag.innerHTML)
+
+
+        tagsList.innerHTML = currentTag.innerHTML + `<button class="tagBtn">
+    <img src="./assets/img/clTag.svg" alt=""></button>`
 }
-const renderTags = (currentTag) => {
-    return `
-    <li class="tagSelect">
-        <h3>${currentTag}</h3>
-        <button class="tagBtn">
-            <img src="./assets/img/clTag.svg" alt="">
-        </button>
-    </li>`
-}
+// const renderTags = (currentTag) => {
+//     return `
+//     <li class="tagSelect">
+//         <h3>${currentTag}</h3>
+//         <button class="tagBtn">
+//             <img src="./assets/img/clTag.svg" alt="">
+//         </button>
+//     </li>`
+// }
 
 const startTagsListener = () => {
     selectedTags = document.querySelectorAll('.list-items')//on recupere tous nos li
@@ -240,14 +273,58 @@ const startTagsListener = () => {
 }
 window.addEventListener('load', displayTags)
 
+
+let Search = () => {
+
+    searchValue = principalSearch.value.trim().toLowerCase()
+    const searchArray = []
+
+
+    recipes.filter((recipe) => {
+        if (recipe.name.trim().toLowerCase().includes(searchValue) || recipe.description.trim().toLowerCase().includes(searchValue) || recipe.ingredients.find((el) =>
+            el.ingredient.trim().toLowerCase().includes(searchValue))) {
+            searchArray.push(recipe)
+        }
+    })
+
+
+    if (searchValue.length >= 3) {
+
+        /* Création des recipes cards en fonction du resultat de la recherche*/
+        //on parcour l'array obtenu et on instancie la class recipeCard
+        const results = searchArray.map(s => new RecipeCard(s))
+
+        //on cree une méthode qui va gérer le html de toutes les ecttes trouvées
+        const visualAll = (searchArray) => {
+            let all = ''
+            for (let searching of searchArray) {
+                all += searching.renderRecipe()
+            }
+            return all
+        }
+        document.querySelector('#recettes').innerHTML = visualAll(results)
+
+        if (searchArray.length == 0) {
+            ghost.classList.remove('hidden')
+        } else {
+            ghost.classList.add('hidden')
+        }
+    }
+}
+
+principalSearch.addEventListener('input', Search)
+
 //on injecte le html du render recipe ds notre section recette
 const displayRecipes = () => {
 
     const container = recipes.map(r => new RecipeCard(r))
+    // console.log(container)
     const renderAllRecipes = (recipes) => {
         let all = ''
+        // console.log(all)
         for (let recipe of recipes) {
             all += recipe.renderRecipe()
+            // console.log(all)
         }
         return all
 
