@@ -11,7 +11,10 @@ const tagsList = document.querySelector('#tagsList')
 
 //inputs
 const filterBtn = document.querySelectorAll('.filterBtn')
+<<<<<<< HEAD
 console.log(filterBtn)
+=======
+>>>>>>> algo2
 const ingredientFilter = document.querySelector('#ingredients-filter')
 const applianceFilter = document.querySelector('#appliance-filter')
 const ustensilFilter = document.querySelector('#ustensils-filter')
@@ -44,11 +47,19 @@ let searchValue = ''
 const allList = () => {
     recipes.forEach(recipe => {
         recipe.ingredients.map(el => {
+<<<<<<< HEAD
             ingredientsArray.push(el.ingredient)
         })
         appliancesArray.push(recipe.appliance)
         recipe.ustensils.map(el => {
             ustensilsArray.push(el)
+=======
+            ingredientsArray.push(el.ingredient.toLowerCase())
+        })
+        appliancesArray.push(recipe.appliance.toLowerCase())
+        recipe.ustensils.map(el => {
+            ustensilsArray.push(el.toLowerCase())
+>>>>>>> algo2
         })
     })
 
@@ -61,6 +72,7 @@ window.addEventListener('load', allList)
 
 
 // listeners Filters
+<<<<<<< HEAD
 filterBtn.addEventListener('click',)
 ingredientFilter.addEventListener('click', (e) => {
     displayIngList()
@@ -70,10 +82,22 @@ applianceFilter.addEventListener('click', (e) => {
 })
 ustensilFilter.addEventListener('click', (e) => {
     displayUstList()
+=======
+
+filterBtn.forEach(btn => {
+    btn.addEventListener('click', e => {
+        
+        
+    })
+>>>>>>> algo2
 })
 
 
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> algo2
 /*Affichage Liste Ing*/
 const buildIngredientsList = (ingredient) => {
     return `<li class="list-items ingredient" data-type="ingredient">
@@ -241,6 +265,7 @@ const displayTags = (e) => {
     tagsList.style.display = ''
 
     let currentTag = e.target
+<<<<<<< HEAD
     console.log(currentTag)
     switch (currentTag.dataset.type) {
         case 'ingredient':
@@ -260,6 +285,23 @@ const displayTags = (e) => {
     const listTags = 
 
     tagsList.innerHTML = currentTag.innerHTML + `<button class="tagBtn">
+=======
+    // switch (currentTag.dataset.type) {
+    //     case 'ingredient':
+    //         selectIngredients.push(currentTag)
+    //         break;
+    //     case 'appliance':
+    //         selectedAppliances.push(currentTag)
+    //         break;
+    //     case 'ustensil':
+    //         selectedUstensils.push(currentTag)
+    //         break;
+    // }
+
+
+
+        tagsList.innerHTML = currentTag.innerHTML + `<button class="tagBtn">
+>>>>>>> algo2
     <img src="./assets/img/clTag.svg" alt=""></button>`
 }
 // const renderTags = (currentTag) => {
@@ -284,6 +326,7 @@ window.addEventListener('load', displayTags)
 let Search = () => {
 
     searchValue = principalSearch.value.trim().toLowerCase()
+<<<<<<< HEAD
     let searchArray = []
 
     if (searchValue.length >= 3) {
@@ -334,13 +377,49 @@ let Search = () => {
             } else {
                 ghost.classList.add('hidden')
             }
+=======
+    const searchArray = []
+
+
+    recipes.filter((recipe) => {
+        if (recipe.name.trim().toLowerCase().includes(searchValue) || recipe.description.trim().toLowerCase().includes(searchValue) || recipe.ingredients.find((el) =>
+            el.ingredient.trim().toLowerCase().includes(searchValue))) {
+            searchArray.push(recipe)
+        }
+    })
+
+
+    if (searchValue.length >= 3) {
+
+        /* Création des recipes cards en fonction du resultat de la recherche*/
+        //on parcour l'array obtenu et on instancie la class recipeCard
+        const results = searchArray.map(s => new RecipeCard(s))
+
+        //on cree une méthode qui va gérer le html de toutes les ecttes trouvées
+        const visualAll = (searchArray) => {
+            let all = ''
+            for (let searching of searchArray) {
+                all += searching.renderRecipe()
+            }
+            return all
+        }
+        document.querySelector('#recettes').innerHTML = visualAll(results)
+
+        if (searchArray.length == 0) {
+            ghost.classList.remove('hidden')
+        } else {
+            ghost.classList.add('hidden')
+>>>>>>> algo2
         }
     }
 }
 
 principalSearch.addEventListener('input', Search)
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> algo2
 //on injecte le html du render recipe ds notre section recette
 const displayRecipes = () => {
 
