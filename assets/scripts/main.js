@@ -11,10 +11,6 @@ const tagsList = document.querySelector('#tagsList')
 
 //inputs
 const filterBtn = document.querySelectorAll('.filterBtn')
-<<<<<<< HEAD
-console.log(filterBtn)
-=======
->>>>>>> algo2
 const ingredientFilter = document.querySelector('#ingredients-filter')
 const applianceFilter = document.querySelector('#appliance-filter')
 const ustensilFilter = document.querySelector('#ustensils-filter')
@@ -47,19 +43,11 @@ let searchValue = ''
 const allList = () => {
     recipes.forEach(recipe => {
         recipe.ingredients.map(el => {
-<<<<<<< HEAD
-            ingredientsArray.push(el.ingredient)
-        })
-        appliancesArray.push(recipe.appliance)
-        recipe.ustensils.map(el => {
-            ustensilsArray.push(el)
-=======
             ingredientsArray.push(el.ingredient.toLowerCase())
         })
         appliancesArray.push(recipe.appliance.toLowerCase())
         recipe.ustensils.map(el => {
             ustensilsArray.push(el.toLowerCase())
->>>>>>> algo2
         })
     })
 
@@ -72,32 +60,16 @@ window.addEventListener('load', allList)
 
 
 // listeners Filters
-<<<<<<< HEAD
-filterBtn.addEventListener('click',)
-ingredientFilter.addEventListener('click', (e) => {
-    displayIngList()
-})
-applianceFilter.addEventListener('click', (e) => {
-    displayAppList()
-})
-ustensilFilter.addEventListener('click', (e) => {
-    displayUstList()
-=======
 
 filterBtn.forEach(btn => {
     btn.addEventListener('click', e => {
         
         
     })
->>>>>>> algo2
 })
 
 
 
-<<<<<<< HEAD
-=======
-
->>>>>>> algo2
 /*Affichage Liste Ing*/
 const buildIngredientsList = (ingredient) => {
     return `<li class="list-items ingredient" data-type="ingredient">
@@ -265,27 +237,6 @@ const displayTags = (e) => {
     tagsList.style.display = ''
 
     let currentTag = e.target
-<<<<<<< HEAD
-    console.log(currentTag)
-    switch (currentTag.dataset.type) {
-        case 'ingredient':
-            selectIngredients.push(currentTag)
-            break;
-        case 'appliance':
-            selectedAppliances.push(currentTag)
-            break;
-        case 'ustensil':
-            selectedUstensils.push(currentTag)
-            break;
-    }
-
-    console.log(selectIngredients)
-    console.log(selectedAppliances)
-    console.log(selectedUstensils)
-    const listTags = 
-
-    tagsList.innerHTML = currentTag.innerHTML + `<button class="tagBtn">
-=======
     // switch (currentTag.dataset.type) {
     //     case 'ingredient':
     //         selectIngredients.push(currentTag)
@@ -301,7 +252,6 @@ const displayTags = (e) => {
 
 
         tagsList.innerHTML = currentTag.innerHTML + `<button class="tagBtn">
->>>>>>> algo2
     <img src="./assets/img/clTag.svg" alt=""></button>`
 }
 // const renderTags = (currentTag) => {
@@ -326,58 +276,6 @@ window.addEventListener('load', displayTags)
 let Search = () => {
 
     searchValue = principalSearch.value.trim().toLowerCase()
-<<<<<<< HEAD
-    let searchArray = []
-
-    if (searchValue.length >= 3) {
-        for (let i = 0; i < recipes.length; i++) {
-            if (recipes[i].name.toLowerCase().includes(searchValue) || recipes[i].description.includes(searchValue)) {
-                searchArray.push(recipes[i])
-            } else {
-                for (let r = 0; r < recipes[i].ingredients.length; r++) {
-                    if (recipes[i].ingredients[r].ingredient.toLowerCase().includes(searchValue)) {
-                        searchArray.push(recipes[i])
-                        break;
-                    }
-                }
-            }
-            // recipes.splice(0,recipes.length,...searchArray)
-            // console.log(recipes)
-
-            /*MAJ des liste en fonction du résultat de la recherche principale*/
-            let ingFiltered = searchArray.map(i => i.ingredients.map(n => n.ingredient.toLowerCase()))
-            ingFiltered = ingFiltered + ''
-            let iFiltredData = ingFiltered.split(',')
-            let newIngredientArray = [...new Set(iFiltredData)].sort()
-
-            let appFiltered = searchArray.map(a => a.appliance.toLowerCase())
-            let newApplianceArray = [...new Set(appFiltered)].sort()
-
-            let ustFistered = searchArray.map(u => u.ustensils.toString().toLowerCase())
-            ustFistered = ustFistered + ''
-            let uFilteredData = ustFistered.split(',')
-            let newUstensilsArray = [...new Set(uFilteredData)].sort()
-
-            /* Création des recipes cards en fonction du resultat de la recherche*/
-            //on parcour l'array obtenu et on instancie notre class recipeCard
-            const results = searchArray.map(s => new RecipeCard(s))
-            // console.log(searchArray)
-            //on cree une méthode qui va gérer le html de toutes les ecttes trouvées
-            const visualAll = (searchArray) => {
-                let all = ''
-                for (let searching of searchArray) {
-                    all += searching.renderRecipe()
-                }
-                return all
-            }
-            document.querySelector('#recettes').innerHTML = visualAll(results)
-            //s'il n'y a pas de recette on fait app le mess no result sinon il est caché
-            if (searchArray.length == 0) {
-                ghost.classList.remove('hidden')
-            } else {
-                ghost.classList.add('hidden')
-            }
-=======
     const searchArray = []
 
 
@@ -409,17 +307,12 @@ let Search = () => {
             ghost.classList.remove('hidden')
         } else {
             ghost.classList.add('hidden')
->>>>>>> algo2
         }
     }
 }
 
 principalSearch.addEventListener('input', Search)
 
-<<<<<<< HEAD
-
-=======
->>>>>>> algo2
 //on injecte le html du render recipe ds notre section recette
 const displayRecipes = () => {
 
