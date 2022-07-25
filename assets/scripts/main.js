@@ -50,10 +50,12 @@ const allList = () => {
             ustensilsArray.push(el.toLowerCase())
         })
     })
-
+    // je trie pour supp les doublons
     ingredientsArray = [...new Set(ingredientsArray)].sort()
     appliancesArray = [...new Set(appliancesArray)].sort()
     ustensilsArray = [...new Set(ustensilsArray)].sort()
+
+    displayIngList(ingredientsArray)
 }
 
 window.addEventListener('load', allList)
@@ -63,10 +65,13 @@ window.addEventListener('load', allList)
 
 filterBtn.forEach(btn => {
     btn.addEventListener('click', e => {
-        
-        
+        displayIngList()
+        displayAppList()
+        displayUstList()
+
     })
 })
+
 
 
 
@@ -76,7 +81,7 @@ const buildIngredientsList = (ingredient) => {
     ${ingredient}</li>`
 }
 
-const displayIngList = (e) => {
+const displayIngList = () => {
     const ingList = ingredientsArray
 
 
@@ -87,6 +92,24 @@ const displayIngList = (e) => {
         }
         return all
     }
+
+    ingredientsArray = Array.from(document.querySelectorAll('.list-items'))
+    ingredientsArray = [...new Set(ingredientsArray)].sort()
+    // console.log(ingredientsArray)
+    ingredientsArray.forEach((item) => {
+        item.addEventListener("click", () => {
+            if (!inSelectedTags(item.dataset.item)) {
+                selectedIngredients.push(
+                    item.dataset.item.toLowerCase().replace(/\s/g, "")
+                );
+                selectedTags.push(item); // empeche l'affichage en double du tag
+            }
+
+            hideList(listOfIngredients, ingredientFilter, ingredientChevron);
+            ingredientFilter.value = "";
+            init(recipesArray);
+        });
+    })
 
 
     if (!ingLabel.classList.contains('hidden')) {
@@ -237,21 +260,21 @@ const displayTags = (e) => {
     tagsList.style.display = ''
 
     let currentTag = e.target
-    // switch (currentTag.dataset.type) {
-    //     case 'ingredient':
-    //         selectIngredients.push(currentTag)
-    //         break;
-    //     case 'appliance':
-    //         selectedAppliances.push(currentTag)
-    //         break;
-    //     case 'ustensil':
-    //         selectedUstensils.push(currentTag)
-    //         break;
-    // }
+    switch (currentTag.dataset.type) {
+        case 'ingredient':
+            selectIngredients.push(currentTag)
+            break;
+        case 'appliance':
+            selectedAppliances.push(currentTag)
+            break;
+        case 'ustensil':
+            selectedUstensils.push(currentTag)
+            break;
+    }
 
 
 
-        tagsList.innerHTML = currentTag.innerHTML + `<button class="tagBtn">
+    tagsList.innerHTML = currentTag.innerHTML + `<button class="tagBtn">
     <img src="./assets/img/clTag.svg" alt=""></button>`
 }
 // const renderTags = (currentTag) => {
