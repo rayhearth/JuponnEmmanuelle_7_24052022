@@ -11,16 +11,18 @@ const tagsList = document.querySelector('#tagsList')
 
 //inputs
 const filterBtn = document.querySelectorAll('.filterBtn')
+const expandBtn = document.querySelectorAll('.controlExpand')
 const ingredientFilter = document.querySelector('#ingredients-filter')
 const applianceFilter = document.querySelector('#appliance-filter')
 const ustensilFilter = document.querySelector('#ustensils-filter')
 
 //search listes
 const ingLabel = document.querySelector('#ingL')
-const ingSearch = document.querySelector('#ingredients')
 const appLabel = document.querySelector('#appL')
-const appSearch = document.querySelector('#appareils')
 const ustLabel = document.querySelector('#ustL')
+
+const ingSearch = document.querySelector('#ingredients')
+const appSearch = document.querySelector('#appareils')
 const ustSearch = document.querySelector('#ustensiles')
 
 const principalSearch = document.querySelector('#search')
@@ -54,7 +56,7 @@ const allList = () => {
     // je trie pour supp les doublons
     ingredientsArray = [...new Set(ingredientsArray)].sort()
     appliancesArray = [...new Set(appliancesArray)].sort()
-    ustensilsArray = [...new Set(ustensilsArray)].sort()
+    ustensilsArray = [...new Set(ustensilsArray)].sort()    
 }
 
 window.addEventListener('load', allList)
@@ -83,6 +85,14 @@ filterBtn.forEach(btn => {
     })
 })
 
+// expandBtn.forEach(btn =>{
+//     btn.addEventListener('click', e => {
+//         closeIngList()
+//         closeAppList()
+//         closeUstList()
+//     })
+// })
+
 
 /*Render Liste Ing*/
 const buildIngredientsList = (ingredient) => {
@@ -93,7 +103,6 @@ const buildIngredientsList = (ingredient) => {
 /*Affichage des li */
 const displayIngList = () => {
     const ingList = ingredientsArray
-
     const renderAllIngredient = (ingredientsArray) => {
         let all = ''
         for (let ingredient of ingredientsArray) {
@@ -107,7 +116,7 @@ const displayIngList = () => {
     listOfIngredients.innerHTML = renderAllIngredient(ingList)
     listOfIngredients.style.display = ''
     listOfIngredients.setAttribute('aria-hidden', 'false')
-
+    
 
     startTagsListener()
 
@@ -146,8 +155,6 @@ const displayAppList = () => {
     listOfAppliances.style.display = ''
     listOfAppliances.setAttribute('aria-hidden', 'false')
 
-
-
     startTagsListener()
 }
 window.addEventListener('load', displayAppList)
@@ -183,7 +190,6 @@ const displayUstList = () => {
     listOfUstensils.style.display = ''
     listOfUstensils.setAttribute('aria-hidden', 'false')
 
-
     startTagsListener()
 }
 window.addEventListener('load', displayUstList)
@@ -196,26 +202,26 @@ const closeUstList = () => {
 }
 window.addEventListener('load', closeUstList)
 
-
+/*TAITEMENT DES TAGS */
 
 let selectedTags = []
 
-let selectIngredients = []
-// console.log(selectIngredients)
-let selectedAppliances = []
-// console.log(selectedAppliances)
-let selectedUstensils = []
-// console.log(selectedUstensils)
+let selectIngredients = []//array ingredients tags
+let selectedAppliances = []//array appliances tags
+let selectedUstensils = []//array ustensils tags
+
 
 const displayTags = (e) => {
     //cible endroit où tags select seront insérés
-    tags.classList.remove('hidden')
-    tagsList.style.display = ''
+    document.querySelector('#tagsSelect').classList.remove('hidden')
+    document.querySelector('#tagsSelect').style.display = ''
 
     let currentTag = e.target
+    // console.log(currentTag)
     switch (currentTag.dataset.type) {
         case 'ingredient':
             selectIngredients.push(currentTag)
+
             break;
         case 'appliance':
             selectedAppliances.push(currentTag)
@@ -225,23 +231,32 @@ const displayTags = (e) => {
             break;
     }
 
-
-
-    tagsList.innerHTML = currentTag.innerHTML + `<button class="tagBtn">
-    <img src="./assets/img/clTag.svg" alt=""></button>`
+    selectedTags = selectIngredients.concat(selectedAppliances,selectedUstensils)
+    
+    const renderAllTags = (selectedTags) =>{
+        let all = ''
+        for (let tag of selectedTags) {
+            all += renderTags(tag)
+        }
+        return all
+    }
+    
+    tagsList.innerHTML = renderAllTags(selectedTags)
 }
-// const renderTags = (currentTag) => {
-//     return `
-//     <li class="tagSelect">
-//         <h3>${currentTag}</h3>
-//         <button class="tagBtn">
-//             <img src="./assets/img/clTag.svg" alt="">
-//         </button>
-//     </li>`
-// }
+const renderTags = (tag) => {
+    console.log(tag)
+    return `
+    <li class="tagSelect" data-type=${tag.dataset}>
+        <h3>${tag.innerHTML}</h3>
+        <button class="tagBtn">
+            <img src="./assets/img/clTag.svg" alt="">
+        </button>
+    </li>`
+}
 
 const startTagsListener = () => {
     selectedTags = document.querySelectorAll('.list-items')//on recupere tous nos li
+    
     for (let t of selectedTags) {
         t.addEventListener('click', displayTags)
     }
@@ -268,7 +283,7 @@ let Search = () => {
         /* Création des recipes cards en fonction du resultat de la recherche*/
         //on parcour l'array obtenu et on instancie la class recipeCard
         const results = searchArray.map(s => new RecipeCard(s))
-
+        console.log(results)
         //on cree une méthode qui va gérer le html de toutes les ecttes trouvées
         const visualAll = (searchArray) => {
             let all = ''
@@ -291,17 +306,13 @@ principalSearch.addEventListener('input', Search)
 
 //on injecte le html du render recipe ds notre section recette
 const displayRecipes = () => {
-
     const container = recipes.map(r => new RecipeCard(r))
-
     const renderAllRecipes = (recipes) => {
         let all = ''
-
         for (let recipe of recipes) {
             all += recipe.renderRecipe()
         }
         return all
-
     }
     recipesContainer.innerHTML = renderAllRecipes(container)
 }

@@ -54,6 +54,16 @@ export class RecipeCard {
         }
     }
 
+    renderTags(){
+        return `
+            <li class="tagSelect">
+                <h3>${currentTag}</h3>
+                <button class="tagBtn">
+                <img src="./assets/img/clTag.svg" alt="">
+                </button>
+            </li>`
+    }
+
     // limite de texte pour la description
     ellipsis () {
         //creation variable de la desc
