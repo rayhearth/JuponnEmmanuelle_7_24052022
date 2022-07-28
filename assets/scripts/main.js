@@ -126,6 +126,7 @@ const displayIngList = () => {
     listOfIngredients.innerHTML = renderAllIngredient(ingredientsArray)
     listOfIngredients.style.display = ''
     listOfIngredients.setAttribute('aria-hidden', 'false')
+    document.querySelector('.expIng').style.transform = 'rotate(180deg)'
 
 
     startTagsListener()
@@ -139,6 +140,7 @@ const closeIngList = () => {
     ingSearch.classList.add('hidden')
     listOfIngredients.style.display = 'none'
     listOfIngredients.setAttribute('aria-hidden', 'true')
+    document.querySelector('.expIng').style.transform = 'none'
 }
 window.addEventListener('load', closeIngList)
 
@@ -164,6 +166,7 @@ const displayAppList = () => {
     listOfAppliances.innerHTML = renderAllAppliance(appList)
     listOfAppliances.style.display = ''
     listOfAppliances.setAttribute('aria-hidden', 'false')
+    document.querySelector('.expApp').style.transform = 'rotate(180deg)'
 
     startTagsListener()
 }
@@ -174,6 +177,7 @@ const closeAppList = () => {
     appSearch.classList.add('hidden')
     listOfAppliances.style.display = 'none'
     listOfAppliances.setAttribute('aria-hidden', 'true')
+    document.querySelector('.expApp').style.transform = 'none'
 }
 window.addEventListener('load', closeAppList)
 
@@ -199,6 +203,7 @@ const displayUstList = () => {
     listOfUstensils.innerHTML = renderAllUstensils(ustList)
     listOfUstensils.style.display = ''
     listOfUstensils.setAttribute('aria-hidden', 'false')
+    document.querySelector('.expUst').style.transform = 'rotate(180deg)'
 
     startTagsListener()
 }
@@ -209,6 +214,7 @@ const closeUstList = () => {
     ustSearch.classList.add('hidden')
     listOfUstensils.style.display = 'none'
     listOfUstensils.setAttribute('aria-hidden', 'true')
+    document.querySelector('.expUst').style.transform = 'none'
 }
 window.addEventListener('load', closeUstList)
 
