@@ -37,7 +37,8 @@
     <main>
         <aside class="search">
             <div class="inputSearch">
-                <input type="text" class="formControl controlsInput" id="search" placeholder="Rechercher une recette" data-search>
+                <input type="text" class="formControl controlsInput" id="search" placeholder="Rechercher une recette"
+                    data-search>
                 <label class="formLabel" for="search">
                     <img src="./assets/img/loupe.svg" alt="loupe de recherche">
                 </label>
@@ -46,44 +47,51 @@
             <div class="searchTags hidden" id="tagsSelect">
                 <ul class="tagsList " id="tagsList"></ul>
             </div>
-            
+
             <div class="searchFilters">
-                <div class="filterBtn" id='ingredients-filter' data-filter="ingrédients">
-                    <div class="searchControls">
-                        <label for="inputIngredients" class="controlsFilter" id="ingL"
-                            data-filter-label>Ingrédients</label>
-                        <input type="text" class="controlsInput hidden" placeholder="Rechercher un ingrédient"
-                            id="ingredients" data-filter-input>
-                        <button class="controlExpand" data-expand="ingredient">
-                            <img src="./assets/img/arrow.svg" alt="arrowDown">
-                        </button>
+                <div class="filter ingFilter">
+                    <div class="filterBtn" id='ingredients-filter' data-filter="ingrédients">
+                        <div class="searchControls">
+                            <label for="inputIngredients" class="controlsFilter" id="ingL"
+                                data-filter-label>Ingrédients</label>
+                            <input type="text" class="controlsInput hidden" placeholder="Rechercher un ingrédient"
+                                id="ingredients" data-filter-input>
+                        </div>
+                        <ul class="searchResult" id="ingredientsList" data-filter-results></ul>
                     </div>
-                    <ul class="searchResult" id="ingredientsList" data-filter-results></ul>
+                    <button class="controlExpand" data-expand="ingredient">
+                        <img src="./assets/img/arrow.svg" alt="arrowDown">
+                    </button>
                 </div>
 
-                <div class="filterBtn" id='appliance-filter' data-filter="appareils">
-                    <div class="searchControls">
-                        <label for="inputAppareils" class="controlsFilter" id="appL" data-filter-label>Appareils</label>
-                        <input type="text" class="controlsInput hidden" placeholder="Rechercher un appareil"
-                            id="appareils" data-filter-input>
-                        <button class="controlExpand" data-expand="appareils">
-                            <img src="./assets/img/arrow.svg" alt="arrowDown">
-                        </button>
+                <div class="filter appFilter">
+                    <div class="filterBtn" id='appliance-filter' data-filter="appareils">
+                        <div class="searchControls">
+                            <label for="inputAppareils" class="controlsFilter" id="appL"
+                                data-filter-label>Appareils</label>
+                            <input type="text" class="controlsInput hidden" placeholder="Rechercher un appareil"
+                                id="appareils" data-filter-input>
+                        </div>
+                        <ul class="searchResult" id="applianceList" data-filter-results></ul>
                     </div>
-                    <ul class="searchResult" id="applianceList" data-filter-results></ul>
+                    <button class="controlExpand" data-expand="appareils">
+                        <img src="./assets/img/arrow.svg" alt="arrowDown">
+                    </button>
                 </div>
 
-                <div class="filterBtn" id='ustensils-filter' data-filter="ustensiles">
-                    <div class="searchControls">
-                        <label for="inputUstensiles" class="controlsFilter" id="ustL"
-                            data-filter-label>Ustensiles</label>
-                        <input type="text" class="controlsInput hidden" placeholder="Rechercher un ustensile"
-                            id="ustensiles" data-filter-input>
-                        <button class="controlExpand" data-expand="ustensiles">
-                            <img src="./assets/img/arrow.svg" alt="arrowDown">
-                        </button>
+                <div class="filter ustFilter">
+                    <div class="filterBtn" id='ustensils-filter' data-filter="ustensiles">
+                        <div class="searchControls">
+                            <label for="inputUstensiles" class="controlsFilter" id="ustL"
+                                data-filter-label>Ustensiles</label>
+                            <input type="text" class="controlsInput hidden" placeholder="Rechercher un ustensile"
+                                id="ustensiles" data-filter-input>
+                        </div>
+                        <ul class="searchResult" id="ustensilsList" data-filter-results></ul>
                     </div>
-                    <ul class="searchResult" id="ustensilsList" data-filter-results></ul>
+                    <button class="controlExpand" data-expand="ustensiles">
+                        <img src="./assets/img/arrow.svg" alt="arrowDown">
+                    </button>
                 </div>
             </div>
         </aside>
