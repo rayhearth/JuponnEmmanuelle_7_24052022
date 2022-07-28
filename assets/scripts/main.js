@@ -3,16 +3,14 @@ import { RecipeCard } from './models/recipeCard.js'
 
 
 //DOM
-const recipesContainer = document.querySelector('#recettes')
-//const ou est stocke la div no result
-const ghost = document.querySelector('#noResults')
-const tags = document.querySelector('#tagsSelect')
-const tagsList = document.querySelector('#tagsList')
+const tagsList = document.querySelector('#tagsList')//div des tags
+const recipesContainer = document.querySelector('#recettes')//section des recettes
+const ghost = document.querySelector('#noResults')//div no results
 
-//inputs
+
+//btn ouverture et fermetures des listes
 const filterBtn = document.querySelectorAll('.filterBtn')
 const expandBtn = document.querySelectorAll('.controlExpand')
-
 
 //search listes
 const ingLabel = document.querySelector('#ingL')
@@ -20,13 +18,14 @@ const appLabel = document.querySelector('#appL')
 const ustLabel = document.querySelector('#ustL')
 
 //input
+const principalSearch = document.querySelector('#search')
+
 const ingSearch = document.querySelector('#ingredients')
 const appSearch = document.querySelector('#appareils')
 const ustSearch = document.querySelector('#ustensiles')
 
-const principalSearch = document.querySelector('#search')
 
-//ul
+//listes des ingredients; appliances, ustensils
 const listOfIngredients = document.querySelector('#ingredientsList')
 const listOfUstensils = document.querySelector('#ustensilsList')
 const listOfAppliances = document.querySelector('#applianceList')
@@ -56,6 +55,7 @@ const allList = () => {
     })
     // je trie pour supp les doublons
     ingredientsArray = [...new Set(ingredientsArray)].sort()
+    console.log(ingredientsArray)
     appliancesArray = [...new Set(appliancesArray)].sort()
     ustensilsArray = [...new Set(ustensilsArray)].sort()
 }
@@ -87,9 +87,8 @@ filterBtn.forEach(btn => {
 })
 
 expandBtn.forEach(btn => {
-    
+
     btn.addEventListener('click', e => {
-        console.log('hgfgh')
         switch (btn.dataset.expand) {
             case 'ingredient':
                 closeIngList()
@@ -116,7 +115,6 @@ const displayIngList = () => {
 
     const renderAllIngredient = (ingredientsArray) => {
         let all = ''
-        console.log('ghzydr')
         for (let ingredient of ingredientsArray) {
             all += buildIngredientsList(ingredient)
         }
@@ -227,12 +225,14 @@ const displayTags = (e) => {
     //cible endroit où tags select seront insérés
     document.querySelector('#tagsSelect').classList.remove('hidden')
     document.querySelector('#tagsSelect').style.display = ''
-    console.log('albert')
+    //cible element clické
     let currentTag = e.target
-    // console.log(currentTag)
+    // en fonction du type on insère ds le tableau selectIng, selectApp, selectUst
     switch (currentTag.dataset.type) {
         case 'ingredient':
             selectIngredients.push(currentTag)
+            ingredientsArray.indexOf(currentTag)
+            console.log(ingredientsArray.indexOf(currentTag))
             break;
         case 'appliance':
             selectedAppliances.push(currentTag)
@@ -241,9 +241,10 @@ const displayTags = (e) => {
             selectedUstensils.push(currentTag)
             break;
     }
-
+    console.log(selectIngredients)
+    //on concat les résultats ds le tableau de selectags
     selectedTags = selectIngredients.concat(selectedAppliances, selectedUstensils)
-
+    //on parcours le tableau de tags et on appelle la methode de render pour chacun d'eux
     const renderAllTags = (selectedTags) => {
         let all = ''
         for (let tag of selectedTags) {
@@ -251,37 +252,37 @@ const displayTags = (e) => {
         }
         return all
     }
-
+    // on insère la méthode avec le tag ds le html
     tagsList.innerHTML = renderAllTags(selectedTags)
 
     let tagClose = document.querySelectorAll('.tagBtn')
     tagClose.forEach((tag) => tag.addEventListener('click', closeTags))
 }
 
-const closeTags = (e) => {
-
-    let elem = e.target.closest('li')
-    elem.style.display = 'none'
-}
 
 const renderTags = (tag) => {
-    console.log(tag)
     return `
     <li class="tagSelect" data-type=${tag.dataset.type}>
-        <h3>${tag.innerHTML}</h3>
-        <button class="tagBtn">
-            <img src="./assets/img/clTag.svg" alt="">
-        </button>
+    <h3>${tag.innerHTML}</h3>
+    <button class="tagBtn">
+    <img src="./assets/img/clTag.svg" alt="">
+    </button>
     </li>`
 }
 
 const startTagsListener = () => {
     selectedTags = document.querySelectorAll('.list-items')//on recupere tous nos li
+    //pour chaque tag on ajoute un listener pour le display de celui-ci
     for (let t of selectedTags) {
         t.addEventListener('click', displayTags)
     }
 }
 
+const closeTags = (e) => {
+    // on cible le li ou se situe le btn close
+    let elem = e.target.closest('li')
+    elem.style.display = 'none'
+}
 
 
 let Search = () => {
@@ -293,7 +294,6 @@ let Search = () => {
         searchArray.forEach(item => {
             item.ingredients.map(el => {
                 ingSelectedArray.push(el.ingredient)
-                // console.log(ingSelectedArray)
             })
             appSelectedArray.push(item.appliance)
             item.ustensils.map(el => {
@@ -302,9 +302,7 @@ let Search = () => {
         })
 
         ingredientsArray = [...new Set(ingSelectedArray)].sort()
-        // console.log(ingSelectedArray)
         appliancesArray = [...new Set(appSelectedArray)].sort()
-        // console.log(appSelectedArray)
         ustensilsArray = [...new Set(ustSelectedArray)].sort()
     }
 
@@ -318,27 +316,14 @@ let Search = () => {
 
     if (searchValue.length >= 3) {
 
+        //on appelle la méthode qui va mettre à jour les listes d'ingrédients, d'appareils et d'ustensils en fonction de la recherche
+        allListFiltered()
+
         /* Création des recipes cards en fonction du resultat de la recherche*/
         //on parcour l'array obtenu et on instancie la class recipeCard
         const results = searchArray.map(s => new RecipeCard(s))
-        // console.log(results)
-        allListFiltered()
 
-        // const displayIngList = () => {
-        //     console.log('gfqg')
-        //     const renderAllIngredient = (ingSelectedArray) => {
-        //         let all = ''
-        //         for (let ingredient of ingSelectedArray) {
-        //             all += buildIngredientsList(ingredient)
-        //         }
-        //         return all
-        //     }
-
-        //     listOfIngredients.innerHTML = renderAllIngredient(ingSelectedArray)
-        //     console.log(listOfIngredients)
-        // }
-        // window.addEventListener('load', displayIngList)
-        //on cree une méthode qui va gérer le html de toutes les ecttes trouvées
+        //on cree une méthode qui va gérer le html de toutes les recettes trouvées
         const visualAll = (searchArray) => {
             let all = ''
             for (let searching of searchArray) {
@@ -348,6 +333,7 @@ let Search = () => {
         }
         document.querySelector('#recettes').innerHTML = visualAll(results)
 
+        //si le tableau de recettes est vide on affiche le message no results
         if (searchArray.length == 0) {
             ghost.classList.remove('hidden')
         } else {
@@ -357,45 +343,6 @@ let Search = () => {
 }
 
 principalSearch.addEventListener('input', Search)
-
-let SearchIng = () => {
-    searchValue = ingSearch.value.trim().toLowerCase()
-    const ingSelected = []
-    console.log(ingSelected)
-    recipes.filter((recipe) => {
-        if (recipe.ingredients.find((el) =>
-            el.ingredient.trim().toLowerCase().includes(searchValue))) {
-            ingSelected.push(recipe)
-        }
-    })
-
-    if (searchValue.length >= 3) {
-
-        /* Création des recipes cards en fonction du resultat de la recherche*/
-        //on parcour l'array obtenu et on instancie la class recipeCard
-        const r = ingSelect.map(s => new RecipeCard(s))
-        console.log(r)
-        allListFiltered()
-
-        //on cree une méthode qui va gérer le html de toutes les ecttes trouvées
-        const visualAll = (ingSelect) => {
-            let all = ''
-            for (let searching of ingSelect) {
-                all += searching.renderRecipe()
-            }
-            return all
-        }
-        document.querySelector('#recettes').innerHTML = visualAll(results)
-
-        if (ingSelect.length == 0) {
-            ghost.classList.remove('hidden')
-        } else {
-            ghost.classList.add('hidden')
-        }
-    }
-}
-
-ingSearch.addEventListener('input', SearchIng)
 
 //on injecte le html du render recipe ds notre section recette
 const displayRecipes = () => {
