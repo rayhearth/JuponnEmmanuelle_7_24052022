@@ -63,7 +63,7 @@ const allList = () => {
 window.addEventListener('load', allList)
 
 
-// listeners Filters dispaly and close method
+// listeners Filters display and close method
 filterBtn.forEach(btn => {
     btn.addEventListener('click', e => {
         switch (btn.dataset.filter) {
@@ -86,6 +86,7 @@ filterBtn.forEach(btn => {
     })
 })
 
+// listeners Filters close method
 expandBtn.forEach(btn => {
 
     btn.addEventListener('click', e => {
@@ -114,7 +115,7 @@ const buildIngredientsList = (ingredient) => {
 
 /*Affichage des li */
 const displayIngList = () => {
-
+    //pour chaque ingredients de notre array on passe la methode buildIngredientsList
     const renderAllIngredient = (ingredientsArray) => {
         let all = ''
         for (let ingredient of ingredientsArray) {
@@ -122,15 +123,15 @@ const displayIngList = () => {
         }
         return all
     }
-
+    // on cache le label ingredient pour faire apparaitre la recherche secondaire
     ingLabel.classList.add('hidden')
     ingSearch.classList.remove('hidden')
-    listOfIngredients.innerHTML = renderAllIngredient(ingredientsArray)
     listOfIngredients.style.display = ''
     listOfIngredients.setAttribute('aria-hidden', 'false')
     document.querySelector('.expIng').style.transform = 'rotate(180deg)'
-
-
+    //on injecte notre html
+    listOfIngredients.innerHTML = renderAllIngredient(ingredientsArray)
+    //on branche le listener des tags
     startTagsListener()
 
 }
@@ -228,6 +229,15 @@ let selectIngredients = []//array ingredients tags
 let selectedAppliances = []//array appliances tags
 let selectedUstensils = []//array ustensils tags
 
+const renderTags = (tag) => {
+    return `
+    <li class="tagSelect" data-type=${tag.dataset.type}>
+    <h3>${tag.innerHTML}</h3>
+    <button class="tagBtn">
+    <img src="./assets/img/clTag.svg" alt="">
+    </button>
+    </li>`
+}
 
 const displayTags = (e) => {
     //cible endroit où tags select seront insérés
@@ -248,7 +258,7 @@ const displayTags = (e) => {
             selectedUstensils.push(currentTag)
             break;
     }
-    console.log(selectIngredients)
+
     //on concat les résultats ds le tableau de selectags
     selectedTags = selectIngredients.concat(selectedAppliances, selectedUstensils)
     //on parcours le tableau de tags et on appelle la methode de render pour chacun d'eux
@@ -267,16 +277,6 @@ const displayTags = (e) => {
 }
 
 
-const renderTags = (tag) => {
-    return `
-    <li class="tagSelect" data-type=${tag.dataset.type}>
-    <h3>${tag.innerHTML}</h3>
-    <button class="tagBtn">
-    <img src="./assets/img/clTag.svg" alt="">
-    </button>
-    </li>`
-}
-
 const startTagsListener = () => {
     selectedTags = document.querySelectorAll('.list-items')//on recupere tous nos li
     //pour chaque tag on ajoute un listener pour le display de celui-ci
@@ -291,12 +291,14 @@ const closeTags = (e) => {
     elem.style.display = 'none'
 }
 
-
+/*RECHERCHE PRINCIPALE */
 let Search = () => {
-
-    searchValue = principalSearch.value.trim().toLowerCase() || ingSearch.value.trim().toLowerCase() || appSearch.value.trim().toLowerCase() || ustSearch.value.trim().toLowerCase()
+    //on cible notre input de recherche 
+    searchValue = principalSearch.value.trim().toLowerCase()
+    // on cree une const qui va stocké les résultats de notre recherche
     const searchArray = []
 
+    // mise à jour des li en fonction de la recherche pricipale
     const allListFiltered = () => {
         searchArray.forEach(item => {
             item.ingredients.map(el => {
@@ -307,12 +309,12 @@ let Search = () => {
                 ustSelectedArray.push(el)
             })
         })
-
+        //on met a jour notre variable en fonction du nouveau tableau
         ingredientsArray = [...new Set(ingSelectedArray)].sort()
         appliancesArray = [...new Set(appSelectedArray)].sort()
         ustensilsArray = [...new Set(ustSelectedArray)].sort()
     }
-
+    //pour chaque recette de recipes on verifie si les mots entrés ds search value correspondent, si oui on stocke la recette ds notre variable searchArray
     recipes.filter((recipe) => {
         if (recipe.name.trim().toLowerCase().includes(searchValue) || recipe.description.trim().toLowerCase().includes(searchValue) || recipe.ingredients.find((el) =>
             el.ingredient.trim().toLowerCase().includes(searchValue))) {
