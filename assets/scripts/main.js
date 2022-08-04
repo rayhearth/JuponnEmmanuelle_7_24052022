@@ -19,6 +19,7 @@ const ustLabel = document.querySelector('#ustL')
 
 //input
 const principalSearch = document.querySelector('#search')
+let searchValue = ''// requête principe de recherche de recettes
 
 const ingSearch = document.querySelector('#ingredients')
 const appSearch = document.querySelector('#appareils')
@@ -40,7 +41,7 @@ let ingSelectedArray = []// array des ingredients selectionnés
 let appSelectedArray = []// array des ingredients appliance
 let ustSelectedArray = []// array des ingredients ustensils
 
-let searchValue = ''
+
 
 //Recuperation des données des listes
 const allList = () => {
@@ -55,7 +56,6 @@ const allList = () => {
     })
     // je trie pour supp les doublons
     ingredientsArray = [...new Set(ingredientsArray)].sort()
-    console.log(ingredientsArray)
     appliancesArray = [...new Set(appliancesArray)].sort()
     ustensilsArray = [...new Set(ustensilsArray)].sort()
 }
@@ -63,7 +63,7 @@ const allList = () => {
 window.addEventListener('load', allList)
 
 
-// listeners Filters
+// listeners Filters dispaly and close method
 filterBtn.forEach(btn => {
     btn.addEventListener('click', e => {
         switch (btn.dataset.filter) {
@@ -103,6 +103,8 @@ expandBtn.forEach(btn => {
     })
 })
 
+
+//METHODE DE TRAITEMENT DES LI 
 
 /*Render Liste Ing*/
 const buildIngredientsList = (ingredient) => {
@@ -238,7 +240,6 @@ const displayTags = (e) => {
         case 'ingredient':
             selectIngredients.push(currentTag)
             ingredientsArray.indexOf(currentTag)
-            console.log(ingredientsArray.indexOf(currentTag))
             break;
         case 'appliance':
             selectedAppliances.push(currentTag)

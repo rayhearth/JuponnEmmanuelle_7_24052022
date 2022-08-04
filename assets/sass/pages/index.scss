@@ -92,3 +92,25 @@ aside {
     justify-content: center;
     align-items: center;
 }
+
+@media screen and (max-width: 1024px) {
+    .recettes {
+        grid-template-columns: 1fr 1fr;
+        grid-gap: 2.5rem;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .recettes {
+        grid-template-columns: 1fr;
+        grid-gap: 2.5rem;
+        padding: 40% 0;
+    }
+}
+
+@media screen and (max-width: 425px) {
+    .recettes {
+        padding: 65% 0;
+    }
+}
+

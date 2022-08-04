@@ -22,6 +22,7 @@ body ::-webkit-scrollbar-thumb {
 }
 
 main {
+  width: 100%;
   max-width: 77.5rem;
   margin: 0 auto;
   padding: 0 2%;
@@ -172,6 +173,15 @@ img {
   align-items: center;
 }
 
+@media screen and (max-width: 768px) {
+  .searchFilters {
+    flex-direction: column;
+  }
+  .searchFilters .filter {
+    width: 96%;
+    margin: 1% 0;
+  }
+}
 .searchTags {
   display: flex;
   align-items: center;
@@ -320,4 +330,23 @@ aside .inputSearch input {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+@media screen and (max-width: 1024px) {
+  .recettes {
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 2.5rem;
+  }
+}
+@media screen and (max-width: 768px) {
+  .recettes {
+    grid-template-columns: 1fr;
+    grid-gap: 2.5rem;
+    padding: 40% 0;
+  }
+}
+@media screen and (max-width: 425px) {
+  .recettes {
+    padding: 65% 0;
+  }
 }/*# sourceMappingURL=main.css.map */

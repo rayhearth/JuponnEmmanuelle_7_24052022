@@ -75,3 +75,13 @@
         }
     }
 }
+
+@media screen and (max-width: 768px) {
+    .searchFilters {
+        flex-direction: column;
+        .filter{
+            width: 96%;
+            margin: 1% 0;
+        }
+    }
+}
