@@ -47,11 +47,11 @@ let ustSelectedArray = []// array des ingredients ustensils
 const allList = () => {
     recipes.forEach(recipe => {
         recipe.ingredients.map(el => {
-            ingredientsArray.push(el.ingredient.toLowerCase())
+            ingredientsArray.push(el.ingredient.toLowerCase().replaceAll(/[.,!?]/g, ""))
         })
-        appliancesArray.push(recipe.appliance.toLowerCase())
+        appliancesArray.push(recipe.appliance.toLowerCase().replaceAll(/[.,!?]/g, ""))
         recipe.ustensils.map(el => {
-            ustensilsArray.push(el.toLowerCase())
+            ustensilsArray.push(el.toLowerCase().replaceAll(/[.,!?]/g, ""))
         })
     })
     // je trie pour supp les doublons
@@ -258,6 +258,8 @@ const displayTags = (e) => {
             selectedUstensils.push(currentTag)
             break;
     }
+
+    
 
     //on concat les résultats ds le tableau de selectags
     selectedTags = selectIngredients.concat(selectedAppliances, selectedUstensils)
