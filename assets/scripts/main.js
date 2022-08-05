@@ -249,7 +249,6 @@ const displayTags = (e) => {
     switch (currentTag.dataset.type) {
         case 'ingredient':
             selectIngredients.push(currentTag)
-            ingredientsArray.indexOf(currentTag)
             break;
         case 'appliance':
             selectedAppliances.push(currentTag)
@@ -260,7 +259,6 @@ const displayTags = (e) => {
     }
 
     
-
     //on concat les résultats ds le tableau de selectags
     selectedTags = selectIngredients.concat(selectedAppliances, selectedUstensils)
     //on parcours le tableau de tags et on appelle la methode de render pour chacun d'eux
