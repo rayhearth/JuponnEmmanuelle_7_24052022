@@ -32,13 +32,13 @@
                 background-color: transparent;
             }
         }
-        li[data-type = 'ingredient']{
+        li[dataset = 'ingredient']{
             background-color: $blue;
         }
-        li[data-type = 'appliance']{
+        li[dataset = 'appliance']{
             background-color: $green;
         }
-        li[data-type = 'ustensil']{
+        li[dataset = 'ustensil']{
             background-color: $red;
         }
     }

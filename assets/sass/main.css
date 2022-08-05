@@ -215,13 +215,13 @@ img {
   color: white;
   background-color: transparent;
 }
-.searchTags ul li[data-type=ingredient] {
+.searchTags ul li[dataset=ingredient] {
   background-color: #3282F7;
 }
-.searchTags ul li[data-type=appliance] {
+.searchTags ul li[dataset=appliance] {
   background-color: #68D9A4;
 }
-.searchTags ul li[data-type=ustensil] {
+.searchTags ul li[dataset=ustensil] {
   background-color: #ED6454;
 }
 

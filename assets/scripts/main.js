@@ -231,7 +231,7 @@ let selectedUstensils = []//array ustensils tags
 
 const renderTags = (tag) => {
     return `
-    <li class="tagSelect" data-type=${tag.dataset.type}>
+    <li class="tagSelect" dataset='${tag.dataset}' >
     <h3>${tag.innerHTML}</h3>
     <button class="tagBtn">
     <img src="./assets/img/clTag.svg" alt="">
@@ -248,13 +248,23 @@ const displayTags = (e) => {
     // en fonction du type on insère ds le tableau selectIng, selectApp, selectUst
     switch (currentTag.dataset.type) {
         case 'ingredient':
-            selectIngredients.push(currentTag)
+            selectIngredients.push({
+                innerHTML:currentTag.textContent,
+                dataset:'ingredient'
+            })
+            console.log(selectIngredients)
             break;
         case 'appliance':
-            selectedAppliances.push(currentTag)
+            selectedAppliances.push({
+                innerHTML:currentTag.textContent,
+                dataset:'appliance'
+            })
             break;
         case 'ustensil':
-            selectedUstensils.push(currentTag)
+            selectedUstensils.push({
+                innerHTML:currentTag.textContent,
+                dataset:'ustensil'
+            })
             break;
     }
 
