@@ -252,7 +252,6 @@ const displayTags = (e) => {
                 innerHTML:currentTag.textContent,
                 dataset:'ingredient'
             })
-            console.log(selectIngredients)
             break;
         case 'appliance':
             selectedAppliances.push({
