@@ -150,8 +150,7 @@ window.addEventListener('load', closeIngList)
 
 /* Affichage Liste App*/
 const buildApplianceList = (appliance) => {
-    return `<li class="list-items appliance" data-type="appliance">
-        ${appliance}</li>`
+    return `<li class="list-items appliance" data-type="appliance">${appliance}</li>`
 }
 
 const displayAppList = () => {
@@ -186,8 +185,7 @@ window.addEventListener('load', closeAppList)
 
 /*Affichage Liste Ust*/
 const buildUstensilList = (ustensil) => {
-    return `<li class="list-items ustensil" data-type="ustensil">
-    ${ustensil}</li>`
+    return `<li class="list-items ustensil" data-type="ustensil">${ustensil}</li>`
 }
 
 const displayUstList = () => {
@@ -287,7 +285,7 @@ const displayTags = (e) => {
 
 
 const startTagsListener = () => {
-    selectedTags = Array.from(document.querySelectorAll('.list-items'))//on recupere tous nos li
+    selectedTags = Array.from(document.querySelectorAll('.list-items'))//on recupere tous nos li et on les stockent ds un array
     //pour chaque tag on ajoute un listener pour le display de celui-ci
     for (let t of selectedTags) {
         t.addEventListener('click', displayTags)
@@ -300,12 +298,16 @@ const closeTags = (e) => {
     selectedTags = selectedTags.filter(item => {
         return item.textContent.toLowerCase() != elem.textContent.toLowerCase().trim()
     })
+
     selectIngredients = selectIngredients.filter(item =>{
         return item.innerHTML.toLowerCase() != elem.textContent.toLowerCase().trim()
     })
-    console.log(elem.textContent)
-    console.log(selectedTags)
-    console.log(selectIngredients)
+    selectedAppliances = selectedAppliances.filter(item =>{
+        return item.textContent.toLowerCase() != elem.textContent.toLowerCase().trim()
+    })
+    selectedUstensils = selectedUstensils.filter(item =>{
+        return item.textContent.toLowerCase() != elem.textContent.toLowerCase().trim()
+    })
     elem.remove()
     // elem.style.display = 'none'
 }
