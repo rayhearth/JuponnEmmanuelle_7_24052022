@@ -37,6 +37,7 @@ recipes: [] //array de toutes les recettes
 let ingredientsArray = [] //array des ing
 let appliancesArray = []// array app
 let ustensilsArray = []//array ust
+
 let ingSelectedArray = []// array des ingredients selectionnés
 let appSelectedArray = []// array des ingredients appliance
 let ustSelectedArray = []// array des ingredients ustensils
@@ -109,8 +110,7 @@ expandBtn.forEach(btn => {
 
 /*Render Liste Ing*/
 const buildIngredientsList = (ingredient) => {
-    return `<li class="list-items ingredient" data-type="ingredient">
-    ${ingredient}</li>`
+    return `<li class="list-items ingredient" data-type="ingredient">${ingredient}</li>`
 }
 
 /*Affichage des li */
@@ -287,7 +287,7 @@ const displayTags = (e) => {
 
 
 const startTagsListener = () => {
-    selectedTags = document.querySelectorAll('.list-items')//on recupere tous nos li
+    selectedTags = Array.from(document.querySelectorAll('.list-items'))//on recupere tous nos li
     //pour chaque tag on ajoute un listener pour le display de celui-ci
     for (let t of selectedTags) {
         t.addEventListener('click', displayTags)
@@ -297,7 +297,17 @@ const startTagsListener = () => {
 const closeTags = (e) => {
     // on cible le li ou se situe le btn close
     let elem = e.target.closest('li')
-    elem.style.display = 'none'
+    selectedTags = selectedTags.filter(item => {
+        return item.textContent.toLowerCase() != elem.textContent.toLowerCase().trim()
+    })
+    selectIngredients = selectIngredients.filter(item =>{
+        return item.innerHTML.toLowerCase() != elem.textContent.toLowerCase().trim()
+    })
+    console.log(elem.textContent)
+    console.log(selectedTags)
+    console.log(selectIngredients)
+    elem.remove()
+    // elem.style.display = 'none'
 }
 
 /*RECHERCHE PRINCIPALE */
