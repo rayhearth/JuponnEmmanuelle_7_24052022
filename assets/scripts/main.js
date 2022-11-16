@@ -5,7 +5,6 @@ import { RecipeCard } from './models/recipeCard.js'
 //DOM
 const tagsList = document.querySelector('#tagsList')//div des tags
 const recipesContainer = document.querySelector('#recettes')//section des recettes
-const ghost = document.querySelector('#noResults')//div no results
 
 
 //btn ouverture et fermetures des listes
@@ -247,25 +246,25 @@ const displayTags = (e) => {
     switch (currentTag.dataset.type) {
         case 'ingredient':
             selectIngredients.push({
-                innerHTML:currentTag.textContent,
-                dataset:'ingredient'
+                innerHTML: currentTag.textContent,
+                dataset: 'ingredient'
             })
             break;
         case 'appliance':
             selectedAppliances.push({
-                innerHTML:currentTag.textContent,
-                dataset:'appliance'
+                innerHTML: currentTag.textContent,
+                dataset: 'appliance'
             })
             break;
         case 'ustensil':
             selectedUstensils.push({
-                innerHTML:currentTag.textContent,
-                dataset:'ustensil'
+                innerHTML: currentTag.textContent,
+                dataset: 'ustensil'
             })
             break;
     }
 
-    
+
     //on concat les résultats ds le tableau de selectags
     selectedTags = selectIngredients.concat(selectedAppliances, selectedUstensils)
     //on parcours le tableau de tags et on appelle la methode de render pour chacun d'eux
@@ -299,13 +298,13 @@ const closeTags = (e) => {
         return item.textContent.toLowerCase() != elem.textContent.toLowerCase().trim()
     })
 
-    selectIngredients = selectIngredients.filter(item =>{
+    selectIngredients = selectIngredients.filter(item => {
         return item.innerHTML.toLowerCase() != elem.textContent.toLowerCase().trim()
     })
-    selectedAppliances = selectedAppliances.filter(item =>{
+    selectedAppliances = selectedAppliances.filter(item => {
         return item.textContent.toLowerCase() != elem.textContent.toLowerCase().trim()
     })
-    selectedUstensils = selectedUstensils.filter(item =>{
+    selectedUstensils = selectedUstensils.filter(item => {
         return item.textContent.toLowerCase() != elem.textContent.toLowerCase().trim()
     })
     elem.remove()
@@ -365,9 +364,10 @@ let Search = () => {
 
         //si le tableau de recettes est vide on affiche le message no results
         if (searchArray.length == 0) {
-            ghost.classList.remove('hidden')
-        } else {
-            ghost.classList.add('hidden')
+            recipesContainer.innerHTML = `
+            <p> Aucune recette ne correspond à vos critères de recherche.<br>Vous pouvez chercher « tarte aux pommes
+                »,« poisson », etc.</p>
+            `
         }
     }
 }
