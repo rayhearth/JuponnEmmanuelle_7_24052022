@@ -6,7 +6,6 @@ import { RecipeCard } from './models/recipeCard.js'
 const tagsList = document.querySelector('#tagsList')//div des tags
 const recipesContainer = document.querySelector('#recettes')//section des recettes
 
-
 //btn ouverture et fermetures des listes
 const filterBtn = document.querySelectorAll('.filterBtn')
 const expandBtn = document.querySelectorAll('.controlExpand')
@@ -109,7 +108,7 @@ expandBtn.forEach(btn => {
 
 /*Render Liste Ing*/
 const buildIngredientsList = (ingredient) => {
-    return `<li class="list-items ingredient" data-type="ingredient">${ingredient}</li>`
+    return `<li class="list-items ingredient" data-type="ingredient">${ingredient.charAt(0).toUpperCase() + ingredient.substr(1).toLowerCase()}</li>`
 }
 
 /*Affichage des li */
@@ -149,11 +148,10 @@ window.addEventListener('load', closeIngList)
 
 /* Affichage Liste App*/
 const buildApplianceList = (appliance) => {
-    return `<li class="list-items appliance" data-type="appliance">${appliance}</li>`
+    return `<li class="list-items appliance" data-type="appliance">${appliance.charAt(0).toUpperCase() + appliance.substr(1).toLowerCase()}</li>`
 }
 
 const displayAppList = () => {
-    const appList = appliancesArray
 
     const renderAllAppliance = (appliancesArray) => {
         let all = ''
@@ -164,7 +162,7 @@ const displayAppList = () => {
     }
     appLabel.classList.add('hidden')
     appSearch.classList.remove('hidden')
-    listOfAppliances.innerHTML = renderAllAppliance(appList)
+    listOfAppliances.innerHTML = renderAllAppliance(appliancesArray)
     listOfAppliances.style.display = ''
     listOfAppliances.setAttribute('aria-hidden', 'false')
     document.querySelector('.expApp').style.transform = 'rotate(180deg)'
@@ -184,11 +182,10 @@ window.addEventListener('load', closeAppList)
 
 /*Affichage Liste Ust*/
 const buildUstensilList = (ustensil) => {
-    return `<li class="list-items ustensil" data-type="ustensil">${ustensil}</li>`
+    return `<li class="list-items ustensil" data-type="ustensil">${ustensil.charAt(0).toUpperCase() + ustensil.substr(1).toLowerCase()}</li>`
 }
 
 const displayUstList = () => {
-    const ustList = ustensilsArray
 
     const renderAllUstensils = (ustensilsArray) => {
         let all = ''
@@ -200,7 +197,7 @@ const displayUstList = () => {
 
     ustLabel.classList.add('hidden')
     ustSearch.classList.remove('hidden')
-    listOfUstensils.innerHTML = renderAllUstensils(ustList)
+    listOfUstensils.innerHTML = renderAllUstensils(ustensilsArray)
     listOfUstensils.style.display = ''
     listOfUstensils.setAttribute('aria-hidden', 'false')
     document.querySelector('.expUst').style.transform = 'rotate(180deg)'
@@ -222,11 +219,12 @@ window.addEventListener('load', closeUstList)
 
 let selectedTags = []
 
-let selectIngredients = []//array ingredients tags
+let selectedIngredients = []//array ingredients tags
 let selectedAppliances = []//array appliances tags
 let selectedUstensils = []//array ustensils tags
 
 const renderTags = (tag) => {
+
     return `
     <li class="tagSelect" dataset='${tag.dataset}' >
     <h3>${tag.innerHTML}</h3>
@@ -242,10 +240,11 @@ const displayTags = (e) => {
     document.querySelector('#tagsSelect').style.display = ''
     //cible element clické
     let currentTag = e.target
+    // console.log(e.target);
     // en fonction du type on insère ds le tableau selectIng, selectApp, selectUst
     switch (currentTag.dataset.type) {
         case 'ingredient':
-            selectIngredients.push({
+            selectedIngredients.push({
                 innerHTML: currentTag.textContent,
                 dataset: 'ingredient'
             })
@@ -264,9 +263,12 @@ const displayTags = (e) => {
             break;
     }
 
+    //on concat les résultats ds le tableau de selectags et on enlèeve les doublons
+    selectedTags = [...new Set([...selectedIngredients, ...selectedAppliances, ...selectedUstensils])].sort()
 
-    //on concat les résultats ds le tableau de selectags
-    selectedTags = selectIngredients.concat(selectedAppliances, selectedUstensils)
+    Search(e.target.textContent.toLowerCase())
+
+
     //on parcours le tableau de tags et on appelle la methode de render pour chacun d'eux
     const renderAllTags = (selectedTags) => {
         let all = ''
@@ -279,6 +281,8 @@ const displayTags = (e) => {
     tagsList.innerHTML = renderAllTags(selectedTags)
 
     let tagClose = document.querySelectorAll('.tagBtn')
+
+    console.log(tagClose);
     tagClose.forEach((tag) => tag.addEventListener('click', closeTags))
 }
 
@@ -289,32 +293,38 @@ const startTagsListener = () => {
     for (let t of selectedTags) {
         t.addEventListener('click', displayTags)
     }
+
 }
 
 const closeTags = (e) => {
     // on cible le li ou se situe le btn close
-    let elem = e.target.closest('li')
+    let elem = e.target.closest("li")
+    console.log(e.target);
+    console.log(elem);
+    console.log(e);
+
     selectedTags = selectedTags.filter(item => {
         return item.textContent.toLowerCase() != elem.textContent.toLowerCase().trim()
     })
 
-    selectIngredients = selectIngredients.filter(item => {
-        return item.innerHTML.toLowerCase() != elem.textContent.toLowerCase().trim()
+    selectedIngredients = selectedIngredients.filter(item => {
+        return item.innerHTML.toLowerCase().trim() != elem.textContent.toLowerCase().trim()
     })
+    console.log(selectedIngredients);
     selectedAppliances = selectedAppliances.filter(item => {
-        return item.textContent.toLowerCase() != elem.textContent.toLowerCase().trim()
+        return item.textContent.toLowerCase().trim() != elem.textContent.toLowerCase().trim()
     })
     selectedUstensils = selectedUstensils.filter(item => {
-        return item.textContent.toLowerCase() != elem.textContent.toLowerCase().trim()
+        return item.textContent.toLowerCase().trim() != elem.textContent.toLowerCase().trim()
     })
     elem.remove()
     // elem.style.display = 'none'
 }
 
 /*RECHERCHE PRINCIPALE */
-let Search = () => {
+let Search = (recup) => {
     //on cible notre input de recherche 
-    searchValue = principalSearch.value.trim().toLowerCase()
+    searchValue = recup
     // on cree une const qui va stocké les résultats de notre recherche
     const searchArray = []
 
@@ -322,15 +332,17 @@ let Search = () => {
     const allListFiltered = () => {
         searchArray.forEach(item => {
             item.ingredients.map(el => {
-                ingSelectedArray.push(el.ingredient)
+                ingSelectedArray.push(el.ingredient.toLowerCase())
             })
-            appSelectedArray.push(item.appliance)
+            appSelectedArray.push(item.appliance.toLowerCase())
             item.ustensils.map(el => {
-                ustSelectedArray.push(el)
+                ustSelectedArray.push(el.toLowerCase())
             })
         })
         //on met a jour notre variable en fonction du nouveau tableau
-        ingredientsArray = [...new Set(ingSelectedArray)].sort()
+
+        ingredientsArray = [...new Set(ingSelectedArray.filter(e => e != recup))].sort()
+        console.log(ingredientsArray);
         appliancesArray = [...new Set(appSelectedArray)].sort()
         ustensilsArray = [...new Set(ustSelectedArray)].sort()
     }
@@ -372,7 +384,9 @@ let Search = () => {
     }
 }
 
-principalSearch.addEventListener('input', Search)
+principalSearch.addEventListener('input', () => {
+    Search(principalSearch.value.trim().toLowerCase())
+})
 
 //on injecte le html du render recipe ds notre section recette
 const displayRecipes = () => {
