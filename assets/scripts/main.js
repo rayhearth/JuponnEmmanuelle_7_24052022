@@ -240,7 +240,6 @@ const displayTags = (e) => {
     document.querySelector('#tagsSelect').style.display = ''
     //cible element clické
     let currentTag = e.target
-    // console.log(e.target);
     // en fonction du type on insère ds le tableau selectIng, selectApp, selectUst
     switch (currentTag.dataset.type) {
         case 'ingredient':
@@ -282,7 +281,6 @@ const displayTags = (e) => {
 
     let tagClose = document.querySelectorAll('.tagBtn')
 
-    console.log(tagClose);
     tagClose.forEach((tag) => tag.addEventListener('click', closeTags))
 }
 
@@ -299,9 +297,6 @@ const startTagsListener = () => {
 const closeTags = (e) => {
     // on cible le li ou se situe le btn close
     let elem = e.target.closest("li")
-    console.log(e.target);
-    console.log(elem);
-    console.log(e);
 
     selectedTags = selectedTags.filter(item => {
         return item.textContent.toLowerCase() != elem.textContent.toLowerCase().trim()
@@ -310,7 +305,6 @@ const closeTags = (e) => {
     selectedIngredients = selectedIngredients.filter(item => {
         return item.innerHTML.toLowerCase().trim() != elem.textContent.toLowerCase().trim()
     })
-    console.log(selectedIngredients);
     selectedAppliances = selectedAppliances.filter(item => {
         return item.textContent.toLowerCase().trim() != elem.textContent.toLowerCase().trim()
     })
@@ -342,7 +336,6 @@ let Search = (recup) => {
         //on met a jour notre variable en fonction du nouveau tableau
 
         ingredientsArray = [...new Set(ingSelectedArray.filter(e => e != recup))].sort()
-        console.log(ingredientsArray);
         appliancesArray = [...new Set(appSelectedArray)].sort()
         ustensilsArray = [...new Set(ustSelectedArray)].sort()
     }
