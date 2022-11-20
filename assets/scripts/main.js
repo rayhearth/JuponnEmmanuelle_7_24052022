@@ -262,7 +262,7 @@ const displayTags = (e) => {
             break;
     }
 
-    //on concat les résultats ds le tableau de selectags et on enlèeve les doublons
+    //on concat les résultats ds le tableau de selectags et on enlève les doublons
     selectedTags = [...new Set([...selectedIngredients, ...selectedAppliances, ...selectedUstensils])].sort()
 
     Search(e.target.textContent.toLowerCase())
@@ -319,7 +319,7 @@ const closeTags = (e) => {
 let Search = (recup) => {
     //on cible notre input de recherche 
     searchValue = recup
-    // on cree une const qui va stocké les résultats de notre recherche
+    // on cree une const qui va stocker les résultats de notre recherche
     const searchArray = []
 
     // mise à jour des li en fonction de la recherche pricipale
@@ -333,11 +333,11 @@ let Search = (recup) => {
                 ustSelectedArray.push(el.toLowerCase())
             })
         })
-        //on met a jour notre variable en fonction du nouveau tableau
 
+        //on met a jour notre variable en fonction du nouveau tableau
         ingredientsArray = [...new Set(ingSelectedArray.filter(e => e != recup))].sort()
-        appliancesArray = [...new Set(appSelectedArray)].sort()
-        ustensilsArray = [...new Set(ustSelectedArray)].sort()
+        appliancesArray = [...new Set(appSelectedArray.filter(e => e != recup))].sort()
+        ustensilsArray = [...new Set(ustSelectedArray.filter(e => e != recup))].sort()
     }
     //pour chaque recette de recipes on verifie si les mots entrés ds search value correspondent, si oui on stocke la recette ds notre variable searchArray
     recipes.filter((recipe) => {
