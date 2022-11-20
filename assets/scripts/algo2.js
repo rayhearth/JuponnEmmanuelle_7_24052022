@@ -7,7 +7,7 @@ let ing = recipes.map(i => i.ingredients.map(n => n.ingredient.toLowerCase()))
 ing = ing + ''
 //transforme string en array  
 let ingData = ing.split(',')
-let ingredientsArray = [...new Set(ingData)].sort() 
+let ingredientsArray = [...new Set(ingData)].sort()
 
 /*traitement app*/
 
@@ -37,8 +37,6 @@ let Search = () => {
                     }
                 }
             }
-            // recipes.splice(0,recipes.length,...searchArray)
-            // console.log(recipes)
 
             /*MAJ des liste en fonction du résultat de la recherche principale*/
             let ingFiltered = searchArray.map(i => i.ingredients.map(n => n.ingredient.toLowerCase()))

@@ -340,12 +340,18 @@ let Search = (recup) => {
         ustensilsArray = [...new Set(ustSelectedArray.filter(e => e != recup))].sort()
     }
     //pour chaque recette de recipes on verifie si les mots entrés ds search value correspondent, si oui on stocke la recette ds notre variable searchArray
-    recipes.filter((recipe) => {
-        if (recipe.name.trim().toLowerCase().includes(searchValue) || recipe.description.trim().toLowerCase().includes(searchValue) || recipe.ingredients.find((el) =>
-            el.ingredient.trim().toLowerCase().includes(searchValue))) {
-            searchArray.push(recipe)
+    for (let i = 0; i < recipes.length; i++) {
+        if (recipes[i].name.toLowerCase().includes(searchValue) || recipes[i].description.includes(searchValue)) {
+            searchArray.push(recipes[i])
+        } else {
+            for (let r = 0; r < recipes[i].ingredients.length; r++) {
+                if (recipes[i].ingredients[r].ingredient.toLowerCase().includes(searchValue)) {
+                    searchArray.push(recipes[i])
+                    break;
+                }
+            }
         }
-    })
+    }
 
 
     if (searchValue.length >= 3) {
