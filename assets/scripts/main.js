@@ -265,7 +265,6 @@ const displayTags = (e) => {
     //on concat les résultats ds le tableau de selectags et on enlève les doublons
     selectedTags = [...new Set([...selectedIngredients, ...selectedAppliances, ...selectedUstensils])].sort()
 
-    Search(e.target.textContent.toLowerCase())
 
 
     //on parcours le tableau de tags et on appelle la methode de render pour chacun d'eux
@@ -282,6 +281,9 @@ const displayTags = (e) => {
     let tagClose = document.querySelectorAll('.tagBtn')
 
     tagClose.forEach((tag) => tag.addEventListener('click', closeTags))
+
+    //on insere la meth de recherche pour les tag et on passe en params le textcontent du tag
+    Search(e.target.textContent.toLowerCase())
 }
 
 
@@ -297,11 +299,11 @@ const startTagsListener = () => {
 const closeTags = (e) => {
     // on cible le li ou se situe le btn close
     let elem = e.target.closest("li")
-
+    console.log(elem);
     selectedTags = selectedTags.filter(item => {
         return item.textContent.toLowerCase() != elem.textContent.toLowerCase().trim()
     })
-
+    console.log(selectedTags);
     selectedIngredients = selectedIngredients.filter(item => {
         return item.innerHTML.toLowerCase().trim() != elem.textContent.toLowerCase().trim()
     })
