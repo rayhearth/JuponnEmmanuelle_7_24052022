@@ -1,5 +1,5 @@
 export class RecipeCard {
-    constructor({id, name, servings, ingredients, time, description, appliance,ustensils}) {
+    constructor({ id, name, servings, ingredients, time, description, appliance, ustensils }) {
         this.id = id
         this.name = name
         this.servings = servings
@@ -16,7 +16,6 @@ export class RecipeCard {
     renderRecipe() {
         return `<article class="card" id='${this.id}'>
                 <div class="card-picture">
-                    <img src="" alt="${this.name}"/>
                 </div>
                 <div class="card-details">
                     <div class="card-header">
@@ -30,11 +29,11 @@ export class RecipeCard {
                     <div class="card-legend">
                         <ul class="ingredients">
                             ${this.ingredients.map((el) =>
-                                `<li><strong>${el.ingredient} :</strong> 
+            `<li><strong>${el.ingredient} :</strong> 
                                     ${'quantity' in el ? el.quantity : ''} 
                                     ${'unit' in el ? el.unit : ''}            
                                 </li>`
-                            ).join('')}
+        ).join('')}
                         </ul>
                         <div class="instructions">
                             <p>${this.description}</p>
@@ -45,16 +44,8 @@ export class RecipeCard {
         `
     }
 
-    renderNoResult(){
-        const noResult = document.querySelector('#noResult')
-        if(!match) {
-            noResult.classList.remove('hidden')
-        } else{
-            noResult.classList.add('hidden')
-        }
-    }
 
-    renderTags(){
+    renderTags() {
         return `
             <li class="tagSelect">
                 <h3>${currentTag}</h3>
@@ -65,20 +56,20 @@ export class RecipeCard {
     }
 
     // limite de texte pour la description
-    ellipsis () {
+    ellipsis() {
         //creation variable de la desc
         let text = this.description
         //on diminue les espace ds le texte
         text = text.replace(/  +/g, '')
         //si le texte est plus long que 200 caract
-        if(text.length > 200){
+        if (text.length > 200) {
             //on coupe les x der caract
-            text = text.substr(0,210)
+            text = text.substr(0, 210)
             // on coupe à nouveau le der mot s'il a été coupé en 2
-            text = text.substr(0, Math.min(text.length , text.lastIndexof('')))
+            text = text.substr(0, Math.min(text.length, text.lastIndexof('')))
             // on retourne le texte coupé avec 3 caract à la fin
             return text + '...'
-        } else{
+        } else {
             return text
         }
     }

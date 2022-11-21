@@ -64,7 +64,7 @@ window.addEventListener('load', allList)
 
 // listeners Filters display and close method
 filterBtn.forEach(btn => {
-    btn.addEventListener('click', e => {
+    btn.addEventListener('click', (e) => {
         switch (btn.dataset.filter) {
             case 'ingrédients':
                 displayIngList()
@@ -299,11 +299,11 @@ const startTagsListener = () => {
 const closeTags = (e) => {
     // on cible le li ou se situe le btn close
     let elem = e.target.closest("li")
-    console.log(elem);
+
     selectedTags = selectedTags.filter(item => {
         return item.textContent.toLowerCase() != elem.textContent.toLowerCase().trim()
     })
-    console.log(selectedTags);
+
     selectedIngredients = selectedIngredients.filter(item => {
         return item.innerHTML.toLowerCase().trim() != elem.textContent.toLowerCase().trim()
     })
@@ -314,6 +314,7 @@ const closeTags = (e) => {
         return item.textContent.toLowerCase().trim() != elem.textContent.toLowerCase().trim()
     })
     elem.remove()
+
     // elem.style.display = 'none'
 }
 
