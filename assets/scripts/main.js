@@ -53,6 +53,7 @@ const allList = () => {
             ustensilsArray.push(el.toLowerCase().replaceAll(/[.,!?]/g, ""))
         })
     })
+
     // je trie pour supp les doublons
     ingredientsArray = [...new Set(ingredientsArray)].sort()
     appliancesArray = [...new Set(appliancesArray)].sort()
@@ -87,8 +88,7 @@ filterBtn.forEach(btn => {
 
 // listeners Filters close method
 expandBtn.forEach(btn => {
-
-    btn.addEventListener('click', e => {
+    btn.addEventListener('click', (e) => {
         switch (btn.dataset.expand) {
             case 'ingredient':
                 closeIngList()
@@ -223,6 +223,7 @@ let selectedIngredients = []//array ingredients tags
 let selectedAppliances = []//array appliances tags
 let selectedUstensils = []//array ustensils tags
 
+
 const renderTags = (tag) => {
 
     return `
@@ -262,9 +263,9 @@ const displayTags = (e) => {
             break;
     }
 
+
     //on concat les résultats ds le tableau de selectags et on enlève les doublons
     selectedTags = [...new Set([...selectedIngredients, ...selectedAppliances, ...selectedUstensils])].sort()
-
 
 
     //on parcours le tableau de tags et on appelle la methode de render pour chacun d'eux
@@ -284,7 +285,9 @@ const displayTags = (e) => {
 
     //on insere la meth de recherche pour les tag et on passe en params le textcontent du tag
     Search(e.target.textContent.toLowerCase())
+
 }
+
 
 
 const startTagsListener = () => {
@@ -310,11 +313,18 @@ const closeTags = (e) => {
     selectedAppliances = selectedAppliances.filter(item => {
         return item.textContent.toLowerCase().trim() != elem.textContent.toLowerCase().trim()
     })
+
     selectedUstensils = selectedUstensils.filter(item => {
         return item.textContent.toLowerCase().trim() != elem.textContent.toLowerCase().trim()
     })
+
     elem.remove()
 
+
+    if (selectedIngredients == 0) {
+        displayRecipes()
+        allList()
+    }
     // elem.style.display = 'none'
 }
 
@@ -377,12 +387,15 @@ let Search = (recup) => {
                 »,« poisson », etc.</p>
             `
         }
+    } else {
+        displayRecipes()
     }
 }
 
 principalSearch.addEventListener('input', () => {
     Search(principalSearch.value.trim().toLowerCase())
 })
+
 
 //on injecte le html du render recipe ds notre section recette
 const displayRecipes = () => {

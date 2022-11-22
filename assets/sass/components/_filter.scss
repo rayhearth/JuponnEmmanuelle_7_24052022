@@ -72,6 +72,9 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            img {
+                padding: 10px;
+            }
         }
     }
 }
@@ -79,7 +82,7 @@
 @media screen and (max-width: 768px) {
     .searchFilters {
         flex-direction: column;
-        .filter{
+        .filter {
             width: 96%;
             margin: 1% 0;
         }
