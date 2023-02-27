@@ -1,4 +1,4 @@
-# Projet 7 - Développeur Front-End  
+# Les petits plats 
 --------------------------
 ## Développez un algorithme de recherche en JavaScript  
 
